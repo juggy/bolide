@@ -11,6 +11,7 @@ RAILS_GEM_VERSION = '2.0.2' unless defined? RAILS_GEM_VERSION
 require File.join(File.dirname(__FILE__), 'boot')
 
 Rails::Initializer.run do |config|
+  
   # Settings in config/environments/* take precedence over those specified here.
   # Application configuration should go into files in config/initializers
   # -- all .rb files in that directory are automatically loaded.
@@ -26,7 +27,9 @@ Rails::Initializer.run do |config|
   # config.plugins = [ :exception_notification, :ssl_requirement, :all ]
 
   # Add additional load paths for your own custom dirs
-  # config.load_paths += %W( #{RAILS_ROOT}/extras )
+  config.load_paths += Dir["#{RAILS_ROOT}/vendor/gems/**"].map do |dir| 
+    File.directory?(lib = "#{dir}/lib") ? lib : dir
+  end
 
   # Force all environments to use the same logger level
   # (by default production uses :info, the others :debug)
