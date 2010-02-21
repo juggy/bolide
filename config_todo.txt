@@ -1,0 +1,17 @@
+-git, ruby, gem, rails
+
+- RabbitMQ
+	- Install
+	- Change guest password
+	- Create vhost '/bolide' (sudo rabbitmqctl add_vhost '/bolide')
+	- Assign guest to '/bolide' (sudo rabbitmqctl set_permissions -p '/bolide' 'guest' '.*' '.*' '.*')
+	
+- Memcachedb
+	- build from source
+
+- Firewall
+
+- Nginx
+	- Proxy to thins 
+	- live.*, admin.* => other thins
+	

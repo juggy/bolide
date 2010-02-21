@@ -1,0 +1,8 @@
+folder = File.join(File.dirname(__FILE__), 'models')
+require File.join(folder, 'mq')
+require File.join(folder, 'in_memory_memcache')
+require File.join(folder, 'memcache')
+require File.join(folder, 'base')
+require File.join(folder, 'account_statistics')
+require File.join(folder, 'account')
+require File.join(folder, 'q')

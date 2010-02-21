@@ -1,0 +1,6 @@
+development:
+  host: booky
+  port: 5672
+  user: guest
+  pass: guest
+  

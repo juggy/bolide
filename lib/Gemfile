@@ -1,0 +1,4 @@
+source :gemcutter
+
+gem 'carrot', '0.7.0'
+gem 'memcached', '0.17.7'

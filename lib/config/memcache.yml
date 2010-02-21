@@ -1,0 +1,2 @@
+development:
+  groups: [:servers: [ 'localhost:11211' ]]
