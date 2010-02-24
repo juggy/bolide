@@ -7,7 +7,7 @@ server {
 	server_name  ws.jguimont.com;
 
 	access_log  /u/apps/bolide/current/ws_app/log/nginx.ws.access.log;
-	error_log /u/apps/bolide/current/ws_app/log/nginx.ws.error.log
+	error_log /u/apps/bolide/current/ws_app/log/nginx.ws.error.log;
 
 	keepalive_timeout 5;
 

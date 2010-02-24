@@ -1,12 +1,13 @@
 namespace :deploy do
-  after :update_code, :bundle_update
+  
+  after "deploy:update", "deploy:bundle_update"
   
   task :bundle_update do
     run [
       "cd #{current_path}/ws_app",
-      "bundle install",
+      "/var/lib/gems/1.8/bin/bundle install",
       "cd #{current_path}/stream_app",
-      "bundle install"
+      "/var/lib/gems/1.8/bin/bundle install"
       ].join(" && ")
   end
   
@@ -20,9 +21,9 @@ namespace :deploy do
   
   task :start do
     run [
-        "rainbows -c #{current_path}/config/server/app/live.jguimont.com.rb -E production -D #{current_path}/stream_app/config.ru",
+        "/var/lib/gems/1.8/bin/rainbows -c #{current_path}/config/server/app/live.jguimont.com.rb -E production -D #{current_path}/stream_app/config.ru",
         "cd #{current_path}/ws_app",
-        "unicorn_rails -c #{current_path}/config/server/app/ws.jguimont.com.rb -E production -D"
+        "/var/lib/gems/1.8/bin/unicorn_rails -c #{current_path}/config/server/app/ws.jguimont.com.rb -E production -D"
     ].join(" && ")
   end
   

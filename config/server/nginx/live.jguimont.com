@@ -7,7 +7,7 @@ server {
 	server_name  live.jguimont.com;
 
 	access_log  /u/apps/bolide/current/stream_app/log/nginx.live.access.log;
-	error_log /u/apps/bolide/current/stream_app/log/nginx.live.error.log
+	error_log /u/apps/bolide/current/stream_app/log/nginx.live.error.log;
 	
 	keepalive_timeout 5;
 

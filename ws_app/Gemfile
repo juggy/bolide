@@ -1,3 +1,5 @@
+source :gemcutter
+
 gem "unicorn"
 gem "nokogiri"
 gem "builder"
