@@ -94,6 +94,7 @@ namespace :deploy do
       "mkdir -p #{current_path}/ws_app/public",
       "mkdir -p #{current_path}/ws_app/tmp",
       "mkdir -p #{current_path}/stream_app/tmp",
+      "mkdir -p #{shared_path}/sockets",
       
       "ln -s #{shared_path}/log    #{current_path}/ws_app/log",
       "ln -s #{shared_path}/system #{current_path}/ws_app/public/system",

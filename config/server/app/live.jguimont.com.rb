@@ -18,7 +18,7 @@ timeout 30
 # Listen on a Unix data socket
 if rails_env == 'production'
   pid '/u/apps/bolide/current/stream_app/tmp/pids/live.unicorn.pid'
-  listen '/u/apps/bolide/current/stream_app/tmp/sockets/live/live.sock', :backlog => 2048 
+  listen '/u/apps/bolide/current/stream_app/tmp/sockets/live.sock', :backlog => 2048 
 end
  
 before_fork do |server, worker|

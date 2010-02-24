@@ -14,7 +14,9 @@ timeout 30
  
 # Listen on a Unix data socket
 if rails_env == 'production'
-  listen '/u/apps/bolide/current/ws_app/tmp/sockets/ws/ws.sock', :backlog => 2048
+  listen '/u/apps/bolide/current/ws_app/tmp/sockets/ws.sock', :backlog => 2048
+else
+  listen '/Users/juggy/Documents/bolide/ws_app/tmp/sockets/ws.sock', :backlog => 2048
 end
  
 before_fork do |server, worker|
