@@ -1,4 +1,4 @@
-upstream live_server {
+upstream ws_server {
 	server unix:/u/apps/bolide/current/ws_app/tmp/sockets/ws.sock fail_timeout=0;
 }
 
