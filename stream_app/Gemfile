@@ -1,0 +1,8 @@
+source :gemcutter
+
+gem "rainbows"
+gem "system_timer"
+gem "cramp"
+gem "carrot", "0.7.0"
+gem "validatable"
+gem "memcachedb-client", "0.0.2"
