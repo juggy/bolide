@@ -3,12 +3,12 @@ class ParseUserAgent
   attr_reader :ostype, :browser, :os_version, :browser_version_major
   
   def initialize(user_agent)
-    parse(user_agent)
+    parse_ua(user_agent)
   end
   
 protected
   
-  def parse(user_agent)
+  def parse_ua(user_agent)
     if '-' == user_agent
       raise 'Invalid User Agent'
     end

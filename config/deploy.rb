@@ -1,22 +1,17 @@
-set :application, "set your application name here"
-set :repository,  "set your repository location here"
+set :application, "bolide"
+set :repository,  "/bolide"
 
-set :scm, :git
-# Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
+set :user, "juggy"
 
-role :web, "your web-server here"                          # Your HTTP server, Apache/etc
-role :app, "your app-server here"                          # This may be the same as your `Web` server
-role :db,  "your primary db-server here", :primary => true # This is where Rails migrations will run
-role :db,  "your slave db-server here"
+set :repository, "git@github.com:juggy/bolide.git"
+set :branch, "master"
 
-# If you are using Passenger mod_rails uncomment this:
-# if you're still using the script/reapear helper you will need
-# these http://github.com/rails/irs_process_scripts
+role :web, "173.203.201.158"                          # Your HTTP server, Apache/etc
+role :app, "173.203.201.158"                          # This may be the same as your `Web` server
+role :mcdb, "173.203.201.158"
+role :rabbit, "173.203.201.158"
 
-# namespace :deploy do
-#   task :start do ; end
-#   task :stop do ; end
-#   task :restart, :roles => :app, :except => { :no_release => true } do
-#     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
-#   end
-# end
+load 'config/recipes/fast_git_deploy'
+load 'config/recipes/apps'
+load 'config/recipes/nginx'
+

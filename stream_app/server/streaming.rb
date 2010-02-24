@@ -8,6 +8,7 @@ class StreamController < Cramp::Controller::Action
   periodic_timer :close_connection, :every => 10
 
   def verify_client_token
+    p @request
     @user_agent = ParseUserAgent.new(request.env['HTTP_USER_AGENT'])
     @q = BolideApi::Q.load_with(:_id=>params[:queue], :account_id=>params[:account])
     

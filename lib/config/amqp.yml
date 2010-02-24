@@ -4,3 +4,9 @@ development:
   user: guest
   pass: guest
   
+production:
+  host: app1
+  port: 5672
+  user: guest
+  pass: guest
+  

@@ -1,6 +1,8 @@
-
+gem "rainbows"
 gem "carrot", "0.7.0"
 gem "cramp", "0.9.0"
 gem "usher", "0.6.6"
-gem "thin", "1.2.5"
-gem "memcachedb-client", "0.0.1"
+gem "rack", "1.1.0"
+gem "validatable"
+gem "system_timer"
+gem "memcachedb-client", "0.0.2"
