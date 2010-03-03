@@ -4,12 +4,18 @@ dependencies:
     group: 
     - :default
     version: ">= 0"
+  daemons: 
+    group: 
+    - :default
+    version: ">= 0"
 specs: 
+- daemons: 
+    version: 1.0.10
 - eventmachine: 
     version: 0.12.10
 - amqp: 
     version: 0.6.7
-hash: 03b97c74e6b1f10ba2b4e971f6b3fe16a2f54383
+hash: ac548e361fd63fa2ae7aab312c078af927bbdcc4
 sources: 
 - Rubygems: 
     uri: http://gemcutter.org
