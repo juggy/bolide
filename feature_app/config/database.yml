@@ -3,3 +3,10 @@ development:
   database: development
   username: root
   password: mysql
+  
+production:
+  adapter: mysql
+  database: production
+  socket: /var/run/mysqld/mysqld.sock
+  username: root
+  password: mysql
