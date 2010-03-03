@@ -2,16 +2,17 @@
 *~
 *.swp
 
-helpers/vhost/.bundle/**/*
+helpers/vhost/.bundle/*
+helpers/vhost/tmp/*
 
 feature_app/log/*.log
 feature_app/tmp/**/*
 feature_app/doc/api
 feature_app/doc/app
-feature_app/.bundle/**/*
+feature_app/.bundle/*
 
 stream_app/tmp/**/*
-stream_app/.bundle/**/*
+stream_app/.bundle/*
 
 ws_app/log/*.log
 ws_app/tmp/**/*

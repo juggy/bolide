@@ -13,7 +13,9 @@ Bundler.require(:default)
 require 'mq'
 require 'yaml'
 
-require File.expand_path("../../config.amqp_connection", __FILE__)
+require File.expand_path("../../../lib/config/amqp_connection", __FILE__)
+
+ENV['RAILS_ENV'] = 'production'
 
 #write pid to a file
 File.open(File.expand_path("../tmp/pids/vhost.pid", __FILE__), "w") do |f|
