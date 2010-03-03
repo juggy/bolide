@@ -1,3 +1,7 @@
+.DS_Store
+*~
+*.swp
+
 feature_app/log/*.log
 feature_app/tmp/**/*
 feature_app/doc/api

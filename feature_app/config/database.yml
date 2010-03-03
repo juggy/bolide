@@ -1,0 +1,5 @@
+development:
+  adapter: mysql
+  database: development
+  username: root
+  password: mysql
