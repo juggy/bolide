@@ -2,6 +2,8 @@
 *~
 *.swp
 
+helpers/vhost/.bundle/**/*
+
 feature_app/log/*.log
 feature_app/tmp/**/*
 feature_app/doc/api

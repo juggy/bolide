@@ -7,6 +7,8 @@ namespace :deploy do
       "cd #{current_path}/feature_app",
       "sudo bundle install",
       "cd #{current_path}/stream_app",
+      "sudo bundle install",
+      "cd #{current_path}/helpers/vhost",
       "sudo bundle install"
       ].join(" && ")
   end
@@ -16,7 +18,7 @@ namespace :deploy do
     run [
         "sudo kill -USR2 `cat #{shared_path}/pids/live.unicorn.pid`",
         "sudo kill -USR2 `cat #{shared_path}/pids/unicorn.pid`",
-        "sudo kill -9 `cat #{shared_path}/pids/vhost.pid`",
+        'if [ -e "#{shared_path}/pids/vhost.pid" ]; then sudo kill -9 `cat #{shared_path}/pids/vhost.pid`; fi',
         "sudo ruby #{current_path}/helpers/vhost/vhost.rb"
     ].join(" && ")
   end
