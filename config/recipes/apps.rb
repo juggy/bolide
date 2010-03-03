@@ -29,7 +29,7 @@ namespace :deploy do
         "sudo rainbows -c #{current_path}/config/server/app/live.jguimont.com.rb -E production -D",
         "cd #{current_path}/feature_app",
         "sudo unicorn_rails -c #{current_path}/config/server/app/www.jguimont.com.rb -E production -D",
-        "sudo ruby #{current_path}/helpers/vhost/vhost.rb"
+        "sudo ruby #{current_path}/helpers/vhost/vhost.rb &"
     ].join(" && ")
   end
   
