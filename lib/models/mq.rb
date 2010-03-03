@@ -48,7 +48,7 @@ module BolideApi
       if ENV['RAILS_ENV'] == 'test'
         @amqp = InMemoryMQ.new
       else
-        @amqp = Carrot.new(AmqpConnection::connection.merge!({:vhost=> "vhost"})) 
+        @amqp = Carrot.new(AmqpConnection::connection.merge!({:vhost=> vhost})) 
       end
     end
     

@@ -1,9 +1,12 @@
 source :gemcutter
 
+gem "nokogiri"
+gem "builder"
 gem "rainbows"
 gem "system_timer"
 gem "cramp"
-gem "carrot", "0.7.0"
+gem "uuid"
+gem "carrot"
 gem "validatable"
 gem "memcachedb-client", "0.0.2"
 gem "usher"

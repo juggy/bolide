@@ -1,5 +1,8 @@
 development:
   groups: [:servers: [ 'localhost:11211' ]]
+
+local:
+  groups: [:servers: [ 'localhost:11211' ]]
   
 production:
   groups: [:servers: [ 'localhost:11211' ]]

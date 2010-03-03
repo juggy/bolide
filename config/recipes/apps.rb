@@ -4,11 +4,9 @@ namespace :deploy do
   
   task :bundle_update do
     run [
-      "cd #{current_path}/ws_app",
-      "sudo bundle lock",
+      "cd #{current_path}/feature_app",
       "sudo bundle install",
       "cd #{current_path}/stream_app",
-      "sudo bundle lock",
       "sudo bundle install"
       ].join(" && ")
   end
@@ -16,8 +14,10 @@ namespace :deploy do
   task :restart do
     #to restart, send signal usr2
     run [
-        "kill -USR2 `cat #{shared_path}/pids/live.unicorn.pid`",
-        "kill -USR2 `cat #{shared_path}/pids/unicorn.pid`" 
+        "sudo kill -USR2 `cat #{shared_path}/pids/live.unicorn.pid`",
+        "sudo kill -USR2 `cat #{shared_path}/pids/unicorn.pid`",
+        "sudo kill -9 `cat #{shared_path}/pids/vhost.pid`",
+        "sudo ruby #{current_path}/helpers/vhost/vhost.rb"
     ].join(" && ")
   end
   
@@ -25,8 +25,9 @@ namespace :deploy do
     run [
          "cd #{current_path}/stream_app",
         "sudo rainbows -c #{current_path}/config/server/app/live.jguimont.com.rb -E production -D",
-        "cd #{current_path}/ws_app",
-        "sudo unicorn_rails -c #{current_path}/config/server/app/ws.jguimont.com.rb -E production -D"
+        "cd #{current_path}/feature_app",
+        "sudo unicorn_rails -c #{current_path}/config/server/app/www.jguimont.com.rb -E production -D",
+        "sudo ruby #{current_path}/helpers/vhost/vhost.rb"
     ].join(" && ")
   end
   

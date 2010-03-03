@@ -1,4 +1,5 @@
 require 'carrot'
+require 'uuid'
 require 'validatable'
 
 module BolideApi

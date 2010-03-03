@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head profile="http://gmpg.org/xfn/11">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+
+	<!-- style START -->
+	<%= stylesheet_link_tag 'screen.css', 'app.css', 'public/layout.css', 'public/default.css', 'public/forms.css', 
+                            :media => 'screen', :cache => 'cache/cache' %>
+	<!-- for translations -->
+		<!--[if IE]>
+		<%# stylesheet_link_tag 'ie.css', :media => 'screen' %>
+		<![endif]-->
+	<!-- style END -->
+
+	<!-- script START -->
+	<%= javascript_include_tag 'prototype', 'jquery-1.3.2.min', 'application', :cache => 'cache/cache' %>
+	<script type="text/javascript">
+		jQuery.noConflict();
+	</script>
+	<!-- script END -->
+</head>
+<body>
+
+<div id="header">
+	<img src="/images/bolide-top.png"/>
+</div>
+<div id="main" class="column">
+	<div id="menu">
+		<a href="/what"><img src="/images/what-sel.png"/></a>
+		<a href="/how"><img src="/images/how-sel.png"/></a>
+		<a href="api"><img src="/images/api-sel.png"/></a>
+		<%if signed_in? %>
+		<a href="<%= root_url %>"><img style="margin-left:220px" src="/images/home-sel.png"/></a>
+		<%else%>
+		<a href="<%= sign_in_url %>"><img style="margin-left:220px" src="/images/login-sel.png"/></a>
+		<%end%>
+	</div>
+	<div id="content">
+		<h4 style="color:#FF4A3B"><%= flash[:failure] %><%= flash[:notice] %></h4>
+		<%= yield %>
+	</div>
+</div>
+<% if !signed_in? && !controller.is_a?(Clearance::UsersController) && 
+	!controller.is_a?(Clearance::SessionsController) && 
+	!controller.is_a?(Clearance::PasswordsController)%>
+	<div id="sign-up" class="column">
+		<% form_for @user do |form| %>
+			<h3>Sign up</h3>
+			<%= render :partial => '/users/form', :object => form %>
+			<div class="buttons">
+				<%= form.submit 'Sign up', :disable_with => 'Please wait...' %>
+			</div>
+		<% end %>
+	</div>
+<% end %>
+<div class="clear"></div>
+<div id="footer">
+	<p class="small">Julien Guimont - Copyright 2010</p>
+</div>
+
+</body>
+</html>

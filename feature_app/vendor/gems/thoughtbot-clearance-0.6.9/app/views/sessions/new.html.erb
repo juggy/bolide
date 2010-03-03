@@ -1,0 +1,32 @@
+<div class="login">
+	<h2>Sign in</h2>
+
+	<% form_for :session, :url => session_path do |form| %>
+	<fieldset>
+		<div class="label">
+			<%= form.label :email %>
+			<div><%= form.text_field :email %></div>
+		</div>
+		<div class="label">
+			<%= form.label :password %>
+			<div><%= form.password_field :password %></div>
+		</div>
+		<div class="label">
+			<%= form.check_box :remember_me %>
+			<%= form.label :remember_me %>
+		</div>
+		<div class="buttons">
+			<%= form.submit "Sign in", :disable_with => "Please wait..." %>
+		</div>
+	</fieldset>
+	<% end %>
+
+	<ul>
+		<li>
+			<%= link_to "Sign up", sign_up_path %>
+		</li>
+		<li>
+			<%= link_to "Forgot password?", forgot_password_path %>
+		</li>
+	</ul>
+</div>

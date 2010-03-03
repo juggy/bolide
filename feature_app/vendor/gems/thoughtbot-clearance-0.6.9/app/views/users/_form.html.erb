@@ -1,0 +1,20 @@
+<%= form.error_messages %>
+
+<fieldset>
+	<div class="text_field">
+		<%= form.label :email %>
+		<div><%= form.text_field :email %></div>
+	</div>
+	<div class="text_field">
+		<%= form.label :account %>
+		<div><%= form.text_field :account %></div>
+	</div>
+	<div class="password_field">
+		<%= form.label :password %>
+		<div><%= form.password_field :password %></div>
+	</div>
+	<div class="password_field">
+		<%= form.label :password_confirmation, "Confirm password" %>
+		<div><%= form.password_field :password_confirmation %></div>
+	</div>
+</fieldset>

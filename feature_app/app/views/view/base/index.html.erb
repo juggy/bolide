@@ -1,0 +1,18 @@
+<div class="push-2"><h3><a href="<%= sign_out_url%>">log out</a></h3></div>
+<h2>Welcome to Bolide!</h2>
+<p>Here is the information needed to connect to Bolide and stream data to your users.</p>
+<% form_for current_user do |form| %>
+	<fieldset>
+		<div class="text_field">
+			<%= form.label :account %>
+			<div><%= form.text_field :account, :readonly=>true%></div>
+		</div>
+		<div class="text_field">
+			<%= form.label "Secret API Key" %>
+			<div><%= form.text_field :api_key, :readonly=>true%></div>
+		</div>
+	</fieldset>
+<%end%>
+
+<p>Any account abusing of of the service and affecting its stability will see its account suspended</p>
+

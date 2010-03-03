@@ -1,0 +1,22 @@
+<h2>Account &amp; Key</h2>
+<p>
+Once you sign up, you will be asked to chose an account name. Along with your new account, you will get a secret API key that you will be able to use to access the API. 
+</p>
+<h2>Queues for queueing</h2>
+<p>
+To send messages to Bolide you first need to determine which recipient should receive it. To do so you set up a queue using the API. One queue delivers messages to a single client. They are lightweight and expires after a while when no client connects to it. Queues can be created for each session in a web application for example. They can also be used to check if a client is still accessible or not. 
+</p>
+<h2>Messages</h2>
+<p>
+You send Bolide your messages (any messages really, there is a 8kb limit, but the content is up to you) and it will distribute and deliver it for you.
+</p>
+<p>
+Distribution is based on the queue name associated with a message. For example, to send a message to all the connected clients, you can use the distribution criteria "*" or for all users within a particular group: "/group_name/*".
+</p>
+<p>
+Delivery is done using long polling in modern browser and polling in Internet Explorer. Long polling is more efficient than polling and allows to react to disconnections quickly as the client still needs to re-establish the connection from time to time. 
+</p>
+<h2>Underlying technology</h2>
+<p>
+Bolide is running on Rainbows! as a realtime web server, memcachedb for fast pervasive caching and finally rabbitmq as the routing system for all messaging. All this managed for you for fast delivery of messages.
+</p>

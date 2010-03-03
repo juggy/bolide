@@ -1,0 +1,13 @@
+feature_app/log/*.log
+feature_app/tmp/**/*
+feature_app/doc/api
+feature_app/doc/app
+feature_app/.bundle/**/*
+
+stream_app/tmp/**/*
+stream_app/.bundle/**/*
+
+ws_app/log/*.log
+ws_app/tmp/**/*
+ws_app/doc/api
+ws_app/doc/app

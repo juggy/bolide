@@ -1,0 +1,13 @@
+source :gemcutter
+
+gem "unicorn"
+gem "nokogiri"
+gem "builder"
+gem "system_timer"
+gem "uuid"
+gem "rack", ">=1.0.0"
+gem "rails", "~> 2.3.5", :require => nil
+gem "carrot", "0.7.0"
+gem "validatable"
+gem "memcachedb-client", "0.0.2"
+gem "mysql"

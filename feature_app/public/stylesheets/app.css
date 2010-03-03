@@ -1,0 +1,45 @@
+#header{
+	width:100%;
+	height:245px;
+	text-align: center;
+	border-bottom: 1px solid #874585;
+}
+
+#header img{
+	margin-top: 76px;
+}
+
+#main{
+	width: 500px;
+	margin-left: 155px;
+}
+
+#main #menu{
+	background-color: #874585;
+	height: 30px;
+}
+
+#main #content{
+	padding: 10px;
+}
+
+#footer{
+	width:100%;
+	height:245px;
+	text-align: center;
+	border-top: 1px solid #874585;
+	background-color: #f5dff5;
+}
+
+#sign-up{
+	padding: 10px;
+	text-align: center;
+}
+
+a #what{
+	background-image: url(images/what.png);
+}
+
+a:hover #what{
+	background-image: url(images/what-sel.png);
+}

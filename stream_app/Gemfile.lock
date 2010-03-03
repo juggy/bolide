@@ -1,0 +1,91 @@
+--- 
+dependencies: 
+  usher: 
+    group: 
+    - :default
+    version: ">= 0"
+  system_timer: 
+    group: 
+    - :default
+    version: ">= 0"
+  uuid: 
+    group: 
+    - :default
+    version: ">= 0"
+  memcachedb-client: 
+    group: 
+    - :default
+    version: = 0.0.2
+  carrot: 
+    group: 
+    - :default
+    version: ">= 0"
+  rainbows: 
+    group: 
+    - :default
+    version: ">= 0"
+  validatable: 
+    group: 
+    - :default
+    version: ">= 0"
+  builder: 
+    group: 
+    - :default
+    version: ">= 0"
+  nokogiri: 
+    group: 
+    - :default
+    version: ">= 0"
+  cramp: 
+    group: 
+    - :default
+    version: ">= 0"
+specs: 
+- nokogiri: 
+    version: 1.4.1
+- builder: 
+    version: 2.1.2
+- validatable: 
+    version: 1.6.7
+- i18n: 
+    version: 0.3.5
+- eventmachine: 
+    version: 0.12.10
+- mysqlplus: 
+    version: 0.1.1
+- arel: 
+    version: 0.2.1
+- carrot: 
+    version: 0.7.0
+- activemodel: 
+    version: 3.0.0.beta
+- unicorn: 
+    version: 0.97.0
+- rainbows: 
+    version: 0.91.0
+- memcachedb-client: 
+    version: 0.0.2
+- fuzzyhash: 
+    version: 0.0.11
+- memcache-client: 
+    version: 1.7.8
+- rack: 
+    version: 1.1.0
+- macaddr: 
+    version: 1.0.0
+- uuid: 
+    version: 2.2.0
+- system_timer: 
+    version: "1.0"
+- usher: 
+    version: 0.6.7
+- tzinfo: 
+    version: 0.3.16
+- activesupport: 
+    version: 3.0.0.beta
+- cramp: 
+    version: "0.10"
+hash: 71ffa5a3606ec622176e71a6f7e73abcd68b58b0
+sources: 
+- Rubygems: 
+    uri: http://gemcutter.org

@@ -1,7 +1,24 @@
-require 'rubygems'
+begin
+  # Try to require the preresolved locked set of gems.
+  require File.expand_path('../.bundle/environment', __FILE__)
+rescue LoadError
+  # Fall back on doing an unlocked resolve at runtime.
+  require "rubygems"
+  require "bundler"
+  Bundler.setup
+end
+
+Bundler.require(:default)
+
 require 'mq'
 require 'yaml'
-require '../config/amqp_connection'
+
+require File.expand_path("../../config.amqp_connection", __FILE__)
+
+#write pid to a file
+File.open(File.expand_path("../tmp/pids/vhost.pid", __FILE__), "w") do |f|
+  f.write(Process.pid)
+end
 
 AMQP.start(AmqpConnection::connection.merge!({:vhost=>'/bolide'})) do
  

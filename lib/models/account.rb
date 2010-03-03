@@ -17,6 +17,7 @@ module BolideApi
     
     def after_initialize
       @qs = [] if @qs.nil?
+      @api_key = UUID.generate
     end
   
     def vhost
@@ -39,7 +40,7 @@ module BolideApi
     end
     
     def marshal_load(data)
-      @id = data[:id]
+      @_id = data[:id]
       @api_key = data[:api_key]
       @qs = data[:qs]
       @month_start = data[:month_start]

@@ -65,7 +65,7 @@ after_fork do |server, worker|
       Process::UID.change_privilege(target_uid)
     end
   rescue => e
-    if rails_env == 'development'
+    if rails_env != 'production'
       STDERR.puts "couldn't change user, oh well"
     else
       raise e

@@ -55,7 +55,7 @@ module BolideApi
     end
 
     def marshal_load(data)
-      @id = data[:id]
+      @_id = data[:id]
       @account = Account.load_with(:_id=>data[:account_id])
       @saved = data[:saved]
       @token = data[:token]

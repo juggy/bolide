@@ -10,10 +10,8 @@ class QsController < ApplicationController
   end
   
   def show
-    p 'crisse'
     @q = BolideApi::Q.load_with(:_id=>params[:id], :account=>@account )
     respond_to do |f|
-      p f
       f.xml do 
         raise 'Invalid Queue' unless @q.saved
         render :action=>'show.xml.builder'

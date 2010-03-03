@@ -1,0 +1,19 @@
+<div class="login">
+	<h2>Change your password</h2>
+
+	<div class="subtitle">
+		We will email you a link to change your password.
+	</div>
+
+	<% form_for :password, :url => passwords_path do |form| %>
+	<fieldset>
+		<div class="text_field">
+			<%= form.label :email, "Email address" %>
+			<div><%= form.text_field :email %></div>
+		</div>
+		<div class="submit_field">
+			<%= form.submit "Reset password", :disable_with => "Please wait..." %>
+		</div>
+	</fieldset>
+	<% end %>
+</div>

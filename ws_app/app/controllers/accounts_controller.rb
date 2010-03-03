@@ -16,7 +16,7 @@ class AccountsController < ApplicationController
   private   
   def authenticate_admin
      authenticate_or_request_with_http_basic("API Login") do |account, key|
-       account == 'admin' && key == '1234'
+       account == 'admin' && key == ActionController::Base.session_options[:secret]
      end
   end
 end

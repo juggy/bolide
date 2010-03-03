@@ -1,0 +1,22 @@
+site:
+    name: Bolide Realtime
+view/base/index:
+  title: Bolide Realtime Messaging for the Realtime Web
+  description: A hosted message delivery service to promote the realtime web.
+  keywords: Saas, software, realtime, web, bolide, api
+clearance/sessions/new:
+  title: Sign-in to your account
+  description: Sign-in to your account
+  keywords: Sign-in, login, account
+clearance/sessions/destroy:
+  title: Sign-out of your account
+  description: Sign-out of your account
+  keywords: Sign-out, logout, account
+clearance/users/new:
+  title: Sign-up for a new account
+  description: Sign-up for a new account
+  keywords: Sign-up, account
+clearance/passwords/new:
+  title: Change your password
+  description: Change your password
+  keywords: Password, change, account

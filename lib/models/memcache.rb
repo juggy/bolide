@@ -17,7 +17,11 @@ module BolideApi
     
     def get(key)
       value = memcache.get(key)
-      yield if value.nil?
+      if value.nil? 
+        yield 
+      else 
+        value
+      end
     end
    
     def increment(key)
