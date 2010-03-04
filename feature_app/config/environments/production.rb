@@ -28,5 +28,5 @@ config.action_view.cache_template_loading            = true
 # config.threadsafe!
 
 # Clearance
-ClearanceMailer::HOST = "www.jguimont.com"
+HOST = "www.jguimont.com"
 
