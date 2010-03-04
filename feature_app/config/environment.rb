@@ -15,7 +15,7 @@ Rails::Initializer.run do |config|
   config.gem "thoughtbot-clearance", :lib => 'clearance', :source => 'http://gems.github.com/', :version => '0.6.9'
   config.gem 'rubaidh-google_analytics', :lib => 'rubaidh/google_analytics', :source => 'http://gems.github.com'
   # Clearance
-  DO_NOT_REPLY = "donotreply@jguimont.com"
+  DO_NOT_REPLY = "donotreply@bolideapp.com"
 
   config.gem "memcachedb-client"
   config.gem "carrot"
@@ -32,7 +32,7 @@ Rails::Initializer.run do |config|
 end
 
 Rubaidh::GoogleAnalytics.tracker_id   = 'UA-13210481-1'
-Rubaidh::GoogleAnalytics.domain_name  = 'jguimont.com'
+Rubaidh::GoogleAnalytics.domain_name  = 'bolideapp.com'
 Rubaidh::GoogleAnalytics.environments = ['production']
 
 ExceptionNotifier.exception_recipients = %w(julien.guimont@gmail.com)

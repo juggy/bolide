@@ -1,14 +1,14 @@
 development:
   :address: smtp.sendgrid.net
   :port: 25
-  :domain: jguimont.com
+  :domain: bolideapp.com
   :authentication: plain
   :user_name: julien.guimont@gmail.com
   :password: Kaiser11
 production:
   :address: smtp.sendgrid.net
   :port: 25
-  :domain: jguimont.com
+  :domain: bolideapp.com
   :authentication: plain
   :user_name: julien.guimont@gmail.com
   :password: Kaiser11
