@@ -32,7 +32,7 @@ before_fork do |server, worker|
   # we send it a QUIT.
   #
   # Using this method we get 0 downtime deploys.
-  old_pid = "/u/apps/bolide/current/stream_app/tmp/pids/live.pid.oldbin"
+  old_pid = "/u/apps/bolide/current/stream_app/tmp/pids/live.unicorn.pid.oldbin"
   if File.exists?(old_pid) && server.pid != old_pid
     begin
       Process.kill("QUIT", File.read(old_pid).to_i)
