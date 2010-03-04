@@ -1,5 +1,10 @@
 upstream www_server {
-	server unix:/u/apps/bolide/current/feature_app/tmp/sockets/www.sock fail_timeout=0;
+	server unix:/u/apps/bolide/current/feature_app/tmp/sockets/www.sock;
+}
+server {
+	listen   80;
+	server_name  jguimont.com;
+	rewrite ^/(.*) http://www.jguimont.com/$1 permanent;
 }
 
 server {
