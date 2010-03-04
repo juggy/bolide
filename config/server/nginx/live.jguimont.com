@@ -1,5 +1,5 @@
 upstream live_server {
-	server unix:/u/apps/bolide/current/stream_app/tmp/sockets/live.sock fail_timeout=0;
+	server unix:/u/apps/bolide/current/stream_app/tmp/sockets/live.sock;
 }
 
 server {
