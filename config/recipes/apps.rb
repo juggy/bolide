@@ -9,8 +9,7 @@ namespace :deploy do
       "cd #{current_path}/stream_app",
       "sudo bundle install",
       "cd #{current_path}/helpers/vhost",
-      "sudo bundle install",
-      "sudo chown -R www-data #{current_path}/feature_app/public"
+      "sudo bundle install"
       ].join(" && ")
   end
   
