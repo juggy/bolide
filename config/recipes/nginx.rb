@@ -5,8 +5,8 @@ namespace :deploy do
   
   task :nginx_restart do
     run [
-      "sudo cp #{current_path}/config/server/nginx/www.jguimont.com /etc/nginx/sites-enabled/www.jguimont.com",
-      "sudo cp #{current_path}/config/server/nginx/live.jguimont.com /etc/nginx/sites-enabled/live.jguimont.com",
+      "sudo cp #{current_path}/config/server/nginx/www.bolideapp.com /etc/nginx/sites-enabled/www.bolideapp.com",
+      "sudo cp #{current_path}/config/server/nginx/live.bolideapp.com /etc/nginx/sites-enabled/live.bolideapp.com",
       "sudo /etc/init.d/nginx restart"
       ].join(" && ")
   end

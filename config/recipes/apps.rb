@@ -18,17 +18,19 @@ namespace :deploy do
     run [
         "sudo kill -USR2 `cat #{shared_path}/pids/live.unicorn.pid`",
         "sudo kill -USR2 `cat #{shared_path}/pids/unicorn.pid`",
-        "sudo ruby #{current_path}/helpers/vhost/vhost.rb restart"
+        "cd #{current_path}/helpers/vhost",
+        "sudo ruby vhost.rb restart"
     ].join(" && ")
   end
   
   task :start do
     run [
          "cd #{current_path}/stream_app",
-        "sudo rainbows -c #{current_path}/config/server/app/live.jguimont.com.rb -E production -D",
+        "sudo rainbows -c #{current_path}/config/server/app/live.bolideapp.com.rb -E production -D",
         "cd #{current_path}/feature_app",
-        "sudo unicorn_rails -c #{current_path}/config/server/app/www.jguimont.com.rb -E production -D",
-        "sudo ruby #{current_path}/helpers/vhost/vhost.rb start "
+        "sudo unicorn_rails -c #{current_path}/config/server/app/www.bolideapp.com.rb -E production -D",
+        "cd #{current_path}/helpers/vhost",
+        "sudo ruby vhost.rb start "
     ].join(" && ")
   end
   

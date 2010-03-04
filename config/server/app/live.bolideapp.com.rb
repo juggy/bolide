@@ -1,9 +1,10 @@
-# unicorn_rails -c /data/github/current/config/unicorn.rb -E production -D
+# unicorn_rails -c /data/github/current/config/server/app/ws.bolideapp.com.rb -E production -D
  
-rails_env = ENV['RAILS_ENV'] || 'production'
- 
+rails_env = ENV['RACK_ENV'] || 'production'
+ENV['RAILS_ENV'] = rails_env
+
 # 16 workers and 1 master
-worker_processes (rails_env == 'production' ? 3 : 1)
+worker_processes (rails_env == 'production' ? 4 : 1)
  
 # Load rails+github.git into the master before forking workers
 # for super-fast worker spawn times
@@ -11,12 +12,13 @@ preload_app true
  
 # Restart any workers that haven't responded in 30 seconds
 timeout 30
+
+
  
 # Listen on a Unix data socket
 if rails_env == 'production'
-  listen '/u/apps/bolide/current/ws_app/tmp/sockets/ws.sock', :backlog => 2048
-else
-  listen '/Users/juggy/Documents/bolide/ws_app/tmp/sockets/ws.sock', :backlog => 2048
+  pid '/u/apps/bolide/current/stream_app/tmp/pids/live.unicorn.pid'
+  listen '/u/apps/bolide/current/stream_app/tmp/sockets/live.sock', :backlog => 2048 
 end
  
 before_fork do |server, worker|
@@ -30,7 +32,7 @@ before_fork do |server, worker|
   # we send it a QUIT.
   #
   # Using this method we get 0 downtime deploys.
-  old_pid = "/u/apps/bolide/current/ws_app/tmp/pids/ws.pid.oldbin"
+  old_pid = "/u/apps/bolide/current/stream_app/tmp/pids/live.unicorn.pid.oldbin"
   if File.exists?(old_pid) && server.pid != old_pid
     begin
       Process.kill("QUIT", File.read(old_pid).to_i)
@@ -46,8 +48,7 @@ after_fork do |server, worker|
   # Unicorn master loads the app then forks off workers - because of the way
   # Unix forking works, we need to make sure we aren't using any of the parent's
   # sockets, e.g. db connection
-
-
+ 
   ##
   # Unicorn master is started as root, which is fine, but let's
   # drop the workers to git:git
@@ -64,10 +65,15 @@ after_fork do |server, worker|
       Process::UID.change_privilege(target_uid)
     end
   rescue => e
-    if RAILS_ENV == 'development'
+    if rails_env != 'production'
       STDERR.puts "couldn't change user, oh well"
     else
       raise e
     end
   end
 end
+
+Rainbows! do
+    use :EventMachine # this may also be :ThreadSpawn or :ThreadPool
+    worker_connections 256
+  end

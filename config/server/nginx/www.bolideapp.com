@@ -3,13 +3,13 @@ upstream www_server {
 }
 server {
 	listen   80;
-	server_name  jguimont.com;
-	rewrite ^/(.*) http://www.jguimont.com/$1 permanent;
+	server_name  bolideapp.com;
+	rewrite ^/(.*) http://www.bolideapp.com/$1 permanent;
 }
 
 server {
 	listen   80;
-	server_name  www.jguimont.com;
+	server_name  www.bolideapp.com;
 
 	access_log  /u/apps/bolide/current/feature_app/log/nginx.www.access.log;
 	error_log /u/apps/bolide/current/feature_app/log/nginx.www.error.log;
