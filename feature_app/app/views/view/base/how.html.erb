@@ -8,13 +8,13 @@ To send messages to Bolide you first need to determine which recipient should re
 </p>
 <h2>Messages</h2>
 <p>
-You send Bolide your messages (any messages really, there is a 8kb limit, but the content is up to you) and it will distribute and deliver it for you.
+You send Bolide your messages (any messages really, there is a 8kb limit, but the content is up to you) and it will distribute and deliver it for you. Just make sure that the content you send will not interact with the JSONP technique used with IE. Bolide espaces the single quotes to avoid such problem, but we warned.
 </p>
 <p>
 Distribution is based on the queue name associated with a message. For example, to send a message to all the connected clients, you can use the distribution criteria "*" or for all users within a particular group: "/group_name/*".
 </p>
 <p>
-Delivery is done using long polling in modern browser and polling in Internet Explorer. Long polling is more efficient than polling and allows to react to disconnections quickly as the client still needs to re-establish the connection from time to time. 
+Delivery is done using long polling in modern browser and polling with JSONP in Internet Explorer. Long polling is more efficient than polling and allows to react to disconnections quickly as the client still needs to re-establish the connection from time to time. 
 </p>
 <h2>Underlying technology</h2>
 <p>

@@ -2,14 +2,19 @@ require 'carrot'
 require 'cramp'
 require 'cramp/controller'
 
+class String
+  def escape_single_quotes
+    self.gsub(/'/, "\\\\'")
+  end
+end
+
 class StreamController < Cramp::Controller::Action
   before_start :verify_client_token
   periodic_timer :send_data, :every => 1
   periodic_timer :close_connection, :every => 10
 
   def verify_client_token
-    p @request
-    @user_agent = ParseUserAgent.new(request.env['HTTP_USER_AGENT'])
+    
     @q = BolideApi::Q.load_with(:_id=>params[:queue], :account_id=>params[:account])
     
     if !@q.valid_token?(params[:token])
@@ -26,23 +31,40 @@ class StreamController < Cramp::Controller::Action
   end
 
   def respond_with
-    content_type = params[:format] == 'xml' ? 'application/xml' : 'application/json'
-    [200, {'Content-Type' => content_type}]
+    [200, {'Content-Type' => 'application/json', 
+           'Access-Control-Allow-Origin'=>'*',
+           'Access-Control-Allow-Headers'=>'x-prototype-version,x-requested-with,X-Prototype-Version, X-Requested-With, Accept',
+           'Access-Control-Allow-Methods'=>'GET'}]
   end
 
   def send_data
+    if request.request_method == 'OPTIONS'
+      finish
+    end
+    
     msg = @q.read_msg
-   
+      
     while(!msg.nil?)
-      render [msg]
+      render [ jsonp? ? jsonp( msg ) : msg]
       msg = @q.read_msg
     end
-    finish if @user_agent.browser = 'MSIE'
+    
+    finish if jsonp?
+    
+    # render [jsonp? ? jsonp( "ms'g" ) : "msg"]
+    #     finish if jsonp?
   end
 
   def close_connection
     @q.account.down_concurrent if @q
     finish
   end
+  
+  def jsonp?
+    !request.params['jsonp'].nil?
+  end
 
+  def jsonp(data)
+    "Bolide.MSIECallback('" + data.escape_single_quotes + "');"
+  end
 end

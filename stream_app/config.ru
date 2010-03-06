@@ -36,4 +36,6 @@ routes = Usher::Interface.for(:rack) do
 	add('/msg.xml').to(MsgWsController)
 end
 
+use Rack::Static, :urls => ["/js"], :root => "public"
+
 run routes
