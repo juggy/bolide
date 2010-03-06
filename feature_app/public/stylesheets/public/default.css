@@ -42,6 +42,11 @@ a:visited { color: #666; }
   list-style: square;
 }
 
-h1,h2,h3,h4,h5,h6,p {
+p {
 	color: #874585;
+}
+
+h1,h2,h3,h4,h5,h6 {
+	color: #874585;
+	text-shadow: 1px 1px 1px rgba(135,69,133, .5);
 }

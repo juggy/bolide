@@ -1,6 +1,6 @@
 var Bolide = {
 	Version: '1.0',
-	Url: 'http://localhost:8080/'
+	Url: 'http://live.bolideapp.com/'
 };
 
 Bolide.MSIECallback = null;
