@@ -10,11 +10,18 @@ server {
 	error_log /u/apps/bolide/current/stream_app/log/nginx.live.error.log;
 	
 	keepalive_timeout 5;
+	
+	root /u/apps/bolide/current/stream_app/public;
 
 	location / {
 		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
 		proxy_set_header Host $http_host;
 		proxy_redirect off;
+		
+		if (-f $request_filename) {
+			break;
+		}
+		
 		if (!-f $request_filename){
 			proxy_pass http://live_server;
 			break;
