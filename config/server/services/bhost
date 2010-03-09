@@ -1,0 +1,63 @@
+#!/bin/bash
+#
+# Init file for Bolide instances
+#
+# description: Bolide instances
+#
+
+# source function library
+[ -f /etc/rc.d/init.d/functions ] && . /etc/rc.d/init.d/functions
+
+RETVAL=0
+prog="Bhost"
+
+# Some functions to make the below more readable
+
+start()
+{
+        echo $"Starting..."
+
+				echo -n "bhost"
+				cd "/u/apps/bolide/current/helpers"
+        sudo /usr/bin/ruby helpers.rb start bhost && echo ": OK"
+				
+        echo "done"
+}
+
+stop()
+{
+        echo $"Stopping..."
+
+				echo -n "bhost"
+				cd "/u/apps/bolide/current/helpers"
+        sudo /usr/bin/ruby helpers.rb stop bhost && echo ": OK"
+
+        echo "done"
+}
+
+restart()
+{
+        echo $"Reloading..."
+	
+				echo -n "bhost"
+				cd "/u/apps/bolide/current/helpers"
+        sudo /usr/bin/ruby helpers.rb restart bhost && echo ": OK"
+
+        echo "done"
+}
+
+case "$1" in
+        start)
+                start
+                ;;
+        stop)
+                stop
+                ;;
+        restart)
+                restart
+                ;;
+        *)
+                echo $"Usage: $0 {start|stop|restart}"
+                RETVAL=1
+esac
+exit $RETVAL

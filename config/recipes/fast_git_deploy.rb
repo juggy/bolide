@@ -104,7 +104,6 @@ namespace :deploy do
       "ln -s #{shared_path}/log    #{current_path}/stream_app/log",
       "ln -s #{shared_path}/pids   #{current_path}/stream_app/tmp/pids",
       "ln -s #{shared_path}/sockets   #{current_path}/stream_app/tmp/sockets",
-      "ln -s #{shared_path}/pids   #{current_path}/helpers/tmp/pids",
       "ln -s #{shared_path}/log    #{current_path}/helpers/log"
     ].join(" && ")
   end

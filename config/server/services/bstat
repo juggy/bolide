@@ -21,9 +21,6 @@ start()
         cd "/u/apps/bolide/current/helpers"
         /usr/bin/ruby helpers.rb start bstat && echo ": OK"
 				
-				echo -n "bhost"
-        /usr/bin/ruby helpers.rb start bhost && echo ": OK"
-				
         echo "done"
 }
 
@@ -35,9 +32,6 @@ stop()
         cd "/u/apps/bolide/current/helpers"
         /usr/bin/ruby helpers.rb stop bstat && echo ": OK"
 				
-				echo -n "bhost"
-        /usr/bin/ruby helpers.rb stop bhost && echo ": OK"
-
         echo "done"
 }
 
@@ -49,9 +43,6 @@ restart()
         cd "/u/apps/bolide/current/helpers"
         /usr/bin/ruby helpers.rb restart bstat && echo ": OK"
 				
-				echo -n "bhost"
-        /usr/bin/ruby helpers.rb restart bhost && echo ": OK"
-
         echo "done"
 }
 

@@ -9,7 +9,7 @@
 [ -f /etc/rc.d/init.d/functions ] && . /etc/rc.d/init.d/functions
 
 RETVAL=0
-prog="Bolide web"
+prog="Bolide stream"
 
 # Some functions to make the below more readable
 
@@ -17,11 +17,6 @@ start()
 {
         echo $"Starting..."
 
-       	echo -n "Feature App"
-        cd "/u/apps/bolide/current/feature_app"
-        [ -f tmp/pids/unicorn.pid ] && echo ": already started!"
-        /usr/bin/unicorn_rails  -c ../config/server/app/www.bolideapp.com.rb -E production -D && echo ": OK"
-				
 				echo -n "Stream App"
         cd "/u/apps/bolide/current/stream_app"
         [ -f tmp/pids/live.unicorn.pid ] && echo ": already started!"
@@ -34,10 +29,6 @@ stop()
 {
         echo $"Stopping..."
 
-				echo -n "Feature App"
-				kill -QUIT `cat /u/apps/bolide/current/feature_app/tmp/pids/unicorn.pid` && echo ": OK" || echo ": failed";
-       	rm "/u/apps/bolide/current/feature_app/tmp/pids/unicorn.pid"
-
 				echo -n "Stream App"
 				kill -QUIT `cat /u/apps/bolide/current/stream_app/tmp/pids/live.unicorn.pid` && echo ": OK" || echo ": failed";
 				rm "/u/apps/bolide/current/stream_app/tmp/pids/live.unicorn.pid"
@@ -49,9 +40,6 @@ restart()
 {
         echo $"Reloading..."
 
-        echo -n "Feature App"
-				kill -USR2 `cat /u/apps/bolide/current/feature_app/tmp/pids/unicorn.pid` && echo ": OK" || echo ": failed";
-       	
 				echo -n "Stream App"
 				kill -USR2 `cat /u/apps/bolide/current/stream_app/tmp/pids/live.unicorn.pid` && echo ": OK" || echo ": failed";
 				
