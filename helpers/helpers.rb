@@ -13,12 +13,16 @@ Bundler.require(:default)
 require 'daemons'
 require 'logger'
 
+ENV['RAILS_ENV'] = 'production'
 
-ENV['RAILS_ENV'] = 'development'
-
-EventMachine::run {
+Daemons.run("statistics/statistics.rb", :app_name=>'bstat') if ARGV[1] == "bstat"
+Daemons.run("vhost/vhost.rb", :app_name=>'bhost') if ARGV[1] == "bhost"
   
-  require File.expand_path("../statistics/statistics", __FILE__)
-  require File.expand_path("../vhost/vhost", __FILE__)
-  
-}
+# 
+#   EventMachine::run {
+#     require File.expand_path("../statistics/statistics.rb", __FILE__)
+#     require File.expand_path("../vhost/vhost.rb", __FILE__)
+#   
+#   }
+#   
+# }

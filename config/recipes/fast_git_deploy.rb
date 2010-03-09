@@ -94,7 +94,7 @@ namespace :deploy do
       "mkdir -p #{current_path}/feature_app/public",
       "mkdir -p #{current_path}/feature_app/tmp",
       "mkdir -p #{current_path}/stream_app/tmp",
-      "mkdir -p #{current_path}/helpers/vhost/tmp",
+      "mkdir -p #{current_path}/helpers/tmp",
       "mkdir -p #{shared_path}/sockets",
       
       "ln -s #{shared_path}/log    #{current_path}/feature_app/log",
