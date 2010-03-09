@@ -39,6 +39,7 @@ module Clearance
           validates_presence_of     :account
           validates_uniqueness_of   :account, :case_sensitive => false
           validates_format_of       :account, :with => %r{\A[A-Z,a-z,0-9]{0,20}\z}
+          validates_exclusion_of    :account, :in => %w( js accounts bolide test admin admnistration jguimont  ), :message => "\"{{value}\" is not allowed"
 
           validates_presence_of     :password, :if => :password_required?
           validates_confirmation_of :password, :if => :password_required?

@@ -1,7 +1,7 @@
 development:
   groups: [:servers: [ 'localhost:11211' ]]
 
-local:
+deploy:
   groups: [:servers: [ 'localhost:11211' ]]
   
 production:

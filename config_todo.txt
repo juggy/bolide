@@ -8,6 +8,7 @@
 	
 - Memcachedb
 	- build from source
+	-memcachedb -p11211 -r -H ./memcache2 -N
 
 - Firewall
 

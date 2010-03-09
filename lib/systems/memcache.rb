@@ -15,8 +15,8 @@ module BolideApi
       end
     end
     
-    def get(key)
-      value = memcache.get(key)
+    def get(key, raw = false)
+      value = memcache.get(key, raw)
       if value.nil? 
         yield 
       else 
@@ -32,8 +32,8 @@ module BolideApi
       memcache.decrement(key)
     end
     
-    def set(key, value)
-      memcache.set(key, value)
+    def set(key, value, expire = 0, raw = false)
+      memcache.set(key, value, expire, raw)
     end
     
   end

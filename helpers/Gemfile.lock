@@ -1,0 +1,57 @@
+--- 
+dependencies: 
+  system_timer: 
+    group: 
+    - :default
+    version: ">= 0"
+  uuid: 
+    group: 
+    - :default
+    version: ">= 0"
+  amqp: 
+    group: 
+    - :default
+    version: ">= 0"
+  memcachedb-client: 
+    group: 
+    - :default
+    version: = 0.0.2
+  carrot: 
+    group: 
+    - :default
+    version: ">= 0"
+  eventmachine: 
+    group: 
+    - :default
+    version: ">= 0"
+  daemons: 
+    group: 
+    - :default
+    version: ">= 0"
+  validatable: 
+    group: 
+    - :default
+    version: ">= 0"
+specs: 
+- validatable: 
+    version: 1.6.7
+- daemons: 
+    version: 1.0.10
+- eventmachine: 
+    version: 0.12.10
+- carrot: 
+    version: 0.7.0
+- amqp: 
+    version: 0.6.7
+- memcachedb-client: 
+    version: 0.0.2
+- macaddr: 
+    version: 1.0.0
+- uuid: 
+    version: 2.2.0
+- system_timer: 
+    version: "1.0"
+hash: 5d5a9e6cfe0047ee23b9e07e54fcaf0455d5fd78
+sources: 
+- Rubygems: 
+    uri: http://gemcutter.org

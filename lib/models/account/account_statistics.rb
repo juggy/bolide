@@ -5,15 +5,15 @@ module BolideApi
     #accessors
     
     def sent
-      MemCache.instance.get sent_key
+      Integer(MemCache.instance.get(sent_key, true))
     end
     
     def delivered
-      MemCache.instance.set delivered_key
+      Integer(MemCache.instance.get(delivered_key, true))
     end
     
     def concurrent
-      MemCache.instance.set concurrent_key
+      Integer(MemCache.instance.get(concurrent_key, true))
     end
       
     #update with atomic methods
@@ -36,15 +36,15 @@ module BolideApi
   protected
   #keys
     def concurrent_key
-      key + '/live/concurrent'
+      "#" + key + '/live/concurrent'
     end
 
     def sent_key
-      key + '/live/sent'
+      "#" + key + '/live/sent'
     end
 
     def delivered_key
-      key + '/live/delivered'
+      "#" + key + '/live/delivered'
     end
     
   end

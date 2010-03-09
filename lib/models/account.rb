@@ -1,3 +1,5 @@
+require File.expand_path("../account/account_statistics.rb", __FILE__)
+
 module BolideApi
   
   class Account < Base
@@ -6,9 +8,8 @@ module BolideApi
     validates_presence_of :_id, :api_key
     
     def self.accounts
-      accounts = []
-      begin
-        accounts = memcache.get 'accounts'
+      accounts = MemCache.instance.get '#accounts' do
+        []
       end
       accounts.collect! do |a|
         Account.load_with(:_id=>a)
@@ -53,9 +54,9 @@ module BolideApi
       vhost_q.publish(YAML::dump({"add_vhost"=>"/" + @_id}))
       
       #concurrent connections
-      MemCache.instance.set(delivered_key, 0 )
-      MemCache.instance.set(sent_key, 0 )
-      MemCache.instance.set(concurrent_key, 0 ) 
+      MemCache.instance.set(delivered_key, 0, 0, true)
+      MemCache.instance.set(sent_key, 0, 0, true)
+      MemCache.instance.set(concurrent_key, 0, 0, true) 
       
       #add to the account array
       update_accounts
@@ -63,11 +64,11 @@ module BolideApi
     
     def update_accounts
       
-      accounts = MemCache.instance.get('accounts') do 
-        accounts = []
+      account_ids = MemCache.instance.get('#accounts') do 
+        []
       end
-      accounts << @_id
-      MemCache.instance.set('accounts', accounts)   
+      account_ids << @_id
+      MemCache.instance.set('#accounts', account_ids)   
     end
   
     #delete vhost

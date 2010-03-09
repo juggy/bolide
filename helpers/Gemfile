@@ -1,0 +1,10 @@
+source :gemcutter
+
+gem "amqp"
+gem "eventmachine"
+gem "uuid"
+gem "carrot"
+gem "validatable"
+gem "system_timer"
+gem "memcachedb-client", "0.0.2"
+gem "daemons"

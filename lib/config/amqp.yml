@@ -4,7 +4,7 @@ development:
   user: guest
   pass: guest
 
-local:
+deploy:
   host: booky
   port: 5672
   user: guest
