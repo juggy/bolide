@@ -6,17 +6,20 @@ namespace :deploy do
   task :bundle_update do
     run [
       "cd #{current_path}/feature_app",
-      "sudo bundle install",
+      "bundle install",
       "cd #{current_path}/stream_app",
-      "sudo bundle install",
+      "bundle install",
       "cd #{current_path}/helpers",
-      "sudo bundle install"
+      "bundle install"
       ].join(" && ")
   end
   
   task :initd_update do
     run [
-      "sudo cp #{current_path}/config/server/services/* /etc/init.d/",
+      "sudo cp #{current_path}/config/server/services/bhelpers /etc/init.d/",
+      "sudo cp #{current_path}/config/server/services/bolide /etc/init.d/",
+      "sudo chmod +x /etc/init.d/bhelpers",
+      "sudo chmod +x /etc/init.d/bolide",
       "sudo update-rc.d bhelpers defaults",
       "sudo update-rc.d bolide defaults"
       ].join(" && ")

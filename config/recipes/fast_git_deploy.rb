@@ -90,7 +90,7 @@ namespace :deploy do
   desc "Symlink system files"
   task :symlink_system_files, :except => { :no_release => true } do
     run [
-      "rm -rf #{current_path}/feature_app/log #{current_path}/feature_app/public/system #{current_path}/feature_app/tmp/pids #{current_path}/feature_app/tmp/sockets #{current_path}/stream_app/tmp/sockets #{current_path}/stream_app/tmp/pids #{current_path}/stream_app/log #{current_path}/helpers/vhost/tmp/pids #{current_path}/helpers/vhost/log",
+      "rm -rf #{current_path}/feature_app/log #{current_path}/feature_app/public/system #{current_path}/feature_app/tmp/pids #{current_path}/feature_app/tmp/sockets #{current_path}/stream_app/tmp/sockets #{current_path}/stream_app/tmp/pids #{current_path}/stream_app/log #{current_path}/helpers/vhost/tmp/pids #{current_path}/helpers/log",
       "mkdir -p #{current_path}/feature_app/public",
       "mkdir -p #{current_path}/feature_app/tmp",
       "mkdir -p #{current_path}/stream_app/tmp",
@@ -104,8 +104,8 @@ namespace :deploy do
       "ln -s #{shared_path}/log    #{current_path}/stream_app/log",
       "ln -s #{shared_path}/pids   #{current_path}/stream_app/tmp/pids",
       "ln -s #{shared_path}/sockets   #{current_path}/stream_app/tmp/sockets",
-      "ln -s #{shared_path}/pids   #{current_path}/helpers/vhost/tmp/pids",
-      "ln -s #{shared_path}/log    #{current_path}/helpers/vhost/log"
+      "ln -s #{shared_path}/pids   #{current_path}/helpers/tmp/pids",
+      "ln -s #{shared_path}/log    #{current_path}/helpers/log"
     ].join(" && ")
   end
 
