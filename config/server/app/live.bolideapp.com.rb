@@ -15,7 +15,8 @@ timeout 30
 
 # Listen on a Unix data socket
 if rails_env == 'production'
-  logger Logger.new("/u/apps/bolide/current/feature_app/log/unicorn.live.log", 'monthly')
+  working_directory "/u/apps/bolide/current/stream_app"
+  logger Logger.new("/u/apps/bolide/current/stream_app/log/unicorn.live.log", 'monthly')
   pid '/u/apps/bolide/current/stream_app/tmp/pids/live.unicorn.pid'
   listen '/u/apps/bolide/current/stream_app/tmp/sockets/live.sock', :backlog => 2048 
 end

@@ -27,9 +27,8 @@ start()
         echo $"Starting..."
 
        	echo -n "Feature App"
-        cd "/u/apps/bolide/current/feature_app"
-        [ -f tmp/pids/unicorn.pid ] && echo ": already started!"
-        /usr/bin/unicorn_rails  -c ../config/server/app/www.bolideapp.com.rb -E production -D && echo ": OK"
+        [ -f /u/apps/bolide/shared/pids/unicorn.pid ] && echo ": already started!"
+        /usr/bin/unicorn_rails  -c /u/apps/bolide/current/config/server/app/www.bolideapp.com.rb -E production -D && echo ": OK"
 		
         echo "done"
 }
