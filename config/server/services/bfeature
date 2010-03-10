@@ -25,7 +25,7 @@ prog="Bolide feature"
 start()
 {
         echo $"Starting..."
-
+				cd /u/apps/bolide/current/feature_app
        	echo -n "Feature App"
         [ -f /u/apps/bolide/shared/pids/unicorn.pid ] && echo ": already started!"
         /usr/bin/unicorn_rails  -c /u/apps/bolide/current/config/server/app/www.bolideapp.com.rb -E production -D && echo ": OK"
