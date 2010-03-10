@@ -27,7 +27,7 @@ start()
         echo $"Starting..."
 				cd /u/apps/bolide/current/stream_app
 				echo -n "Stream App"
-        [ -f /u/apps/bolide/shared/pids/live.unicorn.pid ] && echo ": already started!"
+        [ -f /u/apps/bolide/shared/pids/live.unicorn.pid ] && stop
         /usr/bin/rainbows  -c /u/apps/bolide/current/config/server/app/live.bolideapp.com.rb -E production -D && echo ": OK"	
 				
         echo "done"

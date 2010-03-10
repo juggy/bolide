@@ -91,7 +91,6 @@ namespace :deploy do
   task :symlink_system_files, :except => { :no_release => true } do
     run [
       "rm -rf #{current_path}/feature_app/log #{current_path}/feature_app/public/system #{current_path}/feature_app/tmp/pids #{current_path}/feature_app/tmp/sockets #{current_path}/stream_app/tmp/sockets #{current_path}/stream_app/tmp/pids #{current_path}/stream_app/log #{current_path}/helpers/vhost/tmp/pids #{current_path}/helpers/log",
-      "mkdir -p #{current_path}/feature_app/public",
       "mkdir -p #{current_path}/feature_app/tmp",
       "mkdir -p #{current_path}/stream_app/tmp",
       "mkdir -p #{current_path}/helpers/tmp",

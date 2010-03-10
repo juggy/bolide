@@ -8,10 +8,10 @@ worker_processes (rails_env == 'production' ? 4 : 1)
  
 # Load rails+github.git into the master before forking workers
 # for super-fast worker spawn times
-preload_app false
+preload_app true
  
 # Restart any workers that haven't responded in 30 seconds
-timeout 30
+timeout 10
 
 # Listen on a Unix data socket
 if rails_env == 'production'
