@@ -22,10 +22,14 @@ namespace :deploy do
       "sudo cp #{current_path}/config/server/services/bstat /etc/init.d/",
       "sudo cp #{current_path}/config/server/services/bstream /etc/init.d/",
       "sudo cp #{current_path}/config/server/services/bfeature /etc/init.d/",
+      "sudo cp #{current_path}/config/server/services/god /etc/init.d/",
       "sudo chmod +x /etc/init.d/bhost",
       "sudo chmod +x /etc/init.d/bstat",
       "sudo chmod +x /etc/init.d/bstream",
-      "sudo chmod +x /etc/init.d/bfeature"
+      "sudo chmod +x /etc/init.d/bfeature",
+      "sudo chmod +x /etc/init.d/god",
+      "sudo update-rc.d -f god defaults 99",
+      "sudo sh -c \"echo 'GOD_CONFIG=#{current_path}/config/god.rb' > /etc/default/god\""
       # "sudo update-rc.d -f bhost defaults 99",
       #       "sudo update-rc.d -f bstat defaults 99",
       #       "sudo update-rc.d -f bstream defaults 99",
