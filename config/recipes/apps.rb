@@ -24,10 +24,10 @@ namespace :deploy do
       "sudo chmod +x /etc/init.d/bstat",
       "sudo chmod +x /etc/init.d/bstream",
       "sudo chmod +x /etc/init.d/bfeature",
-      "sudo update-rc.d bhost start 51 S .",
-      "sudo update-rc.d bstat start 51 S .",
-      "sudo update-rc.d bstream start 51 S .",
-      "sudo update-rc.d bfeature start 51 S ."
+      "sudo update-rc.d -f bhost defaults 99",
+      "sudo update-rc.d -f bstat defaults 99",
+      "sudo update-rc.d -f bstream defaults 99",
+      "sudo update-rc.d -f bfeature defaults 99"
       ].join(" && ")
   end
   

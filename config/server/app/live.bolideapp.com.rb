@@ -3,20 +3,19 @@
 rails_env = ENV['RACK_ENV'] || 'production'
 ENV['RAILS_ENV'] = rails_env
 
-# 16 workers and 1 master
+# 4 workers and 1 master
 worker_processes (rails_env == 'production' ? 4 : 1)
  
 # Load rails+github.git into the master before forking workers
 # for super-fast worker spawn times
-preload_app true
+preload_app false
  
 # Restart any workers that haven't responded in 30 seconds
 timeout 30
 
-
- 
 # Listen on a Unix data socket
 if rails_env == 'production'
+  logger Logger.new("/u/apps/bolide/current/feature_app/log/unicorn.live.log", 'monthly')
   pid '/u/apps/bolide/current/stream_app/tmp/pids/live.unicorn.pid'
   listen '/u/apps/bolide/current/stream_app/tmp/sockets/live.sock', :backlog => 2048 
 end

@@ -1,4 +1,5 @@
 # unicorn_rails -c /data/github/current/config/unicorn.rb -E production -D
+require 'logger'
  
 rails_env = ENV['RAILS_ENV'] || 'production'
  
@@ -7,13 +8,14 @@ worker_processes (rails_env == 'production' ? 3 : 1)
  
 # Load rails+github.git into the master before forking workers
 # for super-fast worker spawn times
-preload_app true
+preload_app false
  
 # Restart any workers that haven't responded in 30 seconds
 timeout 30
- 
+
 # Listen on a Unix data socket
 if rails_env == 'production'
+  logger Logger.new("/u/apps/bolide/current/feature_app/log/unicorn.www.log", 'monthly')
   listen '/u/apps/bolide/current/feature_app/tmp/sockets/www.sock', :backlog => 2048
 end
  
