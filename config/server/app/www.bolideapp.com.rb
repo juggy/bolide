@@ -17,6 +17,7 @@ timeout 10
 if rails_env == 'production'
   working_directory "/u/apps/bolide/current/feature_app"
   logger Logger.new("/u/apps/bolide/current/feature_app/log/unicorn.www.log", 'monthly')
+  pid '/u/apps/bolide/current/feature_app/tmp/pids/unicorn.pid'
   listen '/u/apps/bolide/current/feature_app/tmp/sockets/www.sock', :backlog => 2048
 end
  
