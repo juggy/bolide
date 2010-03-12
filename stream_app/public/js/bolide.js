@@ -51,11 +51,6 @@ Bolide.Client = Class.create({
 		this.connect.bind(this).delay(this.RECONNECT_DELAY);
 	},
 	
-	interactive: function(transport){
-		if(transport.responseText != undefined) transport = transport.responseText;
-		if( this.callbacks['onInteractive']  != null) this.callbacks['onInteractive'](transport);
-	},
-	
 	success: function(transport){
 		if(transport.responseText != undefined) transport = transport.responseText;
 		if( this.callbacks['onSuccess'] != null ) this.callbacks['onSuccess'](transport);
@@ -87,7 +82,6 @@ Bolide.Client = Class.create({
 			new Ajax.Request(this.url, 
 											{ method : 'get',
 												onFailure : this.failure.bind(this),
-												onInteractive : this.interactive.bind(this),
 												onSuccess : this.success.bind(this)
 											}
 			);	

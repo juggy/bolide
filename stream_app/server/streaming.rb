@@ -15,7 +15,8 @@ class StreamController < Cramp::Controller::Action
   
   before_start :verify_client_token
   periodic_timer :send_data, :every => 1
-  periodic_timer :close_connection, :every => 10
+  keep_connection_alive
+  #periodic_timer :close_connection, :every => 10
 
   
   def verify_client_token
@@ -30,6 +31,8 @@ class StreamController < Cramp::Controller::Action
       
     else
       @q.account.up_concurrent
+      @q.reset_expiration
+      @q.save(false)
       yield
     end
     
@@ -46,18 +49,16 @@ class StreamController < Cramp::Controller::Action
     if request.request_method == 'OPTIONS'
       finish
     end
-    
+    rendered = false
     msg = @q.read_msg
-    p msg
     while(msg)
-      render( jsonp? ? jsonp( msg ) : msg )
+      render(jsonp? ? jsonp( msg ) : msg)
+      rendered = true
       msg = @q.read_msg
     end
     
-    close_connection if jsonp?
+    close_connection if rendered
     
-    # render [jsonp? ? jsonp( "ms'g" ) : "msg"]
-    #     finish if jsonp?
   end
 
   def close_connection

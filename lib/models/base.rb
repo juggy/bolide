@@ -29,8 +29,8 @@ module BolideApi
       end
     end 
   
-    def save
-      if(valid?)
+    def save(do_validate = true)
+      if(!do_validate || valid?)
         new_obj = false
         if !@saved 
           @saved = true

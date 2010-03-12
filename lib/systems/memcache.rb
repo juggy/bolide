@@ -25,11 +25,11 @@ module BolideApi
     end
    
     def increment(key)
-      memcache.increment(key)
+      memcache.incr(key)
     end
     
     def decrement(key)
-      memcache.decrement(key)
+      memcache.decr(key)
     end
     
     def set(key, value, expire = 0, raw = false)

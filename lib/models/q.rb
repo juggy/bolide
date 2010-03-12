@@ -67,6 +67,7 @@ module BolideApi
         @account = Account::load_with(:_id=>@account_id) 
         raise InvalidAccountError unless @account.saved
       end
+      @account
     end
     
     def after_initialize
@@ -76,6 +77,10 @@ module BolideApi
     def after_create
       @account.qs << _id
       @account.save
+    end
+    
+    def reset_expiration
+      @expire_on = 5.minutes.from_now.to_datetime
     end
 
     private
@@ -88,9 +93,6 @@ module BolideApi
       @token = UUID.generate
     end
   
-    def reset_expiration
-      @expire_on = 5.minutes.ago.to_datetime
-    end
   end
 
 end
