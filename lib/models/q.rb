@@ -72,6 +72,11 @@ module BolideApi
     def after_initialize
       q_uniqueness
     end
+    
+    def after_create
+      @account.qs << _id
+      @account.save
+    end
 
     private
     

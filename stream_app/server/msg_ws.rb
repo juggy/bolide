@@ -4,7 +4,6 @@ require 'cramp/controller'
 class MsgWsController < BaseWsController
 
   def create
-    p request.body.string
     xml = Nokogiri::XML(request.body.string)
     msgs = []
     
@@ -36,7 +35,7 @@ class MsgWsController < BaseWsController
       msg.send_msg
       warnings = warnings + msg.warnings
     end
-    
+    p warnings
     xml = Nokogiri::XML::Builder.new do |xml|
       if !warnings.empty?
         xml.warnings do
