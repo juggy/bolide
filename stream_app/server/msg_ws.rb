@@ -4,6 +4,7 @@ require 'cramp/controller'
 class MsgWsController < BaseWsController
 
   def create
+    p request.body.string
     xml = Nokogiri::XML(request.body.string)
     msgs = []
     
@@ -46,7 +47,7 @@ class MsgWsController < BaseWsController
       end
     end
     
-    render [xml.to_xml.to_s]
+    render( xml.to_xml.to_s )
   end
 
   add_transaction_tracer :create, :category => :rack, :name => 'msg_stream'

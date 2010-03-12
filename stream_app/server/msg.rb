@@ -15,7 +15,9 @@ class Msg
     return false unless valid?
     
     dqs = determine_queues
+    p dps
     dqs = validate_queues(dqs)
+    p dps
     if dqs.empty?
       warnings << "Selection or queues not matching any active queues"
       return false
