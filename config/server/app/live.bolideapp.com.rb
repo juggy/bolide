@@ -15,6 +15,8 @@ timeout 10
 
 # Listen on a Unix data socket
 if rails_env == 'production'
+  stderr_path "/u/apps/bolide/current/stream_app/log/unicorn.live.stderr.log" 
+  stdout_path "/u/apps/bolide/current/stream_app/log/unicorn.live.stdout.log"
   working_directory "/u/apps/bolide/current/stream_app"
   logger Logger.new("/u/apps/bolide/current/stream_app/log/unicorn.live.log", 'monthly')
   pid '/u/apps/bolide/current/stream_app/tmp/pids/live.unicorn.pid'

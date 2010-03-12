@@ -48,9 +48,9 @@ class StreamController < Cramp::Controller::Action
     end
     
     msg = @q.read_msg
-      
-    while(!msg.nil?)
-      render [ jsonp? ? jsonp( msg ) : msg]
+    p msg
+    while(msg)
+      render( jsonp? ? jsonp( msg ) : msg )
       msg = @q.read_msg
     end
     
