@@ -9,12 +9,18 @@ worker_processes (rails_env == 'production' ? 3 : 1)
 # Load rails+github.git into the master before forking workers
 # for super-fast worker spawn times
 preload_app true
- 
+
+GC.respond_to?(:copy_on_write_friendly=) and
+  GC.copy_on_write_friendly = true
+
+
 # Restart any workers that haven't responded in 30 seconds
 timeout 10
 
 # Listen on a Unix data socket
 if rails_env == 'production'
+  stderr_path "/var/log/unicorn.stderr.log" 
+  stdout_path "/var/log/unicorn.stdout.log"
   working_directory "/u/apps/bolide/current/feature_app"
   logger Logger.new("/u/apps/bolide/current/feature_app/log/unicorn.www.log", 'monthly')
   pid '/u/apps/bolide/current/feature_app/tmp/pids/unicorn.pid'
@@ -22,6 +28,9 @@ if rails_env == 'production'
 end
  
 before_fork do |server, worker|
+  defined?(ActiveRecord::Base) and
+      ActiveRecord::Base.connection.disconnect!
+  
   ##
   # When sent a USR2, Unicorn will suffix its pidfile with .oldbin and
   # immediately start loading up a new version of itself (loaded with a new
@@ -48,7 +57,9 @@ after_fork do |server, worker|
   # Unicorn master loads the app then forks off workers - because of the way
   # Unix forking works, we need to make sure we aren't using any of the parent's
   # sockets, e.g. db connection
-  ActiveRecord::Base.establish_connection
+  defined?(ActiveRecord::Base) and
+      ActiveRecord::Base.establish_connection
+  
 
   ##
   # Unicorn master is started as root, which is fine, but let's

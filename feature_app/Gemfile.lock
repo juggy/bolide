@@ -1,0 +1,89 @@
+--- 
+dependencies: 
+  rails: 
+    group: 
+    - :default
+    version: ~> 2.3.5
+    require: []
+
+  system_timer: 
+    group: 
+    - :default
+    version: ">= 0"
+  mysql: 
+    group: 
+    - :default
+    version: ">= 0"
+  uuid: 
+    group: 
+    - :default
+    version: ">= 0"
+  unicorn: 
+    group: 
+    - :default
+    version: ">= 0"
+  memcachedb-client: 
+    group: 
+    - :default
+    version: = 0.0.2
+  rack: 
+    group: 
+    - :default
+    version: ">= 1.0.0"
+  carrot: 
+    group: 
+    - :default
+    version: = 0.7.0
+  validatable: 
+    group: 
+    - :default
+    version: ">= 0"
+  builder: 
+    group: 
+    - :default
+    version: ">= 0"
+  nokogiri: 
+    group: 
+    - :default
+    version: ">= 0"
+specs: 
+- nokogiri: 
+    version: 1.4.1
+- activesupport: 
+    version: 2.3.5
+- builder: 
+    version: 2.1.2
+- validatable: 
+    version: 1.6.7
+- rack: 
+    version: 1.0.1
+- actionpack: 
+    version: 2.3.5
+- actionmailer: 
+    version: 2.3.5
+- carrot: 
+    version: 0.7.0
+- unicorn: 
+    version: 0.97.0
+- memcachedb-client: 
+    version: 0.0.2
+- rake: 
+    version: 0.8.7
+- mysql: 
+    version: 2.8.1
+- macaddr: 
+    version: 1.0.0
+- uuid: 
+    version: 2.2.0
+- system_timer: 
+    version: "1.0"
+- activerecord: 
+    version: 2.3.5
+- activeresource: 
+    version: 2.3.5
+- rails: 
+    version: 2.3.5
+hash: c18ea8c802169f88749640c4e7519401cff5fcb8
+sources: 
+- Rubygems: 
+    uri: http://gemcutter.org
