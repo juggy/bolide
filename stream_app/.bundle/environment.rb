@@ -131,7 +131,7 @@ end
 
 module Bundler
   LOCKED_BY    = '0.9.7'
-  FINGERPRINT  = "71ffa5a3606ec622176e71a6f7e73abcd68b58b0"
+  FINGERPRINT  = "6b0d8f611166412177a74e60d95266a1f0f6164e"
   AUTOREQUIRES = {:default=>[["nokogiri", false], ["builder", false], ["validatable", false], ["carrot", false], ["rainbows", false], ["memcachedb-client", false], ["uuid", false], ["system_timer", false], ["usher", false], ["cramp", false]]}
   SPECS        = [
         {:load_paths=>["/opt/local/lib/ruby/gems/1.8/gems/nokogiri-1.4.1/lib", "/opt/local/lib/ruby/gems/1.8/gems/nokogiri-1.4.1/ext"], :loaded_from=>"/opt/local/lib/ruby/gems/1.8/specifications/nokogiri-1.4.1.gemspec"},
@@ -147,13 +147,14 @@ module Bundler
         {:load_paths=>["/Users/juggy/.bundle/ruby/1.8/gems/rainbows-0.91.0/lib"], :loaded_from=>"/Users/juggy/.bundle/ruby/1.8/specifications/rainbows-0.91.0.gemspec"},
         {:load_paths=>["/opt/local/lib/ruby/gems/1.8/gems/memcachedb-client-0.0.2/lib"], :loaded_from=>"/opt/local/lib/ruby/gems/1.8/specifications/memcachedb-client-0.0.2.gemspec"},
         {:load_paths=>["/opt/local/lib/ruby/gems/1.8/gems/fuzzyhash-0.0.11/lib"], :loaded_from=>"/opt/local/lib/ruby/gems/1.8/specifications/fuzzyhash-0.0.11.gemspec"},
-        {:load_paths=>["/opt/local/lib/ruby/gems/1.8/gems/memcache-client-1.7.8/lib"], :loaded_from=>"/opt/local/lib/ruby/gems/1.8/specifications/memcache-client-1.7.8.gemspec"},
-        {:load_paths=>["/opt/local/lib/ruby/gems/1.8/gems/rack-1.1.0/lib"], :loaded_from=>"/opt/local/lib/ruby/gems/1.8/specifications/rack-1.1.0.gemspec"},
+        {:load_paths=>["/Users/juggy/.bundle/ruby/1.8/gems/newrelic_rpm-2.10.6/lib"], :loaded_from=>"/Users/juggy/.bundle/ruby/1.8/specifications/newrelic_rpm-2.10.6.gemspec"},
         {:load_paths=>["/opt/local/lib/ruby/gems/1.8/gems/macaddr-1.0.0/lib"], :loaded_from=>"/opt/local/lib/ruby/gems/1.8/specifications/macaddr-1.0.0.gemspec"},
         {:load_paths=>["/opt/local/lib/ruby/gems/1.8/gems/uuid-2.2.0/lib"], :loaded_from=>"/opt/local/lib/ruby/gems/1.8/specifications/uuid-2.2.0.gemspec"},
+        {:load_paths=>["/opt/local/lib/ruby/gems/1.8/gems/memcache-client-1.7.8/lib"], :loaded_from=>"/opt/local/lib/ruby/gems/1.8/specifications/memcache-client-1.7.8.gemspec"},
+        {:load_paths=>["/opt/local/lib/ruby/gems/1.8/gems/rack-1.1.0/lib"], :loaded_from=>"/opt/local/lib/ruby/gems/1.8/specifications/rack-1.1.0.gemspec"},
         {:load_paths=>["/opt/local/lib/ruby/gems/1.8/gems/system_timer-1.0/lib"], :loaded_from=>"/opt/local/lib/ruby/gems/1.8/specifications/system_timer-1.0.gemspec"},
-        {:load_paths=>["/opt/local/lib/ruby/gems/1.8/gems/usher-0.6.7/lib"], :loaded_from=>"/opt/local/lib/ruby/gems/1.8/specifications/usher-0.6.7.gemspec"},
-        {:load_paths=>["/Users/juggy/.bundle/ruby/1.8/gems/tzinfo-0.3.16/lib"], :loaded_from=>"/Users/juggy/.bundle/ruby/1.8/specifications/tzinfo-0.3.16.gemspec"},
+        {:load_paths=>["/Users/juggy/.bundle/ruby/1.8/gems/usher-0.6.8/lib"], :loaded_from=>"/Users/juggy/.bundle/ruby/1.8/specifications/usher-0.6.8.gemspec"},
+        {:load_paths=>["/Users/juggy/.bundle/ruby/1.8/gems/tzinfo-0.3.17/lib"], :loaded_from=>"/Users/juggy/.bundle/ruby/1.8/specifications/tzinfo-0.3.17.gemspec"},
         {:load_paths=>["/Users/juggy/.bundle/ruby/1.8/gems/activesupport-3.0.0.beta/lib"], :loaded_from=>"/Users/juggy/.bundle/ruby/1.8/specifications/activesupport-3.0.0.beta.gemspec"},
         {:load_paths=>["/Users/juggy/.bundle/ruby/1.8/gems/cramp-0.10/lib"], :loaded_from=>"/Users/juggy/.bundle/ruby/1.8/specifications/cramp-0.10.gemspec"},
       ].map do |hash|

@@ -1,8 +1,11 @@
 require 'cramp'
 require 'cramp/controller'
+require 'newrelic_rpm'
+require 'new_relic/agent/instrumentation/controller_instrumentation'
 
 class BaseWsController < Cramp::Controller::Action
   extend ActiveSupport::Concern
+  include NewRelic::Agent::Instrumentation::ControllerInstrumentation
   
   before_start :authenticate
   on_start :send_data

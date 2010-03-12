@@ -1,13 +1,19 @@
 --- 
 dependencies: 
-  usher: 
-    group: 
-    - :default
-    version: ">= 0"
   system_timer: 
     group: 
     - :default
     version: ">= 0"
+  usher: 
+    group: 
+    - :default
+    version: ">= 0"
+  newrelic_rpm: 
+    group: 
+    - :default
+    version: ">= 0"
+    require: []
+
   uuid: 
     group: 
     - :default
@@ -24,19 +30,19 @@ dependencies:
     group: 
     - :default
     version: ">= 0"
-  validatable: 
-    group: 
-    - :default
-    version: ">= 0"
   builder: 
     group: 
     - :default
     version: ">= 0"
-  nokogiri: 
+  validatable: 
     group: 
     - :default
     version: ">= 0"
   cramp: 
+    group: 
+    - :default
+    version: ">= 0"
+  nokogiri: 
     group: 
     - :default
     version: ">= 0"
@@ -67,25 +73,27 @@ specs:
     version: 0.0.2
 - fuzzyhash: 
     version: 0.0.11
-- memcache-client: 
-    version: 1.7.8
-- rack: 
-    version: 1.1.0
+- newrelic_rpm: 
+    version: 2.10.6
 - macaddr: 
     version: 1.0.0
 - uuid: 
     version: 2.2.0
+- memcache-client: 
+    version: 1.7.8
+- rack: 
+    version: 1.1.0
 - system_timer: 
     version: "1.0"
 - usher: 
-    version: 0.6.7
+    version: 0.6.8
 - tzinfo: 
-    version: 0.3.16
+    version: 0.3.17
 - activesupport: 
     version: 3.0.0.beta
 - cramp: 
     version: "0.10"
-hash: 71ffa5a3606ec622176e71a6f7e73abcd68b58b0
+hash: 6b0d8f611166412177a74e60d95266a1f0f6164e
 sources: 
 - Rubygems: 
     uri: http://gemcutter.org

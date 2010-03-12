@@ -1,7 +1,9 @@
 require 'carrot'
 require 'cramp'
 require 'cramp/controller'
-
+require 'newrelic_rpm'
+require 'new_relic/agent/instrumentation/controller_instrumentation'
+  
 class String
   def escape_single_quotes
     self.gsub(/'/, "\\\\'")
@@ -9,10 +11,13 @@ class String
 end
 
 class StreamController < Cramp::Controller::Action
+  include NewRelic::Agent::Instrumentation::ControllerInstrumentation
+  
   before_start :verify_client_token
   periodic_timer :send_data, :every => 1
   periodic_timer :close_connection, :every => 10
 
+  
   def verify_client_token
     
     @q = BolideApi::Q.load_with(:_id=>params[:queue], :account_id=>params[:account])
@@ -49,7 +54,7 @@ class StreamController < Cramp::Controller::Action
       msg = @q.read_msg
     end
     
-    finish if jsonp?
+    close_connection if jsonp?
     
     # render [jsonp? ? jsonp( "ms'g" ) : "msg"]
     #     finish if jsonp?
@@ -67,4 +72,7 @@ class StreamController < Cramp::Controller::Action
   def jsonp(data)
     "Bolide.MSIECallback('" + data.escape_single_quotes + "');"
   end
+  
+  add_transaction_tracer :verify_client_token, :category => :rack, :name => 'stream'
+  add_transaction_tracer :send_data, :category => :rack, :name => 'stream'
 end

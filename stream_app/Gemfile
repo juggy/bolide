@@ -10,3 +10,4 @@ gem "carrot"
 gem "validatable"
 gem "memcachedb-client", "0.0.2"
 gem "usher"
+gem 'newrelic_rpm', :require => false

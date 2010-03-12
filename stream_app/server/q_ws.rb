@@ -2,7 +2,7 @@ require 'cramp'
 require 'cramp/controller'
 
 class QWsController < BaseWsController
-   
+  
   def index
     @qs = @account.qs
     xml = Nokogiri::XML::Builder.new do |xml|
@@ -46,5 +46,8 @@ class QWsController < BaseWsController
       raise @q.errors.full_messages.join(', ')
     end
   end
-
+  
+  add_transaction_tracer :index, :category => :rack, :name => 'q_stream'
+  add_transaction_tracer :show, :category => :rack, :name => 'q_stream'
+  add_transaction_tracer :update, :category => :rack, :name => 'q_stream'
 end

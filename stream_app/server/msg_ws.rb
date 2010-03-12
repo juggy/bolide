@@ -49,4 +49,5 @@ class MsgWsController < BaseWsController
     render [xml.to_xml.to_s]
   end
 
+  add_transaction_tracer :create, :category => :rack, :name => 'msg_stream'
 end
