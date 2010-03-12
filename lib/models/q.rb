@@ -33,7 +33,7 @@ module BolideApi
     end
   
     def mq
-      @mq = @account.vhost[_id]
+      @mq = @account.vhost.queue(_id, {:exclusive=>false, :durable=>true})
     end
 
     def key
