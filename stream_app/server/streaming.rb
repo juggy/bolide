@@ -49,15 +49,17 @@ class StreamController < Cramp::Controller::Action
     if request.request_method == 'OPTIONS'
       finish
     end
-    rendered = false
-    msg = @q.read_msg
-    while(msg)
-      render(jsonp? ? jsonp( msg ) : msg)
-      rendered = true
+    @rendered = false
+    if !@rendered
       msg = @q.read_msg
+      while(msg)
+        render(jsonp? ? jsonp( msg ) : msg)
+        @rendered = true
+        msg = @q.read_msg
+      end
     end
     
-    close_connection if rendered
+    close_connection if @rendered
     
   end
 
