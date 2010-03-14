@@ -14,7 +14,8 @@ class StreamController < Cramp::Controller::Action
   include NewRelic::Agent::Instrumentation::ControllerInstrumentation
   
   before_start :verify_client_token
-  periodic_timer :send_data, :every => 1
+  periodic_timer :send_data, :every => 0.3
+  periodic_time :update_expire, :every => 60
   keep_connection_alive
   #periodic_timer :close_connection, :every => 10
 
@@ -31,8 +32,6 @@ class StreamController < Cramp::Controller::Action
       
     else
       @q.account.up_concurrent
-      @q.reset_expiration
-      @q.save(false)
       yield
     end
     
@@ -62,9 +61,18 @@ class StreamController < Cramp::Controller::Action
     close_connection if @rendered
     
   end
+  
+  def update_expire
+    @q.reset_expiration
+    @q.save(false)
+  end
 
   def close_connection
-    @q.account.down_concurrent if @q
+    if @q
+      @q.account.down_concurrent
+      update_expire
+    end
+    
     finish
   end
   
