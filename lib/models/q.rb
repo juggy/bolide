@@ -19,8 +19,9 @@ module BolideApi
     end
     
     def read_msg
-      @account.up_delivered
-      mq.pop
+      msg = mq.pop
+      @account.up_delivered if msg
+      msg
     end
     
     def send_msg(m)

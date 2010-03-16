@@ -11,7 +11,7 @@ class String
 end
 
 class StreamController < Cramp::Controller::Action
-  include NewRelic::Agent::Instrumentation::ControllerInstrumentation
+  #include NewRelic::Agent::Instrumentation::ControllerInstrumentation
   
   before_start :verify_client_token
   periodic_timer :send_data, :every => 0.3
@@ -84,6 +84,6 @@ class StreamController < Cramp::Controller::Action
     "Bolide.MSIECallback('" + data + "');"
   end
   
-  add_transaction_tracer :verify_client_token, :category => :rack, :name => 'stream'
-  add_transaction_tracer :send_data, :category => :rack, :name => 'stream'
+  #add_transaction_tracer :verify_client_token, :category => :rack, :name => 'stream'
+  #add_transaction_tracer :send_data, :category => :rack, :name => 'stream'
 end
