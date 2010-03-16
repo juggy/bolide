@@ -15,7 +15,7 @@ class StreamController < Cramp::Controller::Action
   
   before_start :verify_client_token
   periodic_timer :send_data, :every => 0.3
-  periodic_time :update_expire, :every => 60
+  periodic_timer :update_expire, :every => 60
   keep_connection_alive
   #periodic_timer :close_connection, :every => 10
 
