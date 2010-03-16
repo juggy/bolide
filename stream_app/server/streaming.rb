@@ -55,10 +55,10 @@ class StreamController < Cramp::Controller::Action
       msgs << msg.escape_single_quotes
       msg = @q.read_msg
     end
-    
-    render(jsonp? ? jsonp( msgs.inspect ) : msgs.inspect)
-    close_connection
-    
+    if(!msgs.empty?)
+      render(jsonp? ? jsonp( msgs.inspect ) : msgs.inspect)
+      close_connection
+    end
   end
   
   def update_expire
