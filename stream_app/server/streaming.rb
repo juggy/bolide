@@ -52,9 +52,8 @@ class StreamController < Cramp::Controller::Action
     
     msg = @q.read_msg
     while(msg)
-        msgs << msg.escape_single_quotes
-        msg = @q.read_msg
-      end
+      msgs << msg.escape_single_quotes
+      msg = @q.read_msg
     end
     
     render(jsonp? ? jsonp( msgs.inspect ) : msgs.inspect)
