@@ -23,6 +23,8 @@ module BolideApi
 
   class MQ
     
+    @@channels = {}
+    
     attr_accessor :vhost, :amqp
     
     def []=(qname, pub_value)
@@ -39,6 +41,15 @@ module BolideApi
        @qs.fetch(qname) do 
          @amqp.queue(qname)
        end
+    end
+    
+    def self.open(vhost)
+      channel = @@channels[vhost]
+      if(channel)
+        channel
+      else
+        @@channels[vhost] = MQ.new(vhost)
+      end
     end
     
     def initialize(vhost)

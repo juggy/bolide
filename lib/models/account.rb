@@ -22,7 +22,7 @@ module BolideApi
     end
   
     def vhost
-      @vhost = MQ.new("/" + @_id) unless @vhost
+      @vhost = MQ.open("/" + @_id) unless @vhost
       @vhost
     end
     
@@ -78,7 +78,7 @@ module BolideApi
     end
 
     def vhost_q
-      @amqp_vhost = MQ.new("/bolide") unless @amqp_vhost
+      @amqp_vhost = MQ.open("/bolide") unless @amqp_vhost
       @amqp_vhost.queue('vhost', :type=>'durable')
     end
   
