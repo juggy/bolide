@@ -1,29 +1,65 @@
 <h2>Generalities</h2>
+<p>The Bolide API is meant to be simple and fast for both the client, the server and the backend to process. The goal of the architecture is to provide low latency message distribution. Some server design decision might tint the overall API design, if you have suggestion to improve it, drop me a <a href="mailto:julien.guimont@gmail.com">mail</a>.</p>
 
 <h3>Backend Bindings</h3>
+<p>To facilitate the use of the API, I created a simple Ruby wrapper as an example. The same type of wrapper could be built for Python, Java, .net, etc. If you happen to build your wrapper, drop me a <a href="mailto:julien.guimont@gmail.com">line</a> and I will add it to the list.</p>
+
 <h4>Ruby</h4>
+<p>The Ruby wrapper is available on my <a href="http://github.com/juggy/bolide-client">GitHub account</a>. You can also install it as a gem using the usual:</p>
+
+<script src="http://gist.github.com/333517.js"></script>
+
+<p>Here is an example of the common usage of the gem. It creates a new queue for each Rails session that is created.</p>
+
+<script src="http://gist.github.com/332154.js"></script>
 
 <h3>Client Bindings</h3>
+<p>Same applies for the client bindings as the backend bindings, I created a sample Prototype javascript client that you can use with your application. If you create your own, well you know the <a href="mailto:julien.guimont@gmail.com">drill</a>.
+
 <h4>Prototype</h4> 
-
+<p>The Prototype client is really simple as it tries to stick with the same events a normal Ajax.Request object.</p>
+<script src="http://gist.github.com/332155.js"></script>
+ 
 <h2>Backend API</h2>
-
-
+<p>The backend API, the API your server application is using to push data to your client application, is talking XML. The XML is sent in the cloud to the Bolide servers using HTTP. There is no HTTPS as it tends to consume system ressources on both side of the channel. If you need your data to be encrypted, encrypt it on you backend and decrypt it on your client, Bolide is not handling that to improve the overall speed and design.</p>
+  
 <h3>Authentication</h3>
-
-
+<p>The authentification used by the API is akin to the one used by the Amazon Web Services. Each account created is provided a secret API key that is used it conjonction with HTTP headers to generate a hash key that can be validated by the Bolide server.</p>
+<p>The first step in the authentication is to build the different Bolide HTTP headers. There are two:</p>
+  <ul>
+    <li>X-Bol-Date: &lt;Date and time of the request&gt;</li>
+    <li>X-Bol-Authentication: &lt;MD5 Hash&gt;</li>
+  </ul>
+<p>The first is the date and time of the request. This provides a time dependant value to the hash key that avoids attacks by replay. The second is a MD5 hash generated based on secret API key and the date HTTP header:</p>
+<script src="http://gist.github.com/332158.js"></script>
+<p>The MD5 hash is generated using the following string</p>
+  <ul>
+    <li>Account:&lt;account name&gt;</li>
+    <li>Api-Key:&lt;account name&gt;</li>
+    <li>X-Bol-Date:&lt;Same date and time as the header&gt;</li>
+  </ul>
+<p>There is no space after the ":". Each line is concatenated by a new line character and then hashed. The hash is then used as the value of HTTP header "X-Bol-Authentication".</p>
 
 <h3>Queues</h3>
-
-
-
+<p>You can get the list of the queues details for your account at</p>
+<script src="http://gist.github.com/332138.js"></script>
+<p>The result should look like</p>
+<script src="http://gist.github.com/332128.js"></script>
+<p>You can create or update a queue putting to</p>
+<script src="http://gist.github.com/332137.js"></script>
+<p>When you create a queue, a client token is created for it. This token will be used by the client to connect to the bolide servers without exposing you secret API key. The token is meant to be used by a unique client and expires 5 minutes after its creation. The expiration is reported if a client connects or if messages are sent to the queue. more on this in the client section</p>
 <h3>Messages</h3>
-
-
+<p>After creating queues for the different clients, you can send messages to them. There are two different ways of sending messages to different queues. You can directly specify the queue name that you want that message to be addressed to or you can provide a regular expression that, once matched to the queue name, will select the different queues. The XML looks like this for both options:</p>
+<script src="http://gist.github.com/332144.js"></script>
+<p>Once you created the message XML, you can post it to this URL:</p>
+<script src="http://gist.github.com/332145.js"></script>
 
 <h2>Client API</h2>
 
+<p>The client API is pretty simple once you have the token for your client queue. You simply get this URL using a normal XMLHTTPRequest</p>
+<script src="http://gist.github.com/332147.js"></script>
+<p>and you will receive the data queued for the client in question. Bolide is taking care of cross domain request authorizations for you.</p><p>Unfortunately this is not as easy as this in IE, therefore a technique called JSONP is used with IE. This technique uses the script tag to load a script from a different domain. In this case the URL above will be used as the source of the script and ?jsonp will be added to it to tell the server to send JSONP ready data. The drawbacks of this is that javascript code is freely executed on the client side.</p>
 
-<h3>Authentication</h3>
+
 
 

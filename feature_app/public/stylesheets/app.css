@@ -5,6 +5,13 @@
 	border-bottom: 1px solid #874585;
 }
 
+#preview{
+	float: left;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+}
+
 #header img{
 	margin-top: 76px;
 }
@@ -18,6 +25,7 @@
 	background-color: #874585;
 	height: 30px;
 }
+
 
 #main #content{
 	padding: 10px;

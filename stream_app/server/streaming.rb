@@ -48,17 +48,17 @@ class StreamController < Cramp::Controller::Action
     if request.request_method == 'OPTIONS'
       finish
     end
-    @rendered = false
-    if !@rendered
-      msg = @q.read_msg
-      while(msg)
-        render(jsonp? ? jsonp( msg ) : msg)
-        @rendered = true
+    msgs = []
+    
+    msg = @q.read_msg
+    while(msg)
+        msgs << msg.escape_single_quotes
         msg = @q.read_msg
       end
     end
     
-    close_connection if @rendered
+    render(jsonp? ? jsonp( msgs.inspect ) : msgs.inspect)
+    close_connection
     
   end
   
@@ -81,7 +81,7 @@ class StreamController < Cramp::Controller::Action
   end
 
   def jsonp(data)
-    "Bolide.MSIECallback('" + data.escape_single_quotes + "');"
+    "Bolide.MSIECallback('" + data + "');"
   end
   
   add_transaction_tracer :verify_client_token, :category => :rack, :name => 'stream'
