@@ -37,9 +37,9 @@ namespace :deploy do
   task :restart do
     #to restart, send signal usr2
     run [
-        'sudo god restart bdaemons'
-        'rm #{current_path}/feature_app/public/javascripts/cache/cache.js',
-        'rm #{current_path}/feature_app/public/stylesheets/cache/cache.css'
+        'sudo god restart bdaemons',
+        "rm #{current_path}/feature_app/public/javascripts/cache/cache.js",
+        "rm #{current_path}/feature_app/public/stylesheets/cache/cache.css"
     ].join(" && ")
   end
   

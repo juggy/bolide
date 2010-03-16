@@ -18,7 +18,7 @@ module BolideApi
     def get(key, raw = false)
       value = memcache.get(key, raw)
       if value.nil? 
-        yield 
+        yield if block_given?
       else 
         value
       end
