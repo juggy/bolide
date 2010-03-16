@@ -1,0 +1,31 @@
+<div class="push-2"><h3><a href="<%= sign_out_url%>">log out</a></h3></div>
+
+<% for user in @users %>
+<div class="user">
+	<div class="email">
+	  <label>Email: </label><span><%=user.email%></span>
+	</div>
+	<div class="account">
+	  <label>Account: </label><span><%=user.account%></span>
+	</div>
+	<div class="api">
+	  <label>API: </label><span><%=user.api_key%></span>
+	</div>
+	
+	<div id="stats">
+	  <div class="stat">
+	    <%=user.stream_account.sent%>
+	    <p class="small">sent</p>
+	  </div>
+	  <div class="stat">
+	    <%=user.stream_account.delivered%>
+	    <p class="small">delivered</p>
+	  </div>
+	  <div class="stat">
+	    <%=user.stream_account.delivered%>
+	    <p class="small">concurrent</p>
+	  </div>
+	  <div class="clear"></div>
+	</div>
+</div>
+<% end %>

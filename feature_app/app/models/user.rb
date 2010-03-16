@@ -5,9 +5,7 @@ class User < ActiveRecord::Base
   
   def confirm_email!
     #create account
-    p account
-    @stream_account = BolideApi::Account.load_with(:_id=>account)
-    if !@stream_account.save
+    if !stream_account.save
        raise @stream_account.errors.full_messages.join(', ')
     end
     
@@ -15,9 +13,13 @@ class User < ActiveRecord::Base
     real_confirm_email!
   end
   
-  def api_key
+  def stream_account
     @stream_account = BolideApi::Account.load_with(:_id=>account) unless @stream_account
-    @stream_account.api_key
+    @stream_account
+  end
+  
+  def api_key
+    stream_account.api_key
   end
   
 end

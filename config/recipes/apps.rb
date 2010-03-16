@@ -30,10 +30,7 @@ namespace :deploy do
       "sudo chmod +x /etc/init.d/god",
       "sudo update-rc.d -f god defaults 99",
       "sudo sh -c \"echo 'GOD_CONFIG=#{current_path}/config/god.rb' > /etc/default/god\""
-      # "sudo update-rc.d -f bhost defaults 99",
-      #       "sudo update-rc.d -f bstat defaults 99",
-      #       "sudo update-rc.d -f bstream defaults 99",
-      #       "sudo update-rc.d -f bfeature defaults 99"
+      
       ].join(" && ")
   end
   
@@ -41,20 +38,16 @@ namespace :deploy do
     #to restart, send signal usr2
     run [
         'sudo god restart bdaemons'
-        # "sudo /etc/init.d/bhost restart",
-        #         "sudo /etc/init.d/bstat restart",
-        #         "sudo /etc/init.d/bstream restart",
-        #         "sudo /etc/init.d/bfeature restart"
+        'rm #{current_path}/feature_app/public/javascripts/cache/cache.js',
+        'rm #{current_path}/feature_app/public/stylesheets/cache/cache.css'
     ].join(" && ")
   end
   
   task :start do
     run [
-        'sudo god start bdaemons'
-        # "sudo /etc/init.d/bhost start",
-        #         "sudo /etc/init.d/bstat start",
-        #         "sudo /etc/init.d/bstream start",
-        #         "sudo /etc/init.d/bfeature start"
+        'sudo god start bdaemons',
+        'rm #{current_path}/feature_app/public/javascripts/cache/cache.js',
+        'rm #{current_path}/feature_app/public/stylesheets/cache/cache.css'
     ].join(" && ")
   end
   

@@ -1,5 +1,5 @@
 class View::BaseController < ApplicationController
-
+  before_filter :verify_admin, :only=>[:board]
   layout 'public'
 
   def index
@@ -7,6 +7,10 @@ class View::BaseController < ApplicationController
       redirect_to what_url
       return
     end
+  end
+  
+  def board
+    @users = User.find(:all)
   end
 
   def what
@@ -19,6 +23,14 @@ class View::BaseController < ApplicationController
   
   def api
     @user = ::User.new(params[:user])
+  end
+
+  private
+  
+  def verify_admin
+    if !signed_in? || current_user.email != "julien.guimont@gmail.com"
+      redirect_to index_url
+    end
   end
 
 end
