@@ -20,7 +20,6 @@ module BolideApi
       dqs = validate_queues(dqs)
       if dqs.empty?
         warnings << "Selection or queues not matching any active queues"
-        p warnings.inspect
         return false
       end
     

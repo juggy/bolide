@@ -44,16 +44,18 @@ module BolideApi
       MemCache.instance.decrement concurrent_key
     end
     
-  protected
-    def self.global_sent
+    def global_sent
       MemCache.instance.memcache.fetch(global_sent_key, 0, true) do
         0
       end
     end
   
-    def self.global_sent_key
+    def global_sent_key
       "#bolide/global/live/sent"
     end
+    
+  protected
+    
   
   #keys
     def concurrent_key
