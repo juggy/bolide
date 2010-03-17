@@ -26,7 +26,6 @@ require File.join(server_f, 'streaming')
 require File.join(server_f, 'base_ws')
 require File.join(server_f, 'q_ws')
 require File.join(server_f, 'msg_ws')
-require File.join(server_f, 'msg')
 require File.join(server_f, 'parse_user_agent')
 
 routes = Usher::Interface.for(:rack) do
