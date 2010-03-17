@@ -19,6 +19,11 @@ module BolideApi
     #update with atomic methods
     def up_sent
       MemCache.instance.increment sent_key
+      
+      msg = Msg.new(Account.load_with(:_id=>"bolide"))
+      msg.body = sent
+      msg.select = "\\.*\\"
+      msg.send_msg
     end
 
     def up_delivered

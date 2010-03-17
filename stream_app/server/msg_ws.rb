@@ -22,7 +22,7 @@ class MsgWsController < BaseWsController
       #pick the first body only
       node_body = msg.at_css('body')
       
-      m = Msg.new(@account)
+      m = BolideApi::Msg.new(@account)
       m.qs = qs
       m.select = select
       m.body = node_body.content unless node_body.nil?
@@ -35,7 +35,7 @@ class MsgWsController < BaseWsController
       msg.send_msg
       warnings = warnings + msg.warnings
     end
-    p warnings
+    
     xml = Nokogiri::XML::Builder.new do |xml|
       if !warnings.empty?
         xml.warnings do

@@ -15,9 +15,17 @@
 	<!-- style END -->
 
 	<!-- script START -->
-	<%= javascript_include_tag 'prototype', 'jquery-1.3.2.min', 'application', :cache => 'cache/cache' %>
+	<%= javascript_include_tag 'prototype', 'http://live.bolideapp.com/js/bolide.js', 'application', :cache => 'cache/cache' %>
 	<script type="text/javascript">
-		jQuery.noConflict();
+		bolide = new Bolide.Client("bolide", "<%=@q.name%>", "<%=@q.token%>", {
+  		onSuccess: function(response){
+  		  if(response.isString()) response = response.evalJSON();
+  			if(response.isArray()){
+  			  lastReading = response.last;
+  			  $("count").replace(lastReading);
+  			}
+  		}
+  	});
 	</script>
 	<!-- script END -->
 </head>
@@ -27,6 +35,10 @@
 </div>
 <div id="header">
 	<img src="/images/bolide-top.png"/>
+</div>
+<div id="ccontainer">
+  <div id="count"><%=@bolide_account.sent%></div>
+  <div id="msgsent">messages sent</div>
 </div>
 <div id="main" class="column">
 	<div id="menu">

@@ -20,7 +20,7 @@ class MsgsController < ApplicationController
       #pick the first body only
       node_body = msg.at_css('body')
       
-      m = Msg.new(@account)
+      m = BolideApi::Msg.new(@account)
       m.qs = qs
       m.select = select
       m.body = node_body.content unless body.nil?

@@ -1,3 +1,25 @@
+#ccontainer{
+	float:left;
+	width: 200px;
+	height: 100px;
+	position: absolute;
+	top: 80px;
+	right: 100px;
+	text-align: center;
+}
+
+#count{
+	font-size: 4em;
+	color: #874585;
+	text-shadow: 1px 1px 1px rgba(135,69,133, .5);
+}
+
+#msgsent{
+	position: relative;
+	top: -10px;
+	color: #874585;
+}
+
 #header{
 	width:100%;
 	height:245px;
