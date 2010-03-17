@@ -20,10 +20,10 @@
 	<script type="text/javascript">
 		bolide = new Bolide.Client("bolide", "<%=@q.name%>", "<%=@q.token%>", {
   		onSuccess: function(response){
-  		  if(response.isString()) response = response.evalJSON();
-  			if(response.isArray()){
-  			  lastReading = response.last;
-  			  $("count").replace(lastReading);
+  		  if(Object.isString(response)) response = response.evalJSON();
+  			if(Object.isArray(response)){
+  			  lastReading = response.last();
+  			  $("count").innerHTML = lastReading;
   			}
   		}
   	});
