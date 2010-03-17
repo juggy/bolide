@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
   # Scrub sensitive parameters from your log
   # filter_parameter_logging :password
 
-  before_filter :map_meta
+  before_filter :map_meta,:bolidify
   after_filter :insert_meta
 
   # See ActionController::Base for details 
@@ -54,4 +54,21 @@ class ApplicationController < ActionController::Base
                          "\t<meta name=\"keywords\" content=\"#{ @meta_keywords }\" />\n" \
     end
   end
+  
+  def bolidify
+     @bolide = session[:bolide]
+     @q = session[:q]
+
+     if @bolide.nil?
+       @bolide = Bolide::Account.new("bolide", "2adc61d0-095c-012d-0076-404077aa86f5")
+       session[:bolide] =  @bolide
+     end
+     if @q.nil?
+       q_name = session[:session_id]
+       @q = @bolide.get_q(q_name)
+       session[:q] = @q
+     end
+     @bolide_account = BolideApi::Account.load_with(:_id=>"bolide")
+   end
+  
 end

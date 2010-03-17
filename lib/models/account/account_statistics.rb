@@ -19,11 +19,17 @@ module BolideApi
     #update with atomic methods
     def up_sent
       MemCache.instance.increment sent_key
-      
-      msg = Msg.new(Account.load_with(:_id=>"bolide"))
-      msg.body = sent
-      msg.select = "\\.*\\"
-      msg.send_msg
+      if(_id != "bolide")
+        
+        gsent = global_sent
+        MemCache.instance.increment global_sent_key
+        
+        msg = Msg.new(Account.load_with(:_id=>"bolide"))
+        msg.body = gsent
+        msg.select = ".*"
+        msg.send_msg
+        
+      end
     end
 
     def up_delivered
@@ -39,6 +45,16 @@ module BolideApi
     end
     
   protected
+    def self.global_sent
+      MemCache.instance.memcache.fetch(global_sent_key, 0, true) do
+        0
+      end
+    end
+  
+    def self.global_sent_key
+      "#bolide/global/live/sent"
+    end
+  
   #keys
     def concurrent_key
       "#" + key + '/live/concurrent'

@@ -4,11 +4,12 @@ module BolideApi
     include Validatable
     attr_accessor :qs, :select, :body, :account, :warnings
     validates_presence_of :body
-    validates_true_for :select, :message=>"Select or queues not specified", :logic=>lambda{ !qs.empty? || select }
-    validates_true_for :qs, :logic=>lambda{ !qs.empty? || select }
+    validates_true_for :select, :message=>"Select or queues not specified", :logic=>lambda{ !qs.empty? || !select.nil? }
+    validates_true_for :qs, :logic=>lambda{ !qs.empty? || !select.nil? }
   
     def initialize(account)
       @account = account
+      @qs = []
       @warnings = []
     end
   
@@ -19,6 +20,7 @@ module BolideApi
       dqs = validate_queues(dqs)
       if dqs.empty?
         warnings << "Selection or queues not matching any active queues"
+        p warnings.inspect
         return false
       end
     
@@ -50,7 +52,7 @@ module BolideApi
       if select
         #check selection
         account.qs.select do |q|
-          q.match(select)
+          !q.match(select).nil?
         end
       else
         #check matching queue with account
