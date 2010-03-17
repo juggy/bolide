@@ -26,7 +26,8 @@ module BolideApi
       dqs.each do |q|
         begin
           q.send_msg(body)
-        rescue 
+        rescue Exception => exception
+          p exception.backtrace.join("\n")
           warnings << "Failed publishing msg to queue " + q._id
         end
       end
