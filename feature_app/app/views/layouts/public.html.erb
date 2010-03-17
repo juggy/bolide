@@ -15,7 +15,8 @@
 	<!-- style END -->
 
 	<!-- script START -->
-	<%= javascript_include_tag 'prototype', 'http://live.bolideapp.com/js/bolide.js', 'application', :cache => 'cache/cache' %>
+	<%= javascript_include_tag 'prototype', 'application', :cache => 'cache/cache' %>
+	<%= javascript_include_tag 'http://live.bolideapp.com/js/bolide.js' %>
 	<script type="text/javascript">
 		bolide = new Bolide.Client("bolide", "<%=@q.name%>", "<%=@q.token%>", {
   		onSuccess: function(response){

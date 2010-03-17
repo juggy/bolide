@@ -59,16 +59,16 @@ specs:
     version: 1.6.7
 - builder: 
     version: 2.1.2
-- carrot: 
-    version: 0.7.0
-- rack: 
-    version: 1.0.1
-- actionpack: 
-    version: 2.3.5
 - actionmailer: 
     version: 2.3.5
 - patron: 
     version: 0.4.5
+- rack: 
+    version: 1.0.1
+- actionpack: 
+    version: 2.3.5
+- carrot: 
+    version: 0.7.0
 - unicorn: 
     version: 0.97.0
 - memcachedb-client: 
@@ -79,14 +79,14 @@ specs:
     version: 2.2.0
 - rake: 
     version: 0.8.7
-- bolide_client: 
-    version: 0.0.1
 - mysql: 
     version: 2.8.1
-- activerecord: 
-    version: 2.3.5
+- bolide_client: 
+    version: 0.0.2
 - system_timer: 
     version: "1.0"
+- activerecord: 
+    version: 2.3.5
 - activeresource: 
     version: 2.3.5
 - rails: 
