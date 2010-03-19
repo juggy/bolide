@@ -131,18 +131,19 @@ end
 
 module Bundler
   LOCKED_BY    = '0.9.7'
-  FINGERPRINT  = "6b0d8f611166412177a74e60d95266a1f0f6164e"
-  AUTOREQUIRES = {:default=>[["nokogiri", false], ["builder", false], ["validatable", false], ["carrot", false], ["rainbows", false], ["memcachedb-client", false], ["uuid", false], ["system_timer", false], ["usher", false], ["cramp", false]]}
+  FINGERPRINT  = "5276e7f723f6db0a2fdaccfdb9916a0d4d07f1ea"
+  AUTOREQUIRES = {:default=>[["nokogiri", false], ["validatable", false], ["builder", false], ["exceptional", false], ["carrot", false], ["rainbows", false], ["memcachedb-client", false], ["uuid", false], ["rack-test", false], ["system_timer", false], ["usher", false], ["cramp", false]]}
   SPECS        = [
         {:load_paths=>["/opt/local/lib/ruby/gems/1.8/gems/nokogiri-1.4.1/lib", "/opt/local/lib/ruby/gems/1.8/gems/nokogiri-1.4.1/ext"], :loaded_from=>"/opt/local/lib/ruby/gems/1.8/specifications/nokogiri-1.4.1.gemspec"},
-        {:load_paths=>["/opt/local/lib/ruby/gems/1.8/gems/builder-2.1.2/lib"], :loaded_from=>"/opt/local/lib/ruby/gems/1.8/specifications/builder-2.1.2.gemspec"},
         {:load_paths=>["/opt/local/lib/ruby/gems/1.8/gems/validatable-1.6.7/lib"], :loaded_from=>"/opt/local/lib/ruby/gems/1.8/specifications/validatable-1.6.7.gemspec"},
+        {:load_paths=>["/opt/local/lib/ruby/gems/1.8/gems/builder-2.1.2/lib"], :loaded_from=>"/opt/local/lib/ruby/gems/1.8/specifications/builder-2.1.2.gemspec"},
         {:load_paths=>["/Users/juggy/.bundle/ruby/1.8/gems/i18n-0.3.5/lib"], :loaded_from=>"/Users/juggy/.bundle/ruby/1.8/specifications/i18n-0.3.5.gemspec"},
-        {:load_paths=>["/opt/local/lib/ruby/gems/1.8/gems/eventmachine-0.12.10/lib"], :loaded_from=>"/opt/local/lib/ruby/gems/1.8/specifications/eventmachine-0.12.10.gemspec"},
-        {:load_paths=>["/opt/local/lib/ruby/gems/1.8/gems/mysqlplus-0.1.1/lib"], :loaded_from=>"/opt/local/lib/ruby/gems/1.8/specifications/mysqlplus-0.1.1.gemspec"},
         {:load_paths=>["/Users/juggy/.bundle/ruby/1.8/gems/arel-0.2.1/lib"], :loaded_from=>"/Users/juggy/.bundle/ruby/1.8/specifications/arel-0.2.1.gemspec"},
-        {:load_paths=>["/opt/local/lib/ruby/gems/1.8/gems/carrot-0.7.0/lib"], :loaded_from=>"/opt/local/lib/ruby/gems/1.8/specifications/carrot-0.7.0.gemspec"},
+        {:load_paths=>["/opt/local/lib/ruby/gems/1.8/gems/mysqlplus-0.1.1/lib"], :loaded_from=>"/opt/local/lib/ruby/gems/1.8/specifications/mysqlplus-0.1.1.gemspec"},
+        {:load_paths=>["/opt/local/lib/ruby/gems/1.8/gems/exceptional-2.0.11/lib"], :loaded_from=>"/opt/local/lib/ruby/gems/1.8/specifications/exceptional-2.0.11.gemspec"},
+        {:load_paths=>["/opt/local/lib/ruby/gems/1.8/gems/eventmachine-0.12.10/lib"], :loaded_from=>"/opt/local/lib/ruby/gems/1.8/specifications/eventmachine-0.12.10.gemspec"},
         {:load_paths=>["/Users/juggy/.bundle/ruby/1.8/gems/activemodel-3.0.0.beta/lib"], :loaded_from=>"/Users/juggy/.bundle/ruby/1.8/specifications/activemodel-3.0.0.beta.gemspec"},
+        {:load_paths=>["/opt/local/lib/ruby/gems/1.8/gems/carrot-0.7.0/lib"], :loaded_from=>"/opt/local/lib/ruby/gems/1.8/specifications/carrot-0.7.0.gemspec"},
         {:load_paths=>["/Users/juggy/.bundle/ruby/1.8/gems/unicorn-0.97.0/lib", "/Users/juggy/.bundle/ruby/1.8/gems/unicorn-0.97.0/ext"], :loaded_from=>"/Users/juggy/.bundle/ruby/1.8/specifications/unicorn-0.97.0.gemspec"},
         {:load_paths=>["/Users/juggy/.bundle/ruby/1.8/gems/rainbows-0.91.0/lib"], :loaded_from=>"/Users/juggy/.bundle/ruby/1.8/specifications/rainbows-0.91.0.gemspec"},
         {:load_paths=>["/opt/local/lib/ruby/gems/1.8/gems/memcachedb-client-0.0.2/lib"], :loaded_from=>"/opt/local/lib/ruby/gems/1.8/specifications/memcachedb-client-0.0.2.gemspec"},
@@ -152,8 +153,9 @@ module Bundler
         {:load_paths=>["/opt/local/lib/ruby/gems/1.8/gems/uuid-2.2.0/lib"], :loaded_from=>"/opt/local/lib/ruby/gems/1.8/specifications/uuid-2.2.0.gemspec"},
         {:load_paths=>["/opt/local/lib/ruby/gems/1.8/gems/memcache-client-1.7.8/lib"], :loaded_from=>"/opt/local/lib/ruby/gems/1.8/specifications/memcache-client-1.7.8.gemspec"},
         {:load_paths=>["/opt/local/lib/ruby/gems/1.8/gems/rack-1.1.0/lib"], :loaded_from=>"/opt/local/lib/ruby/gems/1.8/specifications/rack-1.1.0.gemspec"},
+        {:load_paths=>["/opt/local/lib/ruby/gems/1.8/gems/rack-test-0.5.3/lib"], :loaded_from=>"/opt/local/lib/ruby/gems/1.8/specifications/rack-test-0.5.3.gemspec"},
         {:load_paths=>["/opt/local/lib/ruby/gems/1.8/gems/system_timer-1.0/lib"], :loaded_from=>"/opt/local/lib/ruby/gems/1.8/specifications/system_timer-1.0.gemspec"},
-        {:load_paths=>["/Users/juggy/.bundle/ruby/1.8/gems/usher-0.6.8/lib"], :loaded_from=>"/Users/juggy/.bundle/ruby/1.8/specifications/usher-0.6.8.gemspec"},
+        {:load_paths=>["/Users/juggy/.bundle/ruby/1.8/gems/usher-0.7.0/lib"], :loaded_from=>"/Users/juggy/.bundle/ruby/1.8/specifications/usher-0.7.0.gemspec"},
         {:load_paths=>["/Users/juggy/.bundle/ruby/1.8/gems/tzinfo-0.3.17/lib"], :loaded_from=>"/Users/juggy/.bundle/ruby/1.8/specifications/tzinfo-0.3.17.gemspec"},
         {:load_paths=>["/Users/juggy/.bundle/ruby/1.8/gems/activesupport-3.0.0.beta/lib"], :loaded_from=>"/Users/juggy/.bundle/ruby/1.8/specifications/activesupport-3.0.0.beta.gemspec"},
         {:load_paths=>["/Users/juggy/.bundle/ruby/1.8/gems/cramp-0.10/lib"], :loaded_from=>"/Users/juggy/.bundle/ruby/1.8/specifications/cramp-0.10.gemspec"},

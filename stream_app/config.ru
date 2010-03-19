@@ -17,6 +17,7 @@ require 'rack'
 require 'memcachedb'
 require 'nokogiri'
 require 'active_support/time'
+require 'exceptional'
 
 require '../lib/config'
 require '../lib/model'
@@ -28,13 +29,14 @@ require File.join(server_f, 'q_ws')
 require File.join(server_f, 'msg_ws')
 require File.join(server_f, 'parse_user_agent')
 
+use Rack::Static, :urls => ["/js"], :root => "public"
+use Rack::Exceptional, "a9ddb14c3ea03aad20327cc6e742a3fbfcb6ad62" if ENV['RAILS_ENV'] == "production"
+
 routes = Usher::Interface.for(:rack) do
   add('/(:account)/(:queue)/(:token)').to(StreamController)
 	add('/q/(:id).xml').to(QWsController)
 	add('/q.xml').to(QWsController)
 	add('/msg.xml').to(MsgWsController)
 end
-
-use Rack::Static, :urls => ["/js"], :root => "public"
 
 run routes

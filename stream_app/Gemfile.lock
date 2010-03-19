@@ -26,7 +26,15 @@ dependencies:
     group: 
     - :default
     version: ">= 0"
+  exceptional: 
+    group: 
+    - :default
+    version: ">= 0"
   rainbows: 
+    group: 
+    - :default
+    version: ">= 0"
+  rack-test: 
     group: 
     - :default
     version: ">= 0"
@@ -49,22 +57,24 @@ dependencies:
 specs: 
 - nokogiri: 
     version: 1.4.1
-- builder: 
-    version: 2.1.2
 - validatable: 
     version: 1.6.7
+- builder: 
+    version: 2.1.2
 - i18n: 
     version: 0.3.5
-- eventmachine: 
-    version: 0.12.10
-- mysqlplus: 
-    version: 0.1.1
 - arel: 
     version: 0.2.1
-- carrot: 
-    version: 0.7.0
+- mysqlplus: 
+    version: 0.1.1
+- exceptional: 
+    version: 2.0.11
+- eventmachine: 
+    version: 0.12.10
 - activemodel: 
     version: 3.0.0.beta
+- carrot: 
+    version: 0.7.0
 - unicorn: 
     version: 0.97.0
 - rainbows: 
@@ -83,17 +93,19 @@ specs:
     version: 1.7.8
 - rack: 
     version: 1.1.0
+- rack-test: 
+    version: 0.5.3
 - system_timer: 
     version: "1.0"
 - usher: 
-    version: 0.6.8
+    version: 0.7.0
 - tzinfo: 
     version: 0.3.17
 - activesupport: 
     version: 3.0.0.beta
 - cramp: 
     version: "0.10"
-hash: 6b0d8f611166412177a74e60d95266a1f0f6164e
+hash: 5276e7f723f6db0a2fdaccfdb9916a0d4d07f1ea
 sources: 
 - Rubygems: 
     uri: http://gemcutter.org
