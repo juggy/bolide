@@ -1,0 +1,631 @@
+# Logfile created on Thu Mar 18 21:22:23 -0400 2010 by logger.rb/22285
+[03/18/10 21:22:23 -0400 booky.local (32267)] INFO : Dispatcher: unicorn
+[03/18/10 21:22:23 -0400 booky.local (32267)] INFO : Application: bolide
+[03/18/10 21:22:23 -0400 booky.local (32267)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/18/10 21:22:23 -0400 booky.local (32267)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 32267
+[03/18/10 21:22:23 -0400 booky.local (32267)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/18/10 21:23:32 -0400 booky.local (32289)] INFO : Dispatcher: unicorn
+[03/18/10 21:23:32 -0400 booky.local (32289)] INFO : Application: bolide
+[03/18/10 21:23:32 -0400 booky.local (32289)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/18/10 21:23:32 -0400 booky.local (32289)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 32289
+[03/18/10 21:23:32 -0400 booky.local (32289)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/18/10 21:24:18 -0400 booky.local (32305)] INFO : Dispatcher: unicorn
+[03/18/10 21:24:18 -0400 booky.local (32305)] INFO : Application: bolide
+[03/18/10 21:24:18 -0400 booky.local (32305)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/18/10 21:24:18 -0400 booky.local (32305)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 32305
+[03/18/10 21:24:18 -0400 booky.local (32305)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/18/10 21:25:15 -0400 booky.local (32330)] INFO : Dispatcher: unicorn
+[03/18/10 21:25:15 -0400 booky.local (32330)] INFO : Application: bolide
+[03/18/10 21:25:15 -0400 booky.local (32330)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/18/10 21:25:15 -0400 booky.local (32330)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 32330
+[03/18/10 21:25:15 -0400 booky.local (32330)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/18/10 21:27:57 -0400 booky.local (32376)] INFO : Dispatcher: unicorn
+[03/18/10 21:27:57 -0400 booky.local (32376)] INFO : Application: bolide
+[03/18/10 21:27:57 -0400 booky.local (32376)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/18/10 21:27:57 -0400 booky.local (32376)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 32376
+[03/18/10 21:27:57 -0400 booky.local (32376)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/18/10 21:30:08 -0400 booky.local (32413)] INFO : Dispatcher: unicorn
+[03/18/10 21:30:08 -0400 booky.local (32413)] INFO : Application: bolide
+[03/18/10 21:30:08 -0400 booky.local (32413)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/18/10 21:30:08 -0400 booky.local (32413)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 32413
+[03/18/10 21:30:08 -0400 booky.local (32413)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/18/10 21:31:03 -0400 booky.local (32431)] INFO : Dispatcher: unicorn
+[03/18/10 21:31:03 -0400 booky.local (32431)] INFO : Application: bolide
+[03/18/10 21:31:03 -0400 booky.local (32431)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/18/10 21:31:03 -0400 booky.local (32431)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 32431
+[03/18/10 21:31:03 -0400 booky.local (32431)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/18/10 21:31:21 -0400 booky.local (32441)] INFO : Dispatcher: unicorn
+[03/18/10 21:31:21 -0400 booky.local (32441)] INFO : Application: bolide
+[03/18/10 21:31:21 -0400 booky.local (32441)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/18/10 21:31:21 -0400 booky.local (32441)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 32441
+[03/18/10 21:31:21 -0400 booky.local (32441)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/18/10 21:32:41 -0400 booky.local (32466)] INFO : Dispatcher: unicorn
+[03/18/10 21:32:41 -0400 booky.local (32466)] INFO : Application: bolide
+[03/18/10 21:32:41 -0400 booky.local (32466)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/18/10 21:32:41 -0400 booky.local (32466)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 32466
+[03/18/10 21:32:41 -0400 booky.local (32466)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/18/10 21:38:38 -0400 booky.local (32553)] INFO : Dispatcher: unicorn
+[03/18/10 21:38:38 -0400 booky.local (32553)] INFO : Application: bolide
+[03/18/10 21:38:38 -0400 booky.local (32553)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/18/10 21:38:38 -0400 booky.local (32553)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 32553
+[03/18/10 21:38:38 -0400 booky.local (32553)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/18/10 21:38:51 -0400 booky.local (32562)] INFO : Dispatcher: unicorn
+[03/18/10 21:38:51 -0400 booky.local (32562)] INFO : Application: bolide
+[03/18/10 21:38:51 -0400 booky.local (32562)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/18/10 21:38:51 -0400 booky.local (32562)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 32562
+[03/18/10 21:38:51 -0400 booky.local (32562)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/18/10 21:39:10 -0400 booky.local (32571)] INFO : Dispatcher: unicorn
+[03/18/10 21:39:10 -0400 booky.local (32571)] INFO : Application: bolide
+[03/18/10 21:39:10 -0400 booky.local (32571)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/18/10 21:39:10 -0400 booky.local (32571)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 32571
+[03/18/10 21:39:10 -0400 booky.local (32571)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/18/10 21:42:24 -0400 booky.local (32620)] INFO : Dispatcher: unicorn
+[03/18/10 21:42:24 -0400 booky.local (32620)] INFO : Application: bolide
+[03/18/10 21:42:24 -0400 booky.local (32620)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/18/10 21:42:24 -0400 booky.local (32620)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 32620
+[03/18/10 21:42:24 -0400 booky.local (32620)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/18/10 21:42:51 -0400 booky.local (32630)] INFO : Dispatcher: unicorn
+[03/18/10 21:42:51 -0400 booky.local (32630)] INFO : Application: bolide
+[03/18/10 21:42:51 -0400 booky.local (32630)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/18/10 21:42:51 -0400 booky.local (32630)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 32630
+[03/18/10 21:42:51 -0400 booky.local (32630)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/18/10 21:43:19 -0400 booky.local (32643)] INFO : Dispatcher: unicorn
+[03/18/10 21:43:19 -0400 booky.local (32643)] INFO : Application: bolide
+[03/18/10 21:43:19 -0400 booky.local (32643)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/18/10 21:43:19 -0400 booky.local (32643)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 32643
+[03/18/10 21:43:19 -0400 booky.local (32643)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/18/10 21:53:18 -0400 booky.local (32790)] INFO : Dispatcher: unicorn
+[03/18/10 21:53:18 -0400 booky.local (32790)] INFO : Application: bolide
+[03/18/10 21:53:18 -0400 booky.local (32790)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/18/10 21:53:18 -0400 booky.local (32790)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 32790
+[03/18/10 21:53:18 -0400 booky.local (32790)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/18/10 21:53:38 -0400 booky.local (32800)] INFO : Dispatcher: unicorn
+[03/18/10 21:53:38 -0400 booky.local (32800)] INFO : Application: bolide
+[03/18/10 21:53:38 -0400 booky.local (32800)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/18/10 21:53:38 -0400 booky.local (32800)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 32800
+[03/18/10 21:53:38 -0400 booky.local (32800)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/18/10 21:54:33 -0400 booky.local (32821)] INFO : Dispatcher: unicorn
+[03/18/10 21:54:33 -0400 booky.local (32821)] INFO : Application: bolide
+[03/18/10 21:54:33 -0400 booky.local (32821)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/18/10 21:54:33 -0400 booky.local (32821)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 32821
+[03/18/10 21:54:33 -0400 booky.local (32821)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/18/10 21:55:35 -0400 booky.local (32843)] INFO : Dispatcher: unicorn
+[03/18/10 21:55:35 -0400 booky.local (32843)] INFO : Application: bolide
+[03/18/10 21:55:35 -0400 booky.local (32843)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/18/10 21:55:35 -0400 booky.local (32843)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 32843
+[03/18/10 21:55:35 -0400 booky.local (32843)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/18/10 21:56:27 -0400 booky.local (32862)] INFO : Dispatcher: unicorn
+[03/18/10 21:56:27 -0400 booky.local (32862)] INFO : Application: bolide
+[03/18/10 21:56:27 -0400 booky.local (32862)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/18/10 21:56:27 -0400 booky.local (32862)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 32862
+[03/18/10 21:56:27 -0400 booky.local (32862)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/18/10 21:57:00 -0400 booky.local (32875)] INFO : Dispatcher: unicorn
+[03/18/10 21:57:00 -0400 booky.local (32875)] INFO : Application: bolide
+[03/18/10 21:57:00 -0400 booky.local (32875)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/18/10 21:57:00 -0400 booky.local (32875)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 32875
+[03/18/10 21:57:00 -0400 booky.local (32875)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/18/10 21:57:46 -0400 booky.local (32891)] INFO : Dispatcher: unicorn
+[03/18/10 21:57:46 -0400 booky.local (32891)] INFO : Application: bolide
+[03/18/10 21:57:46 -0400 booky.local (32891)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/18/10 21:57:46 -0400 booky.local (32891)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 32891
+[03/18/10 21:57:46 -0400 booky.local (32891)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/18/10 21:58:03 -0400 booky.local (32901)] INFO : Dispatcher: unicorn
+[03/18/10 21:58:03 -0400 booky.local (32901)] INFO : Application: bolide
+[03/18/10 21:58:03 -0400 booky.local (32901)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/18/10 21:58:03 -0400 booky.local (32901)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 32901
+[03/18/10 21:58:03 -0400 booky.local (32901)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/18/10 21:58:28 -0400 booky.local (32912)] INFO : Dispatcher: unicorn
+[03/18/10 21:58:28 -0400 booky.local (32912)] INFO : Application: bolide
+[03/18/10 21:58:28 -0400 booky.local (32912)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/18/10 21:58:28 -0400 booky.local (32912)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 32912
+[03/18/10 21:58:28 -0400 booky.local (32912)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/18/10 22:49:55 -0400 booky.local (33390)] INFO : Dispatcher: unicorn
+[03/18/10 22:49:55 -0400 booky.local (33390)] INFO : Application: bolide
+[03/18/10 22:49:55 -0400 booky.local (33390)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/18/10 22:49:55 -0400 booky.local (33390)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 33390
+[03/18/10 22:49:55 -0400 booky.local (33390)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/18/10 22:50:46 -0400 booky.local (33407)] INFO : Dispatcher: unicorn
+[03/18/10 22:50:46 -0400 booky.local (33407)] INFO : Application: bolide
+[03/18/10 22:50:46 -0400 booky.local (33407)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/18/10 22:50:46 -0400 booky.local (33407)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 33407
+[03/18/10 22:50:46 -0400 booky.local (33407)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/18/10 22:51:26 -0400 booky.local (33421)] INFO : Dispatcher: unicorn
+[03/18/10 22:51:26 -0400 booky.local (33421)] INFO : Application: bolide
+[03/18/10 22:51:26 -0400 booky.local (33421)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/18/10 22:51:26 -0400 booky.local (33421)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 33421
+[03/18/10 22:51:26 -0400 booky.local (33421)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/18/10 22:52:36 -0400 booky.local (33449)] INFO : Dispatcher: unicorn
+[03/18/10 22:52:36 -0400 booky.local (33449)] INFO : Application: bolide
+[03/18/10 22:52:36 -0400 booky.local (33449)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/18/10 22:52:36 -0400 booky.local (33449)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 33449
+[03/18/10 22:52:36 -0400 booky.local (33449)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/18/10 22:53:07 -0400 booky.local (33462)] INFO : Dispatcher: unicorn
+[03/18/10 22:53:07 -0400 booky.local (33462)] INFO : Application: bolide
+[03/18/10 22:53:07 -0400 booky.local (33462)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/18/10 22:53:07 -0400 booky.local (33462)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 33462
+[03/18/10 22:53:07 -0400 booky.local (33462)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/18/10 22:54:07 -0400 booky.local (33484)] INFO : Dispatcher: unicorn
+[03/18/10 22:54:07 -0400 booky.local (33484)] INFO : Application: bolide
+[03/18/10 22:54:07 -0400 booky.local (33484)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/18/10 22:54:07 -0400 booky.local (33484)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 33484
+[03/18/10 22:54:07 -0400 booky.local (33484)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/18/10 22:54:28 -0400 booky.local (33494)] INFO : Dispatcher: unicorn
+[03/18/10 22:54:28 -0400 booky.local (33494)] INFO : Application: bolide
+[03/18/10 22:54:28 -0400 booky.local (33494)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/18/10 22:54:28 -0400 booky.local (33494)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 33494
+[03/18/10 22:54:28 -0400 booky.local (33494)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/18/10 22:54:46 -0400 booky.local (33504)] INFO : Dispatcher: unicorn
+[03/18/10 22:54:46 -0400 booky.local (33504)] INFO : Application: bolide
+[03/18/10 22:54:46 -0400 booky.local (33504)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/18/10 22:54:46 -0400 booky.local (33504)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 33504
+[03/18/10 22:54:46 -0400 booky.local (33504)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/18/10 22:55:03 -0400 booky.local (33513)] INFO : Dispatcher: unicorn
+[03/18/10 22:55:03 -0400 booky.local (33513)] INFO : Application: bolide
+[03/18/10 22:55:03 -0400 booky.local (33513)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/18/10 22:55:03 -0400 booky.local (33513)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 33513
+[03/18/10 22:55:03 -0400 booky.local (33513)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/18/10 22:59:58 -0400 booky.local (33588)] INFO : Dispatcher: unicorn
+[03/18/10 22:59:58 -0400 booky.local (33588)] INFO : Application: bolide
+[03/18/10 22:59:58 -0400 booky.local (33588)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/18/10 22:59:58 -0400 booky.local (33588)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 33588
+[03/18/10 22:59:58 -0400 booky.local (33588)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/18/10 23:00:17 -0400 booky.local (33599)] INFO : Dispatcher: unicorn
+[03/18/10 23:00:17 -0400 booky.local (33599)] INFO : Application: bolide
+[03/18/10 23:00:17 -0400 booky.local (33599)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/18/10 23:00:17 -0400 booky.local (33599)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 33599
+[03/18/10 23:00:17 -0400 booky.local (33599)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/18/10 23:00:28 -0400 booky.local (33607)] INFO : Dispatcher: unicorn
+[03/18/10 23:00:28 -0400 booky.local (33607)] INFO : Application: bolide
+[03/18/10 23:00:28 -0400 booky.local (33607)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/18/10 23:00:28 -0400 booky.local (33607)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 33607
+[03/18/10 23:00:28 -0400 booky.local (33607)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/18/10 23:00:42 -0400 booky.local (33615)] INFO : Dispatcher: unicorn
+[03/18/10 23:00:42 -0400 booky.local (33615)] INFO : Application: bolide
+[03/18/10 23:00:42 -0400 booky.local (33615)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/18/10 23:00:42 -0400 booky.local (33615)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 33615
+[03/18/10 23:00:42 -0400 booky.local (33615)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/18/10 23:01:01 -0400 booky.local (33625)] INFO : Dispatcher: unicorn
+[03/18/10 23:01:01 -0400 booky.local (33625)] INFO : Application: bolide
+[03/18/10 23:01:01 -0400 booky.local (33625)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/18/10 23:01:01 -0400 booky.local (33625)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 33625
+[03/18/10 23:01:01 -0400 booky.local (33625)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/18/10 23:01:42 -0400 booky.local (33640)] INFO : Dispatcher: unicorn
+[03/18/10 23:01:42 -0400 booky.local (33640)] INFO : Application: bolide
+[03/18/10 23:01:42 -0400 booky.local (33640)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/18/10 23:01:42 -0400 booky.local (33640)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 33640
+[03/18/10 23:01:42 -0400 booky.local (33640)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/18/10 23:02:01 -0400 booky.local (33650)] INFO : Dispatcher: unicorn
+[03/18/10 23:02:01 -0400 booky.local (33650)] INFO : Application: bolide
+[03/18/10 23:02:01 -0400 booky.local (33650)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/18/10 23:02:01 -0400 booky.local (33650)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 33650
+[03/18/10 23:02:01 -0400 booky.local (33650)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/18/10 23:02:09 -0400 booky.local (33658)] INFO : Dispatcher: unicorn
+[03/18/10 23:02:09 -0400 booky.local (33658)] INFO : Application: bolide
+[03/18/10 23:02:09 -0400 booky.local (33658)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/18/10 23:02:09 -0400 booky.local (33658)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 33658
+[03/18/10 23:02:09 -0400 booky.local (33658)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/18/10 23:03:00 -0400 booky.local (33675)] INFO : Dispatcher: unicorn
+[03/18/10 23:03:00 -0400 booky.local (33675)] INFO : Application: bolide
+[03/18/10 23:03:00 -0400 booky.local (33675)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/18/10 23:03:00 -0400 booky.local (33675)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 33675
+[03/18/10 23:03:00 -0400 booky.local (33675)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/18/10 23:03:14 -0400 booky.local (33684)] INFO : Dispatcher: unicorn
+[03/18/10 23:03:14 -0400 booky.local (33684)] INFO : Application: bolide
+[03/18/10 23:03:14 -0400 booky.local (33684)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/18/10 23:03:14 -0400 booky.local (33684)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 33684
+[03/18/10 23:03:14 -0400 booky.local (33684)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/18/10 23:03:30 -0400 booky.local (33693)] INFO : Dispatcher: unicorn
+[03/18/10 23:03:30 -0400 booky.local (33693)] INFO : Application: bolide
+[03/18/10 23:03:30 -0400 booky.local (33693)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/18/10 23:03:30 -0400 booky.local (33693)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 33693
+[03/18/10 23:03:30 -0400 booky.local (33693)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/18/10 23:03:50 -0400 booky.local (33708)] INFO : Dispatcher: unicorn
+[03/18/10 23:03:50 -0400 booky.local (33708)] INFO : Application: bolide
+[03/18/10 23:03:50 -0400 booky.local (33708)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/18/10 23:03:50 -0400 booky.local (33708)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 33708
+[03/18/10 23:03:50 -0400 booky.local (33708)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/18/10 23:09:52 -0400 booky.local (33800)] INFO : Dispatcher: unicorn
+[03/18/10 23:09:52 -0400 booky.local (33800)] INFO : Application: bolide
+[03/18/10 23:09:52 -0400 booky.local (33800)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/18/10 23:09:52 -0400 booky.local (33800)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 33800
+[03/18/10 23:09:52 -0400 booky.local (33800)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/18/10 23:24:24 -0400 booky.local (34070)] INFO : Dispatcher: unicorn
+[03/18/10 23:24:24 -0400 booky.local (34070)] INFO : Application: bolide
+[03/18/10 23:24:24 -0400 booky.local (34070)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/18/10 23:24:24 -0400 booky.local (34070)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 34070
+[03/18/10 23:24:24 -0400 booky.local (34070)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/18/10 23:50:13 -0400 booky.local (34489)] INFO : Dispatcher: unicorn
+[03/18/10 23:50:13 -0400 booky.local (34489)] INFO : Application: bolide
+[03/18/10 23:50:13 -0400 booky.local (34489)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/18/10 23:50:13 -0400 booky.local (34489)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 34489
+[03/18/10 23:50:13 -0400 booky.local (34489)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/18/10 23:54:01 -0400 booky.local (34556)] INFO : Dispatcher: unicorn
+[03/18/10 23:54:01 -0400 booky.local (34556)] INFO : Application: bolide
+[03/18/10 23:54:01 -0400 booky.local (34556)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/18/10 23:54:01 -0400 booky.local (34556)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 34556
+[03/18/10 23:54:01 -0400 booky.local (34556)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/18/10 23:54:16 -0400 booky.local (34566)] INFO : Dispatcher: unicorn
+[03/18/10 23:54:16 -0400 booky.local (34566)] INFO : Application: bolide
+[03/18/10 23:54:16 -0400 booky.local (34566)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/18/10 23:54:16 -0400 booky.local (34566)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 34566
+[03/18/10 23:54:16 -0400 booky.local (34566)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/18/10 23:55:09 -0400 booky.local (34582)] INFO : Dispatcher: unicorn
+[03/18/10 23:55:09 -0400 booky.local (34582)] INFO : Application: bolide
+[03/18/10 23:55:09 -0400 booky.local (34582)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/18/10 23:55:09 -0400 booky.local (34582)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 34582
+[03/18/10 23:55:09 -0400 booky.local (34582)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/18/10 23:56:10 -0400 booky.local (34617)] INFO : Dispatcher: unicorn
+[03/18/10 23:56:10 -0400 booky.local (34617)] INFO : Application: bolide
+[03/18/10 23:56:10 -0400 booky.local (34617)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/18/10 23:56:10 -0400 booky.local (34617)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 34617
+[03/18/10 23:56:10 -0400 booky.local (34617)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/18/10 23:59:31 -0400 booky.local (34675)] INFO : Dispatcher: unicorn
+[03/18/10 23:59:31 -0400 booky.local (34675)] INFO : Application: bolide
+[03/18/10 23:59:31 -0400 booky.local (34675)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/18/10 23:59:31 -0400 booky.local (34675)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 34675
+[03/18/10 23:59:31 -0400 booky.local (34675)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/19/10 00:01:58 -0400 booky.local (34746)] INFO : Dispatcher: unicorn
+[03/19/10 00:01:58 -0400 booky.local (34746)] INFO : Application: bolide
+[03/19/10 00:01:58 -0400 booky.local (34746)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/19/10 00:01:58 -0400 booky.local (34746)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 34746
+[03/19/10 00:01:58 -0400 booky.local (34746)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/19/10 00:02:37 -0400 booky.local (34760)] INFO : Dispatcher: unicorn
+[03/19/10 00:02:37 -0400 booky.local (34760)] INFO : Application: bolide
+[03/19/10 00:02:37 -0400 booky.local (34760)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/19/10 00:02:37 -0400 booky.local (34760)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 34760
+[03/19/10 00:02:37 -0400 booky.local (34760)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/19/10 00:16:25 -0400 booky.local (35060)] INFO : Dispatcher: unicorn
+[03/19/10 00:16:25 -0400 booky.local (35060)] INFO : Application: bolide
+[03/19/10 00:16:25 -0400 booky.local (35060)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/19/10 00:16:25 -0400 booky.local (35060)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 35060
+[03/19/10 00:16:25 -0400 booky.local (35060)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/19/10 00:16:59 -0400 booky.local (35078)] INFO : Dispatcher: unicorn
+[03/19/10 00:16:59 -0400 booky.local (35078)] INFO : Application: bolide
+[03/19/10 00:16:59 -0400 booky.local (35078)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/19/10 00:16:59 -0400 booky.local (35078)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 35078
+[03/19/10 00:16:59 -0400 booky.local (35078)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/19/10 00:17:29 -0400 booky.local (35090)] INFO : Dispatcher: unicorn
+[03/19/10 00:17:29 -0400 booky.local (35090)] INFO : Application: bolide
+[03/19/10 00:17:29 -0400 booky.local (35090)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/19/10 00:17:29 -0400 booky.local (35090)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 35090
+[03/19/10 00:17:29 -0400 booky.local (35090)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/19/10 00:18:27 -0400 booky.local (35111)] INFO : Dispatcher: unicorn
+[03/19/10 00:18:27 -0400 booky.local (35111)] INFO : Application: bolide
+[03/19/10 00:18:27 -0400 booky.local (35111)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/19/10 00:18:27 -0400 booky.local (35111)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 35111
+[03/19/10 00:18:27 -0400 booky.local (35111)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/19/10 00:19:23 -0400 booky.local (35130)] INFO : Dispatcher: unicorn
+[03/19/10 00:19:23 -0400 booky.local (35130)] INFO : Application: bolide
+[03/19/10 00:19:23 -0400 booky.local (35130)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/19/10 00:19:23 -0400 booky.local (35130)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 35130
+[03/19/10 00:19:23 -0400 booky.local (35130)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/19/10 00:20:46 -0400 booky.local (35153)] INFO : Dispatcher: unicorn
+[03/19/10 00:20:46 -0400 booky.local (35153)] INFO : Application: bolide
+[03/19/10 00:20:46 -0400 booky.local (35153)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/19/10 00:20:46 -0400 booky.local (35153)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 35153
+[03/19/10 00:20:46 -0400 booky.local (35153)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/19/10 00:21:04 -0400 booky.local (35163)] INFO : Dispatcher: unicorn
+[03/19/10 00:21:04 -0400 booky.local (35163)] INFO : Application: bolide
+[03/19/10 00:21:04 -0400 booky.local (35163)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/19/10 00:21:04 -0400 booky.local (35163)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 35163
+[03/19/10 00:21:04 -0400 booky.local (35163)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/19/10 00:21:33 -0400 booky.local (35178)] INFO : Dispatcher: unicorn
+[03/19/10 00:21:33 -0400 booky.local (35178)] INFO : Application: bolide
+[03/19/10 00:21:33 -0400 booky.local (35178)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/19/10 00:21:33 -0400 booky.local (35178)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 35178
+[03/19/10 00:21:33 -0400 booky.local (35178)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/19/10 00:21:45 -0400 booky.local (35194)] INFO : Dispatcher: unicorn
+[03/19/10 00:21:45 -0400 booky.local (35194)] INFO : Application: bolide
+[03/19/10 00:21:45 -0400 booky.local (35194)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/19/10 00:21:45 -0400 booky.local (35194)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 35194
+[03/19/10 00:21:45 -0400 booky.local (35194)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/19/10 00:22:55 -0400 booky.local (35230)] INFO : Dispatcher: unicorn
+[03/19/10 00:22:55 -0400 booky.local (35230)] INFO : Application: bolide
+[03/19/10 00:22:55 -0400 booky.local (35230)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/19/10 00:22:55 -0400 booky.local (35230)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 35230
+[03/19/10 00:22:55 -0400 booky.local (35230)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/19/10 00:25:22 -0400 booky.local (35299)] INFO : Dispatcher: unicorn
+[03/19/10 00:25:22 -0400 booky.local (35299)] INFO : Application: bolide
+[03/19/10 00:25:22 -0400 booky.local (35299)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/19/10 00:25:22 -0400 booky.local (35299)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 35299
+[03/19/10 00:25:22 -0400 booky.local (35299)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/19/10 00:32:47 -0400 booky.local (35417)] INFO : Dispatcher: unicorn
+[03/19/10 00:32:47 -0400 booky.local (35417)] INFO : Application: bolide
+[03/19/10 00:32:47 -0400 booky.local (35417)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/19/10 00:32:47 -0400 booky.local (35417)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 35417
+[03/19/10 00:32:47 -0400 booky.local (35417)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/19/10 00:41:02 -0400 booky.local (35554)] INFO : Dispatcher: unicorn
+[03/19/10 00:41:02 -0400 booky.local (35554)] INFO : Application: bolide
+[03/19/10 00:41:02 -0400 booky.local (35554)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/19/10 00:41:02 -0400 booky.local (35554)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 35554
+[03/19/10 00:41:02 -0400 booky.local (35554)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/19/10 00:45:16 -0400 booky.local (35629)] INFO : Dispatcher: unicorn
+[03/19/10 00:45:16 -0400 booky.local (35629)] INFO : Application: bolide
+[03/19/10 00:45:16 -0400 booky.local (35629)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/19/10 00:45:16 -0400 booky.local (35629)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 35629
+[03/19/10 00:45:16 -0400 booky.local (35629)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/19/10 00:46:47 -0400 booky.local (35660)] INFO : Dispatcher: unicorn
+[03/19/10 00:46:47 -0400 booky.local (35660)] INFO : Application: bolide
+[03/19/10 00:46:47 -0400 booky.local (35660)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/19/10 00:46:47 -0400 booky.local (35660)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 35660
+[03/19/10 00:46:47 -0400 booky.local (35660)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/19/10 00:47:20 -0400 booky.local (35674)] INFO : Dispatcher: unicorn
+[03/19/10 00:47:20 -0400 booky.local (35674)] INFO : Application: bolide
+[03/19/10 00:47:20 -0400 booky.local (35674)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/19/10 00:47:20 -0400 booky.local (35674)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 35674
+[03/19/10 00:47:20 -0400 booky.local (35674)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/19/10 00:48:15 -0400 booky.local (35693)] INFO : Dispatcher: unicorn
+[03/19/10 00:48:15 -0400 booky.local (35693)] INFO : Application: bolide
+[03/19/10 00:48:15 -0400 booky.local (35693)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/19/10 00:48:15 -0400 booky.local (35693)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 35693
+[03/19/10 00:48:15 -0400 booky.local (35693)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/19/10 00:48:56 -0400 booky.local (35708)] INFO : Dispatcher: unicorn
+[03/19/10 00:48:56 -0400 booky.local (35708)] INFO : Application: bolide
+[03/19/10 00:48:56 -0400 booky.local (35708)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/19/10 00:48:56 -0400 booky.local (35708)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 35708
+[03/19/10 00:48:56 -0400 booky.local (35708)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/19/10 00:49:08 -0400 booky.local (35717)] INFO : Dispatcher: unicorn
+[03/19/10 00:49:08 -0400 booky.local (35717)] INFO : Application: bolide
+[03/19/10 00:49:08 -0400 booky.local (35717)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/19/10 00:49:08 -0400 booky.local (35717)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 35717
+[03/19/10 00:49:08 -0400 booky.local (35717)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/19/10 00:49:19 -0400 booky.local (35725)] INFO : Dispatcher: unicorn
+[03/19/10 00:49:19 -0400 booky.local (35725)] INFO : Application: bolide
+[03/19/10 00:49:19 -0400 booky.local (35725)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/19/10 00:49:19 -0400 booky.local (35725)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 35725
+[03/19/10 00:49:19 -0400 booky.local (35725)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/19/10 00:59:46 -0400 booky.local (35913)] INFO : Dispatcher: unicorn
+[03/19/10 00:59:46 -0400 booky.local (35913)] INFO : Application: bolide
+[03/19/10 00:59:46 -0400 booky.local (35913)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/19/10 00:59:46 -0400 booky.local (35913)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 35913
+[03/19/10 00:59:46 -0400 booky.local (35913)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/19/10 01:00:28 -0400 booky.local (35928)] INFO : Dispatcher: unicorn
+[03/19/10 01:00:28 -0400 booky.local (35928)] INFO : Application: bolide
+[03/19/10 01:00:28 -0400 booky.local (35928)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/19/10 01:00:28 -0400 booky.local (35928)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 35928
+[03/19/10 01:00:28 -0400 booky.local (35928)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/19/10 01:01:16 -0400 booky.local (35944)] INFO : Dispatcher: unicorn
+[03/19/10 01:01:16 -0400 booky.local (35944)] INFO : Application: bolide
+[03/19/10 01:01:16 -0400 booky.local (35944)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/19/10 01:01:16 -0400 booky.local (35944)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 35944
+[03/19/10 01:01:16 -0400 booky.local (35944)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/19/10 01:01:52 -0400 booky.local (35958)] INFO : Dispatcher: unicorn
+[03/19/10 01:01:52 -0400 booky.local (35958)] INFO : Application: bolide
+[03/19/10 01:01:52 -0400 booky.local (35958)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/19/10 01:01:52 -0400 booky.local (35958)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 35958
+[03/19/10 01:01:52 -0400 booky.local (35958)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/19/10 01:02:25 -0400 booky.local (35972)] INFO : Dispatcher: unicorn
+[03/19/10 01:02:25 -0400 booky.local (35972)] INFO : Application: bolide
+[03/19/10 01:02:25 -0400 booky.local (35972)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/19/10 01:02:25 -0400 booky.local (35972)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 35972
+[03/19/10 01:02:25 -0400 booky.local (35972)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/19/10 21:58:29 -0400 booky.local (36545)] INFO : Dispatcher: unicorn
+[03/19/10 21:58:29 -0400 booky.local (36545)] INFO : Application: bolide
+[03/19/10 21:58:29 -0400 booky.local (36545)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/19/10 21:58:29 -0400 booky.local (36545)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 36545
+[03/19/10 21:58:29 -0400 booky.local (36545)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/19/10 21:58:43 -0400 booky.local (36555)] INFO : Dispatcher: unicorn
+[03/19/10 21:58:43 -0400 booky.local (36555)] INFO : Application: bolide
+[03/19/10 21:58:43 -0400 booky.local (36555)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/19/10 21:58:43 -0400 booky.local (36555)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 36555
+[03/19/10 21:58:43 -0400 booky.local (36555)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/19/10 21:59:56 -0400 booky.local (36576)] INFO : Dispatcher: unicorn
+[03/19/10 21:59:56 -0400 booky.local (36576)] INFO : Application: bolide
+[03/19/10 21:59:56 -0400 booky.local (36576)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/19/10 21:59:56 -0400 booky.local (36576)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 36576
+[03/19/10 21:59:56 -0400 booky.local (36576)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/19/10 22:00:13 -0400 booky.local (36588)] INFO : Dispatcher: unicorn
+[03/19/10 22:00:13 -0400 booky.local (36588)] INFO : Application: bolide
+[03/19/10 22:00:13 -0400 booky.local (36588)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/19/10 22:00:13 -0400 booky.local (36588)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 36588
+[03/19/10 22:00:13 -0400 booky.local (36588)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/19/10 22:00:25 -0400 booky.local (36597)] INFO : Dispatcher: unicorn
+[03/19/10 22:00:25 -0400 booky.local (36597)] INFO : Application: bolide
+[03/19/10 22:00:25 -0400 booky.local (36597)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/19/10 22:00:25 -0400 booky.local (36597)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 36597
+[03/19/10 22:00:25 -0400 booky.local (36597)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/19/10 22:01:14 -0400 booky.local (36613)] INFO : Dispatcher: unicorn
+[03/19/10 22:01:14 -0400 booky.local (36613)] INFO : Application: bolide
+[03/19/10 22:01:14 -0400 booky.local (36613)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/19/10 22:01:14 -0400 booky.local (36613)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 36613
+[03/19/10 22:01:14 -0400 booky.local (36613)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/19/10 22:01:34 -0400 booky.local (36624)] INFO : Dispatcher: unicorn
+[03/19/10 22:01:34 -0400 booky.local (36624)] INFO : Application: bolide
+[03/19/10 22:01:34 -0400 booky.local (36624)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/19/10 22:01:34 -0400 booky.local (36624)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 36624
+[03/19/10 22:01:34 -0400 booky.local (36624)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/19/10 22:01:42 -0400 booky.local (36631)] INFO : Dispatcher: unicorn
+[03/19/10 22:01:42 -0400 booky.local (36631)] INFO : Application: bolide
+[03/19/10 22:01:42 -0400 booky.local (36631)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/19/10 22:01:42 -0400 booky.local (36631)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 36631
+[03/19/10 22:01:42 -0400 booky.local (36631)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/19/10 22:03:28 -0400 booky.local (36664)] INFO : Dispatcher: unicorn
+[03/19/10 22:03:28 -0400 booky.local (36664)] INFO : Application: bolide
+[03/19/10 22:03:28 -0400 booky.local (36664)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/19/10 22:03:28 -0400 booky.local (36664)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 36664
+[03/19/10 22:03:28 -0400 booky.local (36664)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/19/10 22:05:27 -0400 booky.local (36700)] INFO : Dispatcher: unicorn
+[03/19/10 22:05:27 -0400 booky.local (36700)] INFO : Application: bolide
+[03/19/10 22:05:27 -0400 booky.local (36700)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/19/10 22:05:27 -0400 booky.local (36700)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 36700
+[03/19/10 22:05:27 -0400 booky.local (36700)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/19/10 22:08:53 -0400 booky.local (36753)] INFO : Dispatcher: unicorn
+[03/19/10 22:08:53 -0400 booky.local (36753)] INFO : Application: bolide
+[03/19/10 22:08:53 -0400 booky.local (36753)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/19/10 22:08:53 -0400 booky.local (36753)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 36753
+[03/19/10 22:08:53 -0400 booky.local (36753)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/19/10 22:12:52 -0400 booky.local (36815)] INFO : Dispatcher: unicorn
+[03/19/10 22:12:52 -0400 booky.local (36815)] INFO : Application: bolide
+[03/19/10 22:12:52 -0400 booky.local (36815)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/19/10 22:12:52 -0400 booky.local (36815)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 36815
+[03/19/10 22:12:52 -0400 booky.local (36815)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/19/10 22:13:32 -0400 booky.local (36830)] INFO : Dispatcher: unicorn
+[03/19/10 22:13:32 -0400 booky.local (36830)] INFO : Application: bolide
+[03/19/10 22:13:32 -0400 booky.local (36830)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/19/10 22:13:32 -0400 booky.local (36830)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 36830
+[03/19/10 22:13:32 -0400 booky.local (36830)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/19/10 22:19:54 -0400 booky.local (36945)] INFO : Dispatcher: unicorn
+[03/19/10 22:19:54 -0400 booky.local (36945)] INFO : Application: bolide
+[03/19/10 22:19:54 -0400 booky.local (36945)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/19/10 22:19:54 -0400 booky.local (36945)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 36945
+[03/19/10 22:19:54 -0400 booky.local (36945)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/19/10 22:20:14 -0400 booky.local (36961)] INFO : Dispatcher: unicorn
+[03/19/10 22:20:14 -0400 booky.local (36961)] INFO : Application: bolide
+[03/19/10 22:20:14 -0400 booky.local (36961)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/19/10 22:20:14 -0400 booky.local (36961)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 36961
+[03/19/10 22:20:14 -0400 booky.local (36961)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/19/10 22:20:46 -0400 booky.local (36974)] INFO : Dispatcher: unicorn
+[03/19/10 22:20:46 -0400 booky.local (36974)] INFO : Application: bolide
+[03/19/10 22:20:46 -0400 booky.local (36974)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/19/10 22:20:46 -0400 booky.local (36974)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 36974
+[03/19/10 22:20:46 -0400 booky.local (36974)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/19/10 22:20:59 -0400 booky.local (36982)] INFO : Dispatcher: unicorn
+[03/19/10 22:20:59 -0400 booky.local (36982)] INFO : Application: bolide
+[03/19/10 22:20:59 -0400 booky.local (36982)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/19/10 22:20:59 -0400 booky.local (36982)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 36982
+[03/19/10 22:20:59 -0400 booky.local (36982)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/19/10 22:21:34 -0400 booky.local (36997)] INFO : Dispatcher: unicorn
+[03/19/10 22:21:34 -0400 booky.local (36997)] INFO : Application: bolide
+[03/19/10 22:21:34 -0400 booky.local (36997)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/19/10 22:21:34 -0400 booky.local (36997)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 36997
+[03/19/10 22:21:34 -0400 booky.local (36997)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/19/10 22:21:46 -0400 booky.local (37005)] INFO : Dispatcher: unicorn
+[03/19/10 22:21:46 -0400 booky.local (37005)] INFO : Application: bolide
+[03/19/10 22:21:46 -0400 booky.local (37005)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/19/10 22:21:46 -0400 booky.local (37005)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 37005
+[03/19/10 22:21:46 -0400 booky.local (37005)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/19/10 22:21:53 -0400 booky.local (37013)] INFO : Dispatcher: unicorn
+[03/19/10 22:21:53 -0400 booky.local (37013)] INFO : Application: bolide
+[03/19/10 22:21:53 -0400 booky.local (37013)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/19/10 22:21:53 -0400 booky.local (37013)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 37013
+[03/19/10 22:21:53 -0400 booky.local (37013)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/19/10 22:22:36 -0400 booky.local (37027)] INFO : Dispatcher: unicorn
+[03/19/10 22:22:36 -0400 booky.local (37027)] INFO : Application: bolide
+[03/19/10 22:22:36 -0400 booky.local (37027)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/19/10 22:22:36 -0400 booky.local (37027)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 37027
+[03/19/10 22:22:36 -0400 booky.local (37027)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/19/10 22:22:50 -0400 booky.local (37036)] INFO : Dispatcher: unicorn
+[03/19/10 22:22:50 -0400 booky.local (37036)] INFO : Application: bolide
+[03/19/10 22:22:50 -0400 booky.local (37036)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/19/10 22:22:50 -0400 booky.local (37036)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 37036
+[03/19/10 22:22:50 -0400 booky.local (37036)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/19/10 22:22:57 -0400 booky.local (37044)] INFO : Dispatcher: unicorn
+[03/19/10 22:22:57 -0400 booky.local (37044)] INFO : Application: bolide
+[03/19/10 22:22:57 -0400 booky.local (37044)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/19/10 22:22:57 -0400 booky.local (37044)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 37044
+[03/19/10 22:22:57 -0400 booky.local (37044)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/19/10 22:23:17 -0400 booky.local (37054)] INFO : Dispatcher: unicorn
+[03/19/10 22:23:17 -0400 booky.local (37054)] INFO : Application: bolide
+[03/19/10 22:23:17 -0400 booky.local (37054)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/19/10 22:23:17 -0400 booky.local (37054)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 37054
+[03/19/10 22:23:17 -0400 booky.local (37054)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/19/10 22:24:22 -0400 booky.local (37073)] INFO : Dispatcher: unicorn
+[03/19/10 22:24:22 -0400 booky.local (37073)] INFO : Application: bolide
+[03/19/10 22:24:22 -0400 booky.local (37073)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/19/10 22:24:22 -0400 booky.local (37073)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 37073
+[03/19/10 22:24:22 -0400 booky.local (37073)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/19/10 22:27:00 -0400 booky.local (37123)] INFO : Dispatcher: unicorn
+[03/19/10 22:27:00 -0400 booky.local (37123)] INFO : Application: bolide
+[03/19/10 22:27:00 -0400 booky.local (37123)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/19/10 22:27:00 -0400 booky.local (37123)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 37123
+[03/19/10 22:27:00 -0400 booky.local (37123)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/19/10 22:27:15 -0400 booky.local (37133)] INFO : Dispatcher: unicorn
+[03/19/10 22:27:15 -0400 booky.local (37133)] INFO : Application: bolide
+[03/19/10 22:27:15 -0400 booky.local (37133)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/19/10 22:27:15 -0400 booky.local (37133)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 37133
+[03/19/10 22:27:15 -0400 booky.local (37133)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/19/10 22:27:43 -0400 booky.local (37144)] INFO : Dispatcher: unicorn
+[03/19/10 22:27:43 -0400 booky.local (37144)] INFO : Application: bolide
+[03/19/10 22:27:43 -0400 booky.local (37144)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/19/10 22:27:43 -0400 booky.local (37144)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 37144
+[03/19/10 22:27:43 -0400 booky.local (37144)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/19/10 22:29:13 -0400 booky.local (37178)] INFO : Dispatcher: unicorn
+[03/19/10 22:29:13 -0400 booky.local (37178)] INFO : Application: bolide
+[03/19/10 22:29:13 -0400 booky.local (37178)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/19/10 22:29:13 -0400 booky.local (37178)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 37178
+[03/19/10 22:29:13 -0400 booky.local (37178)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/19/10 22:32:21 -0400 booky.local (37232)] INFO : Dispatcher: unicorn
+[03/19/10 22:32:21 -0400 booky.local (37232)] INFO : Application: bolide
+[03/19/10 22:32:21 -0400 booky.local (37232)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/19/10 22:32:21 -0400 booky.local (37232)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 37232
+[03/19/10 22:32:21 -0400 booky.local (37232)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/19/10 22:34:31 -0400 booky.local (37267)] INFO : Dispatcher: unicorn
+[03/19/10 22:34:31 -0400 booky.local (37267)] INFO : Application: bolide
+[03/19/10 22:34:31 -0400 booky.local (37267)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/19/10 22:34:31 -0400 booky.local (37267)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 37267
+[03/19/10 22:34:31 -0400 booky.local (37267)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/19/10 22:34:58 -0400 booky.local (37279)] INFO : Dispatcher: unicorn
+[03/19/10 22:34:58 -0400 booky.local (37279)] INFO : Application: bolide
+[03/19/10 22:34:58 -0400 booky.local (37279)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/19/10 22:34:58 -0400 booky.local (37279)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 37279
+[03/19/10 22:34:58 -0400 booky.local (37279)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/19/10 22:36:30 -0400 booky.local (37312)] INFO : Dispatcher: unicorn
+[03/19/10 22:36:30 -0400 booky.local (37312)] INFO : Application: bolide
+[03/19/10 22:36:30 -0400 booky.local (37312)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/19/10 22:36:30 -0400 booky.local (37312)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 37312
+[03/19/10 22:36:30 -0400 booky.local (37312)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/19/10 22:37:34 -0400 booky.local (37331)] INFO : Dispatcher: unicorn
+[03/19/10 22:37:34 -0400 booky.local (37331)] INFO : Application: bolide
+[03/19/10 22:37:34 -0400 booky.local (37331)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/19/10 22:37:34 -0400 booky.local (37331)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 37331
+[03/19/10 22:37:34 -0400 booky.local (37331)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/19/10 22:38:00 -0400 booky.local (37344)] INFO : Dispatcher: unicorn
+[03/19/10 22:38:00 -0400 booky.local (37344)] INFO : Application: bolide
+[03/19/10 22:38:00 -0400 booky.local (37344)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/19/10 22:38:00 -0400 booky.local (37344)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 37344
+[03/19/10 22:38:00 -0400 booky.local (37344)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/19/10 22:38:39 -0400 booky.local (37360)] INFO : Dispatcher: unicorn
+[03/19/10 22:38:39 -0400 booky.local (37360)] INFO : Application: bolide
+[03/19/10 22:38:39 -0400 booky.local (37360)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/19/10 22:38:39 -0400 booky.local (37360)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 37360
+[03/19/10 22:38:39 -0400 booky.local (37360)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/19/10 22:38:57 -0400 booky.local (37369)] INFO : Dispatcher: unicorn
+[03/19/10 22:38:57 -0400 booky.local (37369)] INFO : Application: bolide
+[03/19/10 22:38:57 -0400 booky.local (37369)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/19/10 22:38:57 -0400 booky.local (37369)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 37369
+[03/19/10 22:38:57 -0400 booky.local (37369)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/19/10 22:39:24 -0400 booky.local (37381)] INFO : Dispatcher: unicorn
+[03/19/10 22:39:24 -0400 booky.local (37381)] INFO : Application: bolide
+[03/19/10 22:39:24 -0400 booky.local (37381)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/19/10 22:39:24 -0400 booky.local (37381)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 37381
+[03/19/10 22:39:24 -0400 booky.local (37381)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/19/10 22:39:48 -0400 booky.local (37392)] INFO : Dispatcher: unicorn
+[03/19/10 22:39:48 -0400 booky.local (37392)] INFO : Application: bolide
+[03/19/10 22:39:48 -0400 booky.local (37392)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/19/10 22:39:48 -0400 booky.local (37392)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 37392
+[03/19/10 22:39:48 -0400 booky.local (37392)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/19/10 22:40:23 -0400 booky.local (37408)] INFO : Dispatcher: unicorn
+[03/19/10 22:40:23 -0400 booky.local (37408)] INFO : Application: bolide
+[03/19/10 22:40:23 -0400 booky.local (37408)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/19/10 22:40:23 -0400 booky.local (37408)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 37408
+[03/19/10 22:40:23 -0400 booky.local (37408)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/19/10 22:50:46 -0400 booky.local (37600)] INFO : Dispatcher: unicorn
+[03/19/10 22:50:46 -0400 booky.local (37600)] INFO : Application: bolide
+[03/19/10 22:50:46 -0400 booky.local (37600)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/19/10 22:50:46 -0400 booky.local (37600)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 37600
+[03/19/10 22:50:46 -0400 booky.local (37600)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/19/10 22:51:19 -0400 booky.local (37613)] INFO : Dispatcher: unicorn
+[03/19/10 22:51:19 -0400 booky.local (37613)] INFO : Application: bolide
+[03/19/10 22:51:19 -0400 booky.local (37613)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/19/10 22:51:19 -0400 booky.local (37613)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 37613
+[03/19/10 22:51:19 -0400 booky.local (37613)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/19/10 22:51:40 -0400 booky.local (37624)] INFO : Dispatcher: unicorn
+[03/19/10 22:51:40 -0400 booky.local (37624)] INFO : Application: bolide
+[03/19/10 22:51:40 -0400 booky.local (37624)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/19/10 22:51:40 -0400 booky.local (37624)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 37624
+[03/19/10 22:51:40 -0400 booky.local (37624)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/19/10 22:52:42 -0400 booky.local (37642)] INFO : Dispatcher: unicorn
+[03/19/10 22:52:42 -0400 booky.local (37642)] INFO : Application: bolide
+[03/19/10 22:52:42 -0400 booky.local (37642)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/19/10 22:52:42 -0400 booky.local (37642)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 37642
+[03/19/10 22:52:42 -0400 booky.local (37642)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/19/10 22:53:03 -0400 booky.local (37653)] INFO : Dispatcher: unicorn
+[03/19/10 22:53:03 -0400 booky.local (37653)] INFO : Application: bolide
+[03/19/10 22:53:03 -0400 booky.local (37653)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/19/10 22:53:03 -0400 booky.local (37653)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 37653
+[03/19/10 22:53:03 -0400 booky.local (37653)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log
+[03/19/10 22:57:25 -0400 booky.local (37723)] INFO : Dispatcher: unicorn
+[03/19/10 22:57:25 -0400 booky.local (37723)] INFO : Application: bolide
+[03/19/10 22:57:25 -0400 booky.local (37723)] INFO : Transaction tracing threshold is 2.0 seconds.
+[03/19/10 22:57:25 -0400 booky.local (37723)] INFO : New Relic RPM Agent 2.10.6 Initialized: pid = 37723
+[03/19/10 22:57:25 -0400 booky.local (37723)] INFO : Agent Log found in /Users/juggy/Documents/bolide/stream_app/log/newrelic_agent.log

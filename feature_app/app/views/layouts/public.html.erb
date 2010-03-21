@@ -16,18 +16,20 @@
 
 	<!-- script START -->
 	<%= javascript_include_tag 'prototype', 'application', :cache => 'cache/cache' %>
-	<%= javascript_include_tag 'http://live.bolideapp.com/js/bolide.js' %>
-	<script type="text/javascript">
-		bolide = new Bolide.Client("bolide", "<%=@q.name%>", "<%=@q.token%>", {
-  		onSuccess: function(response){
-  		  if(Object.isString(response)) response = response.evalJSON();
-  			if(Object.isArray(response)){
-  			  lastReading = response.last();
-  			  $("count").innerHTML = lastReading;
-  			}
-  		}
-  	});
-	</script>
+	<%if @q %>
+  	<%= javascript_include_tag 'http://live.bolideapp.com/js/bolide.js' %>
+  	<script type="text/javascript">
+  		bolide = new Bolide.Client("bolide", "<%=@q.name%>", "<%=@q.token%>", {
+    		onSuccess: function(response){
+    		  if(Object.isString(response)) response = response.evalJSON();
+    			if(Object.isArray(response)){
+    			  lastReading = response.last();
+    			  $("count").innerHTML = lastReading;
+    			}
+    		}
+    	});
+  	</script>
+	<%end%>
 	<!-- script END -->
 </head>
 <body>

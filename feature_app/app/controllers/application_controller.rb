@@ -59,14 +59,17 @@ class ApplicationController < ActionController::Base
      @bolide = session[:bolide]
      @q = session[:q]
 
-     if @bolide.nil?
-       @bolide = Bolide::Account.new("bolide", "2adc61d0-095c-012d-0076-404077aa86f5")
-       session[:bolide] =  @bolide
-     end
-     if @q.nil?
-       q_name = session[:session_id]
-       @q = @bolide.get_q(q_name)
-       session[:q] = @q
+     begin
+       if @bolide.nil?
+         @bolide = Bolide::Account.new("bolide", "2adc61d0-095c-012d-0076-404077aa86f5")
+         session[:bolide] =  @bolide
+       end
+       if @q.nil?
+         q_name = session[:session_id]
+         @q = @bolide.get_q(q_name)
+         session[:q] = @q
+       end
+     rescue
      end
      @bolide_account = BolideApi::Account.load_with(:_id=>"bolide")
    end

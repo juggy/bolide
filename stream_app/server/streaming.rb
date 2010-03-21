@@ -21,7 +21,6 @@ class StreamController < Cramp::Controller::Action
 
   
   def verify_client_token
-    
     @q = BolideApi::Q.load_with(:_id=>params[:queue], :account_id=>params[:account])
     
     if !@q.valid_token?(params[:token])

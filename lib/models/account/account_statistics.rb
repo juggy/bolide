@@ -45,17 +45,16 @@ module BolideApi
     end
     
     def global_sent
-      MemCache.instance.memcache.fetch(global_sent_key, 0, true) do
-        0
+      if ENV["RAILS_ENV"] != "test"
+        MemCache.instance.memcache.fetch(global_sent_key, 0, true) do
+          0
+        end
       end
     end
   
     def global_sent_key
       "#bolide/global/live/sent"
     end
-    
-  protected
-    
   
   #keys
     def concurrent_key

@@ -94,7 +94,8 @@ specs:
 - rack: 
     version: 1.1.0
 - rack-test: 
-    version: 0.5.3
+    version: 0.5.5
+    source: 0
 - system_timer: 
     version: "1.0"
 - usher: 
@@ -105,7 +106,11 @@ specs:
     version: 3.0.0.beta
 - cramp: 
     version: "0.10"
-hash: 5276e7f723f6db0a2fdaccfdb9916a0d4d07f1ea
+hash: f0cfcdf6e69e980c983ee1d49fc7353e358c6430
 sources: 
+- Git: 
+    uri: git://github.com/juggy/rack-test.git
+    git: git://github.com/juggy/rack-test.git
+    ref: 4e56dd0ee64a94cb1a8c4e232a475f4e338b44c7
 - Rubygems: 
     uri: http://gemcutter.org

@@ -1,24 +1,43 @@
 require 'singleton'
+
+class Hash
+  def get(key)
+    val = self[key]
+    val = yield if (val.nil? && block_given?)
+    self[key] = val
+  end
+end
+
 module BolideApi
+  
+  class InMemoryQueue
+    def initialize
+      @q = []
+    end
+    def publish(value)
+      p "PUB " + value
+      @q << value
+    end
+    def message_count
+      @q.length
+    end
+    def pop
+      p "POP " + @q.inspect
+      @q.pop
+    end
+  end
 
   class InMemoryMQ
-    
-    def publish(value)
-      #nothing to do
+    def initialize
+      @queues = {}
     end
     
     def queue(qname)
-      self
+      @queues.get(qname) do
+        p "CREATE Q " + qname
+        InMemoryQueue.new
+      end
     end
-    
-    def message_count
-      0
-    end
-    
-    def pop
-      "fake msg"
-    end
-    
   end
 
   class MQ
@@ -32,23 +51,20 @@ module BolideApi
     end
 
     def [](qname)
-      @qs.fetch(qname) do 
+      @qs.get(qname) do 
         @amqp.queue(qname)
       end
     end
     
     def queue(qname, opts)
-       @qs.fetch(qname) do 
+       @qs.get(qname) do 
          @amqp.queue(qname)
        end
     end
     
     def self.open(vhost)
-      channel = @@channels[vhost]
-      if(channel)
-        channel
-      else
-        @@channels[vhost] = MQ.new(vhost)
+      @@channels.get(vhost) do
+        MQ.new(vhost)
       end
     end
     
@@ -57,6 +73,7 @@ module BolideApi
       @vhost = vhost
       
       if ENV['RAILS_ENV'] == 'test'
+        p "CREATE HOST " + vhost
         @amqp = InMemoryMQ.new
       else
         @amqp = Carrot.new(AmqpConnection::connection.merge!({:vhost=> vhost})) 

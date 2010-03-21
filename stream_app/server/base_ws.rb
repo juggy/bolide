@@ -23,6 +23,7 @@ class BaseWsController < Cramp::Controller::Action
       index
     end
     finish
+    
   end
 
   def authenticate  
