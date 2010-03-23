@@ -15,7 +15,8 @@ module BolideApi
     attr_accessor :_id, :account, :token, :expire_on, :account_id
    
     def msg_count
-      mq.message_count
+      0
+      #mq.message_count
     end
     
     def read_msg
