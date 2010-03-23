@@ -47,7 +47,7 @@ class QWsController < BaseWsController
     end
   end
   
-  add_transaction_tracer :index, :category => :rack, :name => 'q_stream'
-  add_transaction_tracer :show, :category => :rack, :name => 'q_stream'
-  add_transaction_tracer :update, :category => :rack, :name => 'q_stream'
+  add_transaction_tracer :index, :category => :rack, :name => 'qi_stream'
+  add_transaction_tracer :show, :category => :rack, :name => 'qs_stream'
+  add_transaction_tracer :update, :category => :rack, :name => 'qp_stream'
 end

@@ -35,7 +35,7 @@ class MsgWsController < BaseWsController
       msg.send_msg
       warnings = warnings + msg.warnings
     end
-    
+  
     xml = Nokogiri::XML::Builder.new do |xml|
       if !warnings.empty?
         xml.warnings do
@@ -45,8 +45,8 @@ class MsgWsController < BaseWsController
         end
       end
     end
-    
-    render( xml.to_xml.to_s )
+
+    render [xml.to_xml.to_s] 
   end
 
   add_transaction_tracer :create, :category => :rack, :name => 'msg_stream'

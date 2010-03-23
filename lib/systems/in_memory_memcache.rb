@@ -13,7 +13,7 @@ module BolideApi
     
     def incr(key)
       v = self[key];
-      v = -1 if v.nil?
+      v = 0 if v.nil?
       self[key] = v + 1
     end
     

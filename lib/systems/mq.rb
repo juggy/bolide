@@ -15,14 +15,14 @@ module BolideApi
       @q = []
     end
     def publish(value)
-      p "PUB " + value
+      #p "PUB " + value
       @q << value
     end
     def message_count
       @q.length
     end
     def pop
-      p "POP " + @q.inspect
+     # p "POP " + @q.inspect
       @q.pop
     end
   end
@@ -34,7 +34,7 @@ module BolideApi
     
     def queue(qname)
       @queues.get(qname) do
-        p "CREATE Q " + qname
+        #p "CREATE Q " + qname
         InMemoryQueue.new
       end
     end
@@ -73,7 +73,7 @@ module BolideApi
       @vhost = vhost
       
       if ENV['RAILS_ENV'] == 'test'
-        p "CREATE HOST " + vhost
+        #p "CREATE HOST " + vhost
         @amqp = InMemoryMQ.new
       else
         @amqp = Carrot.new(AmqpConnection::connection.merge!({:vhost=> vhost})) 

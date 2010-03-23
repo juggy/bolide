@@ -22,7 +22,6 @@ class StreamController < Cramp::Controller::Action
   
   def verify_client_token
     @q = BolideApi::Q.load_with(:_id=>params[:queue], :account_id=>params[:account])
-    
     if !@q.valid_token?(params[:token])
       halt 500, {'Content-Type' => 'text/plain'}, "Invalid Queue Token"
       
@@ -55,7 +54,7 @@ class StreamController < Cramp::Controller::Action
       msg = @q.read_msg
     end
     if(!msgs.empty?)
-      render(jsonp? ? jsonp( msgs.inspect ) : msgs.inspect)
+      render( jsonp? ? jsonp( msgs.inspect ) : msgs.inspect)
       close_connection
     end
   end
@@ -73,13 +72,13 @@ class StreamController < Cramp::Controller::Action
   end
   
   def jsonp?
-    !request.params['jsonp'].nil?
+    request.params.has_key?('jsonp')
   end
 
   def jsonp(data)
     "Bolide.MSIECallback('" + data + "');"
   end
   
-  add_transaction_tracer :verify_client_token, :category => :rack, :name => 'stream'
-  add_transaction_tracer :send_data, :category => :rack, :name => 'stream'
+  add_transaction_tracer :verify_client_token, :category => :rack, :name => 'stream_token'
+  add_transaction_tracer :send_data, :category => :rack, :name => 'stream_data'
 end
