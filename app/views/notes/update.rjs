@@ -1,2 +1,0 @@
-page.replace dom_id( @note ), {:partial => 'item', :locals => {:item => @note} }
-page.visual_effect :highlight, dom_id( @note )

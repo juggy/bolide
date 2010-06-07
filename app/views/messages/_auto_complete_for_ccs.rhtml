@@ -1,9 +1,0 @@
-<ul>
-  <% @parties.each do |p| %>
-    <% if !p.is_a?(Building)  %>
-      <% p.emails.own.each do |email| %>
-        <%= content_tag 'li', "#{email.party_name} &lt;#{email.value}&gt;" %> 
-      <% end %>
-    <% end %>
-  <% end %>
-</ul>

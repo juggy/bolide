@@ -1,9 +1,0 @@
-- if activities.length > 0
-  - activities.each do |activity|
-    - partial = '/tasks/completed' if activity.is_a?(Task)
-    - partial = '/notes/item' if activity.is_a?(Note)
-    - partial = '/file_attachments/item' if activity.is_a?(FileAttachment)
-    - partial = '/linked_messages/item' if activity.is_a?(LinkedMessage)
-    - partial = '/activities/state_change' if activity.is_a?(StateChange) 
-    - partial = '/activities/work_sheet_state_change' if activity.is_a?(WorkSheetStateChange)
-    = render :partial => partial, :locals => {:item => activity}

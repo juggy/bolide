@@ -1,8 +1,0 @@
-%tr{:style => 'border-top: 2px solid #777; font-weight: bold;'}
-  %td 
-    %strong Total
-  - @reasons.each do |reason|
-    %td.right= total[reason]
-  
-  %td.right{:style => 'border-left: 1px solid #999'}= total[:justified]
-  %td.right{:style => 'border-left: 2px solid #999'}= total[:total]

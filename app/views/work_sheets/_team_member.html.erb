@@ -1,8 +1,0 @@
-<div>
-<% fields_for("work_sheet[team_members_attrs][]", team_member) do |tm| %>
-  <%= tm.hidden_field :id, :index => "" %>
-  <%= tm.hidden_field :user_id, :index => "" %>
-  <%= check_box_tag "work_sheet[team_members_attrs][][checked]", "1", true %>
-  <%= team_member.roofer.name %>
-<% end %>
-</div>

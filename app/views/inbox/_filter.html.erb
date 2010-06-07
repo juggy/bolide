@@ -1,6 +1,0 @@
-<div class='message_filter'>
-Voir messages: 
-<%= link_to_unless((params[:show] == 'unread'), _("non lus"), inbox_url(:show => 'unread', :page => 1) ) %> | 
-<%= link_to_unless((params[:show] == 'read'), _("lus"), inbox_url(:show => 'read', :page => 1) ) %> |
-<%= link_to_unless((params[:show] != 'read' && params[:show] != 'unread'), _("tous"), inbox_url(:show => '', :page => 1) ) %>
-</div>

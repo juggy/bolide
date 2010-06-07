@@ -1,8 +1,0 @@
-#schedule_info
-  .weather{:style => 'float:left; margin-right: 15px; text-align: center'}
-    = weather_icon(@schedule)
-    %br
-    - if current_user.has_permission?('update_schedule')
-      = link_to_function 'modifier', "$('schedule_form').toggle();", :class => 'no-print'
-  = simple_format @schedule.note
-  .clear{:style => 'clear:both'}

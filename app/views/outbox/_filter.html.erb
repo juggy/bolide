@@ -1,8 +1,0 @@
-<div class='message_filter'>
-Voir messages: 
-<%= link_to_unless((params[:show] == 'unsent'), _("non envoyés"), outbox_url(:show => 'unsent') ) %> | 
-<%= link_to_unless((params[:show] == 'draft'), _("brouillons"), outbox_url(:show => 'draft') ) %> |
-<%= link_to_unless((params[:show] == 'sent'), _("envoyés"), outbox_url(:show => 'sent') ) %> |
-<%= link_to_unless((params[:show] == 'error'), _("erreurs"), outbox_url(:show => 'error') ) %> |
-<%= link_to_unless( !(['sent','unsent','error','draft'].include?(params[:show]) ), _("tous"), outbox_url(:show => '') ) %>
-</div>

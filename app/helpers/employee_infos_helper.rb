@@ -1,2 +1,0 @@
-module EmployeeInfosHelper
-end

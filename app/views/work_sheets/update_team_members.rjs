@@ -1,1 +1,0 @@
-page.replace_html 'team_members_wrapper', render( :partial => 'team_member', :collection => @assignments) 

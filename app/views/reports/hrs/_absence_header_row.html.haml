@@ -1,6 +1,0 @@
-%tr
-  %th{:style => "width: 140px;"} &nbsp;
-  - @reasons.each do |reason|
-    %th{:style => 'width:60px', :title => reason.name}= truncate( reason.name, :length => 25)
-  %th{:style => 'border-left: 1px solid #999'} Non Justifié
-  %th{:style => 'width: 80px; border-left: 2px solid #999'} Total

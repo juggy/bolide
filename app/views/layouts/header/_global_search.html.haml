@@ -1,8 +1,0 @@
-#QuickSearch
-  .w-search
-    %form{:id=>"QuickSearchForm"}
-      = text_field_tag "party_name", "", {:autocomplete => "off", :id => "global_search_party_name", :class=>"value T", :type=>"input"}
-      %span{:class=>"do-search button"}
-      #global_search_party_name_auto_complete.auto_complete{:style=>"display:hidden"}
-      = auto_complete_field "global_search_party_name",{ :frequency => 0.4, :url => {:controller => '/parties', :action => 'search', :collection => 'ALL'}, :after_update_element => "function(element,value)  {var nodes = $(value).getElementsByTagName('a');if(nodes.length>0) window.location = $(nodes[0]).href;}"}
-  .clearer &nbsp;

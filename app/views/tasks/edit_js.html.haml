@@ -1,8 +1,0 @@
-#task_form_wrapper.form_wrapper
-  - remote_ui_form_for(@task, :html => { :method => :put }) do |f|
-    -group "Mettre à jour une tâche" do
-      = render :partial => "form", :locals => {:f => f}
-      = button "Mettre à jour"
-      %span
-        ou
-        = link_to_function "annuler", update_page{|page| page.replace_html(dom_id(@task,'edit'), "") }

@@ -1,7 +1,0 @@
-<%= party_page_header @party %>
-
-<div class='innercol'>
-  
-  <%= render :partial => 'parties/project_list', :locals => {:title => 'Tous les projets', :projects => @party.projects.not_service} %>
-  
-</div>

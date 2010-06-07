@@ -1,8 +1,0 @@
-  <% if @attachments.length > 0 %>
-  <div class="Attachment"><%=@attachments.length %> <%= _("Attachement(s)") %></div>
-  <ul>
-    <% for attachment in @attachments %>
-      <%= render :partial => '/attachments/item', :locals => {:item => attachment} %>
-    <% end %>
-  </ul>
-  <% end %>

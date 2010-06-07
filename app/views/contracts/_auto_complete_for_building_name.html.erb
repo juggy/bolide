@@ -1,8 +1,0 @@
-<ul>
-<% for building in @buildings do -%>
-  <li>
-    <div class="id" style="display:none"><%= building.id.to_s.strip %></div>
-    <div class="full_name"><span class="informal"><%= display_icon( building, building.quick_search_name)  %></span></div>
-  </li>
-<% end -%>
-</ul>
