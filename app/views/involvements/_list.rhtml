@@ -1,0 +1,18 @@
+<% if involvements.length > 0%>
+  <h1><%= title %></h1>
+  <table class='standard'>
+
+  <% for involvement in involvements %>
+    <tr class='<%= cycle("odd","even") %>'>
+
+      <td width='35%'><%= involvement.role %> <%= "(#{involvement.deleted_at.localize(:date)})" if involvement.deleted_at %></td>
+      <td>
+        <%= link_to involvement.party.name, involvement.party, :class => dom_class(involvement.party) %>
+        <%= involvement.party.company.name if involvement.party.is_a?(Contact) && involvement.party.company %>
+      </td>
+      <td width="30"><%= link_to "&nbsp;", edit_project_involvement_url(@project, involvement), {:class=> 'edit', :title=>_("Modifier")} %></td>
+      <td width="20"><%= link_to( "&nbsp;", project_involvement_path(@project, involvement), { :confirm => _('Êtes-vous sûr?'), :method => :delete, :class=> 'delete', :title=>_("Supprimer")} ) unless involvement.deleted_at %></td>
+    </tr>
+  <% end %>
+  </table>
+<% end %>

@@ -1,0 +1,39 @@
+.page_header
+  %h1 Liste des rapports
+
+.innercol
+  %h2 Statistiques
+  %ul.disc
+    %li= link_to "Statistiques Contrats", reports_contract_stats_url
+    %li= link_to "Statistiques Ventes", reports_sale_stats_url
+    - if current_user.has_permission?('show_concurator')
+      %li= link_to "Concurator: projets gagnés", won_reports_concurator_url
+      %li= link_to "Concurator: projets perdus", reports_concurator_url
+    
+  %h2 Comptabilité
+  %ul.disc
+    %li= link_to "Travaux en Cours", reports_accounting_items_url
+
+  %h2 Facturation
+  %ul.disc
+    %li= link_to "Facturation Service", reports_service_invoices_url
+    %li= link_to "Facturation Contrat", reports_contract_invoices_url
+
+  
+  - if current_user.has_permission?('access_human_resource_infos')
+    %h2 Ressources Humaines
+    %ul.disc
+      %li<
+        = link_to "Certifications", courses_reports_hr_url
+        (
+        = link_to "version excel", competences_table_reports_hr_url
+        )
+      / %li= link_to "Tableau excel des certifications", competences_table_reports_hr_url
+      %li= link_to "Certifications à venir", next_courses_reports_hr_url
+      %li= link_to "Certifications échues", expired_competences_reports_hr_url
+      %li= link_to "Liste des annniversaires", birthdays_reports_hr_url
+      %li= link_to "Absences", absences_reports_hr_url
+
+  %h2 Autres
+  %ul.disc
+    %li= link_to "Liste des soumissions archivés", reports_quote_archives_url

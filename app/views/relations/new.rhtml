@@ -1,0 +1,76 @@
+<div class='page_header'>
+  <h1><%= _("Nouvelle relation pour") %> <%= @party.name %></h1>
+</div>
+
+<div class='innercol'>
+
+<%#= error_messages_for :relation %>
+
+<% form_for(:relation, :url => party_relations_path(@party)) do |f| %>
+<%= hidden_field_tag "relation[first_party_id]", @party.id %>
+  <table cellpadding="5" class="relations">
+    <tr>
+
+      <td><%= @party.name %> est</td>
+
+      <td width="20"></td>
+      
+      <th>choisissez un tiers...</th>
+      <td width="20"></td>
+      <td><%= @party.name %></td>
+      
+
+    </tr>
+    <tr>
+
+      <td><%= text_field_tag "relation[description]", "", {:size => 15, :id => 'relation_description'} %></td>
+      <td width="20">=></td>
+      <td>
+        <%= auto_complete_party_id_text_field :relation, :third_party_id %>
+        <!-- <%= text_field_tag "party_name", "", {:autocomplete => "off"} %>
+                <%= hidden_field_tag "relation[third_party_id]", "", :id => "third_party_id" %>
+                <div id="party_name_auto_complete" class="auto_complete" style="display:hidden;"></div>
+                <%= auto_complete_field "party_name", 
+                      {:url => {:controller => 'parties', :action => 'auto_complete_for_party_name'},
+                      :select => 'informal',
+                      :after_update_element => 
+                        "function(element,value)  {
+                           var nodes = value.getElementsByClassName('auto_id', value) || [];
+                           if(nodes.length>0) id_value = Element.collectTextNodes(nodes[0],'auto_id');
+                           $('third_party_id').value = id_value;
+                         }"
+                        } %> --></td>
+      <td width="20">=></td>
+      <td><%= text_field_tag "relation[description_2]", "", {:size => 15, :id => "relation_description_2"} %> </td>
+
+    </tr>
+    <tr>
+
+      <th>
+        Suggestions:<br />
+        <% Relationship.suggestions(@party,:first_party).each do |sugg| %>
+          <%= link_to_function sugg, "$('relation_description').value='#{escape_javascript(sugg)}'" %><br />
+        <% end %>
+        (cliquez pour choisir)
+      </th>
+      <td width="20"></td>
+      <th>&nbsp;</th>
+      <td width="20"></td>
+      
+      <th>Suggestions:<br />
+        <% Relationship.suggestions(@party,:third_party).each do |sugg| %>
+          <%= link_to_function sugg, "$('relation_description_2').value='#{sugg}';" %><br />
+        <% end %>
+      </th>
+
+  
+    </tr>
+  </table>
+  <br />
+  <br />
+  <div><%= _("Relation principale?") %>
+    <%= check_box_tag "relationship[principal]", "1"  %>
+  </div>
+  <%= button_form_submit %>
+<% end %>
+</div>

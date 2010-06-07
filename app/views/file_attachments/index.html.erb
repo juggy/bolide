@@ -1,0 +1,18 @@
+<h1>Listing file_attachments</h1>
+
+<table>
+  <tr>
+  </tr>
+
+<% for file_attachment in @file_attachments %>
+  <tr>
+    <td><%= link_to 'Show', file_attachment %></td>
+    <td><%= link_to 'Edit', edit_file_attachment_path(file_attachment) %></td>
+    <td><%= link_to 'Destroy', file_attachment, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New file_attachment', new_file_attachment_path %>

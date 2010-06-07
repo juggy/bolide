@@ -1,0 +1,46 @@
+<div class='page_header'>
+  <h1>Bons de travail</h1>
+</div>
+
+<div class='innercol'>
+  <div style='font-size:14px;'>
+  <%= @work_sheets.size %> bons de travail pour <%= display_hours( @work_sheets.sum(:scheduled_time) ) %> heures cédulées
+  </div>
+  
+  <table class='standard'>
+    <thead>
+      <tr>
+        <th style='width:70px;'>Date</th>
+        <th style='width:70px;'>Date Prévue</th>
+        <th style='width:70px;'>No</th>
+        <th>Contrat</th>
+        <th>Demande</th>
+        <th>Hres</th>
+        <th>&nbsp</th>
+        <th>Technologie</th>
+        <th>Type de travaux</th>
+        <th>Superficie</th>
+      </tr>
+    </thead>
+    
+  <% for work_sheet in @work_sheets %>
+    <tr class='<%= cycle("odd","even") %>'>
+      <td><%= work_sheet.created_at.to_date.localize %></td>
+      <td><%= work_sheet.scheduled_date.to_date.localize rescue "" %></td>
+      <td>
+        <strong><%= work_sheet.project.contract_number %> - <%= work_sheet.project.call_number %> - <%= work_sheet.id %></strong>
+      </td>
+      <td><%= display_project_contract(work_sheet.project) %></td>
+      <td>
+        <%= link_to work_sheet.project.display_name, project_work_sheet_path(work_sheet.project, work_sheet) %>
+      </td>
+      <td style='text-align:right;'><%= display_hours(work_sheet.scheduled_time) %></td>
+      <td><%=h( work_sheet.foreman.full_name) if work_sheet.foreman %></td>
+      <td><%= work_sheet.technology %></td>
+      <td><%= work_sheet.work_type %></td>
+      <td style='text-align:right;'><%= work_sheet.area %> pc</td>
+    </tr>
+  <% end %>
+  </table>
+  
+</div>

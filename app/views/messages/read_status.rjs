@@ -1,0 +1,6 @@
+if @mail.is_read? 
+page["message_recipient_#{@message.id}"].removeClassName("new_message") 
+else
+page["message_recipient_#{@message.id}"].addClassName("new_message") 
+end
+page["unread_message"].replace_html unread_messages

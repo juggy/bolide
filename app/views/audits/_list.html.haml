@@ -1,0 +1,19 @@
+%h1 Audits
+%table.standard
+  - audits.each do |audit|
+    - tr_class = cycle('odd','even', :name => 'audit')
+    %tr{:class => tr_class, :style => 'border-bottom:none'}
+      %td= audit_action_name( audit )
+      %td= audit.created_at.localize(:short)
+      %td
+        = link_to_remote "voir modifications", :url => audit_url(audit), :method => 'get', :update => dom_id(audit), :complete => "$('#{dom_id(audit)}').show();"
+      %td{:style => 'text-align:right;', :width =>'150'}= highlight_current_user( audit.user )
+        
+    %tr{:class => tr_class}
+      %td{:colspan => 4}
+        %div{:id => dom_id(audit), :style =>'display:none; padding: 5px'}
+          %table.standard
+            / - humanize_audit(audit).each do |change|
+            /   %tr
+            /     %td= change[0]
+            /     %td= change[1]

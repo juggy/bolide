@@ -1,0 +1,116 @@
+.page_header
+  %h1
+    - if current_user.has_permission?("create_and_update_equipments")
+      %span
+        = link_to 'modifier', edit_object_url, :class => 'action'
+    Fiche Équipement
+  = link_to 'retour', collection_url
+.innercol
+  %table.standard
+    - alt_tr do
+      %th{:style => "width:140px"} No:
+      %td=h @equipment.no
+
+    - alt_tr do
+      %th Description:
+      %td=h @equipment.description
+
+    - alt_tr do
+      %th Marque:
+      %td=h @equipment.brand
+      %th Fournisseur:
+      %td=h @equipment.supplier
+    - alt_tr do
+      %th Modèle:
+      %td=h @equipment.model
+      %th Date d'achat:
+      %td=h @equipment.purchased_on
+    - alt_tr do
+      %th No série:
+      %td=h @equipment.serial_no
+      %th Coût:
+      %td= number_to_currency @equipment.cost
+    - alt_tr do
+      %th No immatriculation:
+      %td=h @equipment.license_plate
+      %th Poids:
+      %td= "#{@equipment.weight} kg"
+  
+    - alt_tr do
+      %th Entretien annuel:
+      %td{:style => "#{"background-color: orange" if @equipment.due_for_annual_maintenance?}"}= @equipment.next_annual_maintenance
+      %th Entretien 8000 km:
+      %td{:style => "#{"background-color: orange" if @equipment.due_for_km_maintenance?}"}= "#{@equipment.next_km_maintenance} km"
+    - alt_tr do
+      %th Propriétaire:
+      %td= @equipment.tc_company
+      %th Kilometrage:
+      %td= "#{@equipment.kilometrage} km"
+    - alt_tr do
+      = ""
+  
+  - if current_user.has_permission?("create_and_update_equipments")
+    #equipment_location{:style => 'background-color: lightyellow;padding:5px'}
+      .header
+        %h1== Location: #{@equipment.current_location} depuis le #{@equipment.last_borrowed_date.to_s(:short)} ('#{@equipment.status_name}')
+        /= link_to_function 'modifier', '$("borrow_form").toggle();'
+      #borrow_form
+        .body{:style => "padding: 5px; margin-top: 5px;"}
+          - form_for(@equipment) do |f|
+            %p
+              %label{:for=>"equipment_borrower_id"} Prêté à:
+              /= f.select :borrower_id, User.to_select_options
+              = select_tag 'equipment[borrower_id]', grouped_user_options(@equipment.borrower_id, {:all_label => Equipment::DEFAULT_LOCATION, :group1 => "Chef d'équipe"}) {|user| user.has_role?("chef d'équipe")}, :id => 'equipment_borrower_id'
+              %label{:for=>"equipment_borrowed_date"} Date:
+              = std_calendar_field :equipment, :borrowed_date
+              %label{:for=>"equipment_status_id"} Status:
+              = f.select :status_id, select_options_from_table(EquipmentStatus, :all_label => Equipment::DEFAULT_STATUS)
+            %p
+              %label{:for=>"equipment_borrowed_note", :style => "vertical-align:top;"} Note: &nbsp; &nbsp;
+              = f.text_area :borrowed_note, :size => '40x2'
+              %br
+              = f.label :kilometrage, "km:"
+              &nbsp; &nbsp; &nbsp;
+              = f.text_field :kilometrage, :size => 7
+            %p
+              - if @equipment.last_annual_maintenance
+                = f.check_box :annual_maintenance
+                = f.label :annual_maintenance, "Effectuer entretien annuel"
+                %br
+              = f.check_box :km_maintenance
+              = f.label :km_maintenance, "Effectuer entretien 8000 km"
+            
+            = submit_tag 'Sauver'
+  
+  #equipment_audits
+    .header
+      %h1 Historique
+    .body
+      %table.standard
+        %tr
+          %th Date
+          %th &nbsp
+          %th Statut
+          %th Location
+          %th Note
+          %th
+        - for audit in @equipment.audits
+          %tr{:class => cycle('odd','even')}
+            %td= audit.borrowed_date
+            %td.right= "#{audit.kilometrage} km"
+            %td= show_only_on_change audit.status_name
+            %td= audit.location
+            %td
+              - if audit.annual_maintenance?
+                %strong Maintenance annuelle
+                %br
+              - if audit.km_maintenance?
+                %strong Maintenance 8000km
+                %br
+              = simple_format audit.borrowed_note
+            %td= audit.user_name
+        
+- content_for :sidebar do
+  / .new
+  /   = link_to 'Supprimer', object_url(@equipment), :confirm => 'Etes-vous sur?', :method => :delete, :class => 'new'
+  

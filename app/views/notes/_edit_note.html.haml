@@ -1,0 +1,9 @@
+#note_form_wrapper.form_wrapper
+  .body
+    - remote_ui_form_for(@note, :html => {:id => 'edit_note_form'} ) do |f|
+      - group "Mettre à jour la note" do
+        = render :partial => "/notes/form", :locals => {:f => f} 
+        = button "Mettre à jour"
+        %span
+          ou
+          = link_to_function "annuler", update_page{|page| page.replace_html(dom_id(@note, "description_cell"), "") }

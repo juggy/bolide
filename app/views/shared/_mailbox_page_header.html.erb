@@ -1,0 +1,23 @@
+<div class='page_header'>
+  <% if user_select %>
+    <% if current_user.has_permission?('show_other_user_emails') %>
+      <div style='float:right'>
+        <% form_tag do %>
+          <%= hidden_field_tag :_method, :get %>
+          <%= _("Voir boîte de") %>: <%= select_tag :email_user_id, options_for_select( User.active.can_see_their_emails(current_user).map {|u| [u.full_name, u.id]}, email_user.id), :onchange => 'this.form.submit();' %>
+        <% end %>
+      </div>
+    <% end %>
+  <% end %>
+  
+  <h1>
+    <%= _("Centre de messages") %>
+    <% if current_user != email_user %>
+      <span><%= link_to _("retourner à ma boîte"), inbox_url(:email_user_id => current_user.id) %></span>
+    <% end -%>
+  </h1>
+  
+</div>
+<div class="page_menu">
+  <%= tabnav :message %>
+</div>

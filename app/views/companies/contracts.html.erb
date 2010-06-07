@@ -1,0 +1,20 @@
+<%= party_page_header @company %>
+
+<div class='innercol'>
+  <% for contract in @contracts %>
+    <div class='contract'>
+      <h1><%= link_to _("modifier"), edit_contract_url(contract), :class => 'action' %> <%= contract.name %></h1>
+
+      <% for building in contract.buildings %>
+          <%= render :partial => 'parties/project_list', :locals => {:title => link_to( building.display_name, building), :projects => building.projects.service} %>
+      <% end -%>
+
+    </div>
+  <% end -%>
+</div>
+
+<% content_for :sidebar do %>
+  <div class='new'>
+    <%= link_to _("Nouvelle entente"), new_contract_url(:client_id => @company.id), :class => 'new' %>
+  </div>
+<% end -%>

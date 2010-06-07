@@ -1,0 +1,17 @@
+<div class='page_header'>
+  <h1><%=_("Nouvelle compagnie") %></h1>
+</div>
+
+<div class='innercol'>
+
+  <%= error_messages @company %>
+
+  <% form_for(:company, :url => companies_path, :html => { :onsubmit => "clearBlanks();return true;"}) do |f| %>
+  
+    <%= render :partial => 'form', :locals => {:f => f} %>
+    
+    <%= form_submit %>
+    
+  <% end %>
+  
+</div>

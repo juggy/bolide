@@ -1,0 +1,60 @@
+<div class='page_header'>
+  <h1><%= _("Relation") %> <%= @party.name %></h1>
+</div>
+
+<div class='innercol'>
+<%#= error_messages_for :relation %>
+
+<% form_for(:relation, :url => party_relation_path(@party, @relation.first), :html => { :method => :put }) do |f| %>
+  <table cellpadding="5" class="relations">
+    <tr>
+
+      <td><%= @party.name %> est</td>
+
+      <td width="20"></td>
+      
+      <th></th>
+      <td width="20"></td>
+      <td><%= @party.name %></td>
+      
+
+    </tr>
+    <tr>
+
+      <td><%= text_field_tag "relation[first_description]", @relation.first.description, {:size => 15, :id => 'relation_description'} %></td>
+      <td width="20">=></td>
+      <td><%= @relation.first.third_party.name %></td>
+      <td width="20">=></td>
+      <td><%= text_field_tag "relation[second_description]",  @relation.second.description, {:size => 15, :id => "relation_description_2"} %> </td>
+
+    </tr>
+    <tr>
+
+      <th>
+        Suggestions:<br />
+        <% Relationship.suggestions(@party,:first_party).each do |sugg| %>
+          <%= link_to_function sugg, "$('relation_description').value='#{sugg}';" %><br />
+        <% end %>
+        (cliquez pour choisir)
+      </th>
+      <td width="20"></td>
+      <th>&nbsp;</th>
+      <td width="20"></td>
+      
+      <th>Suggestions:<br />
+        <% Relationship.suggestions(@party,:third_party).each do |sugg| %>
+          <%= link_to_function sugg, "$('relation_description_2').value='#{sugg}';" %><br />
+        <% end %>
+      </th>
+
+  
+    </tr>
+  </table>
+  <br />
+  <br />
+  <div><%= _("Relation principale?") %>
+    <%= check_box_tag "relation[principal]", "1", @relation.principal?  %>
+  </div>
+  <%= button_form_submit %>
+<% end %>
+</div>

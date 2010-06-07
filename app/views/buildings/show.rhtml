@@ -1,0 +1,51 @@
+<%= party_page_header @building %>
+
+<div class='innercol'>
+    <% unless @building.building_instruction.blank? %>
+      <h2>Instructions</h2>
+      <%= simple_format(@building.full_instructions)%>
+    <% end %>
+    <%= render :partial => '/parties/projects_list', :locals => {:party => @building} %>  
+    <%= render :partial => '/parties/task_list', :locals => {:party => @building} %>
+    <%= render :partial => '/parties/recent_activities', :locals => {:party => @building} %>
+</div>
+
+<% content_for :sidebar do %>
+
+<div class='section'>
+  <%= render :partial => '/tasks/add_task', :locals => {:party => @building } %>
+  <%= render :partial => '/notes/add_note', :locals => {:party => @building } %>
+  <%= render :partial => '/linked_messages/add_message', :locals => {:party => @building} %>
+  <%= render :partial => '/parties/add_file', :locals => {:party => @building } %>
+</div>
+
+<% last_foremen = @building.last_foremen %>
+<% if last_foremen.size > 0 %>
+  <div class='section'>
+    <h1>Derniers travaux</h1>
+    <% last_foremen.each do |foreman| %>
+      <p>
+        <%= link_to foreman["date"], project_work_sheet_path(:project_id => foreman["project_id"], :id => foreman["work_sheet_id"]) %>
+        <strong><%= foreman["user"].full_name %></strong> 
+      </p>
+    <% end -%>
+  </div>
+<% end -%>
+
+<div class='section'>
+  <h1>Entente</h1>
+  <p>Ref. icc: <%= @building.icc_ref %></p>
+  <% if @building.contract %>
+    <p style="margin: 10px 0;">
+    <%= display_party_contract(@building) %> <%= link_to @building.contract.short_name, @building.contract  %>
+    </p>
+  <% else %>
+    <p>Aucune entente associée</p>
+  <% end -%>
+</div>
+<div class='section'>
+  <h1><%= _("Adresse") %></h1>
+  <%= display_address @building.address %>
+</div>
+  <%= render :partial => '/parties/relationships', :locals => {:party => @building, :relationships => @building.relationships.principal} %>
+<% end %>

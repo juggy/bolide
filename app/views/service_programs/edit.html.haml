@@ -1,0 +1,44 @@
+%style
+  :sass
+    .section.no-line table.standard tr 
+      td
+        :border none
+      th
+        :border none
+        
+#edit_service_program
+  - work_sheet = @work_sheet
+  %h1= "#{@work_sheet.id} - #{@work_sheet.display_name}"
+  - form_for @work_sheet, :url => service_program_url(:id => @work_sheet.id), :method => :put do |f|
+    - project_manager_select_options = User.to_select_options({:all_label => _("Choisir un chargé")}, Role.find_by_name("chargé de projet").users.active)
+
+    .section.no-line
+      %div{:style => 'width: 500px'}
+        = render :partial => '/project_schedule/edit_info', :locals => {:f => f, :work_sheet => work_sheet, :project_manager_select_options => project_manager_select_options}
+            
+    .section.no-line
+      %div{:style => 'width: 500px'}
+        = render :partial => '/project_schedule/edit_days', :locals => {:f => f, :work_sheet => work_sheet}
+    
+    .section
+      = render :partial => '/project_schedule/edit_note', :locals => {:f => f, :work_sheet => work_sheet}
+    
+    - if @work_sheet.interventions.size > 0
+      .section
+        %div{:style=>'max-height: 150px; overflow-y: scroll'}
+          = render :partial => 'work_sheets/interventions', :locals => {:interventions => @work_sheet.interventions, :editable => false}
+
+    .section{:style => "border:none"}
+
+      %div{:style => 'float:right; font-size: 11px'}
+        dernière mise-à-jour:
+        = work_sheet.updated_at.to_date.localize
+        %span{:style => 'margin-left: 20px'}
+          = link_to_function "fermer",  "remove_edit_form()", :class => "action"
+        - if current_user.has_permission?("update_schedule")
+          %span{:style => 'margin-left: 20px'}
+            = submit_tag 'sauver', :style => 'margin-top: 5px'
+      %div{:style => "clear:both"}
+  
+  .section
+    = render :partial => '/tasks/add_task', :locals => {:party => work_sheet.project}

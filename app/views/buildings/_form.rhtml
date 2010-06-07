@@ -1,0 +1,48 @@
+<%= error_messages @building %>
+
+  <p><%= _("Nom") %> <br/> <%= f.text_field :name %></p>
+  
+  <%#= f.tag_list("Building") %>
+  <br>
+  
+  <h2><%= _("Entente") %></h2>
+  <% if @building.contract %>
+    <%= display_party_contract(@building) %> <%= link_to @building.contract.short_name, @building.contract  %>
+  <% else %>
+    Aucune entente.
+  <% end -%>
+  <p>#ICC <br/><%= f.text_field :icc_number, :readonly => true %></p>
+  <p>Compagnie facturation:<br/> <%= f.select :tc_company_id, select_options_from_table(TcCompany) %></p>
+  <%#= f.select :contract_type_id, select_options_from_table(ContractType) %>  
+  <br>
+  
+  <% address = @building.address %>
+  <h2><%= _("Adresse") %></h2>
+  <% fields_for "building[address_attributes]", address do |address_form| %>
+  <div style="border-bottom: 0px;" class='address' <%= "id='#{dom_id(address)}'" if !address.new_record? %>>
+    <p>
+      <%= text_area_with_inline_label(address_form, _("Rue"), address.street, :street, {:cols => 29, :rows => 2} ) %></p>
+    <p>
+      <%= text_field_with_inline_label(address_form, _("Ville"), address.city, :city, {} ) %></p>
+    <p>
+      <%= text_field_with_inline_label(address_form, ("Province"), address.state, :state, {:size => 20} ) %>
+      <%= text_field_with_inline_label(address_form, ("Code Postal"), address.zip, :zip, {:size => 8} ) %></p>
+    <p>
+      <%= text_field_with_inline_label(address_form, ("Pays"), address.country, :country, {} ) %></p>
+  </div>
+  <% end %>
+  
+  <p>Type d'immeuble:<br/> <%= f.select :building_type_id, select_options_from_table(BuildingType) %></p>
+  <p>Region:<br/> <%= f.select :region_id, select_options_from_table(Region) %></p>
+  <p>Technologie:<br/> <%= f.select :technology_id, select_options_from_table(Technology) %></p>
+  <p>Hauteur:<br/> <%= f.text_field :height, :size => 10 %> pi.</p>
+  
+  
+  <h2><%= _("Instructions (par défaut sur bon de travail)") %></h2>
+  <div style="border-bottom: 0px;">
+    <p><%= f.text_area :building_instruction , {:cols => 70, :rows => 5} %></p>
+  </div>
+  <h2><%= _("Instructions Internes") %></h2>
+  <div style="border-bottom: 0px;">
+    <p><%= f.text_area :internal_instructions , {:cols => 70, :rows => 5} %></p>
+  </div>

@@ -1,0 +1,20 @@
+%div{:style => "padding: 5px"}
+  = error_messages(@bidder)
+  = f.label :party_name, "Competiteur:"
+  %br
+  = auto_complete_party_id_text_field( :bidder, :company_id, :url => {:collection => "company"}, :size => 40 )
+  %br
+  = f.label :bid, "Prix:"
+  %br
+  = f.text_field :bid, :size => 12
+  $
+  / %br
+  = f.check_box :won
+  = f.label :won, "gagnant"
+  / %div{:style => "padding:5px"}
+  / = f.label :position
+  / %br
+  / = f.text_field :position, :size => 4
+  %br
+  = button_to_function "sauver", js_check_bid_price, :id => 'bid_submit_button'
+  /= submit_tag 'sauver'

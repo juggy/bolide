@@ -1,0 +1,22 @@
+<%= @message %>
+
+Client:<% if @project.client %> <%= @project.client.name %> <%= "(entente: #{@project.client.contract_type.name})" if @project.client.contract_type %> <% end %>
+
+Immeuble:
+<% if @project.building %> <%= @project.building.name %>
+  <%= @project.building.address.to_s %>
+  <%= "(entente: #{@project.building.contract_type.name})" if @project.building.contract_type %>
+<% end %>
+
+Gestionnaire de compte: <%= @project.manager.full_name if @project.manager %>
+Estimateur: <%= @project.estimator.full_name if @project.estimator %>
+
+
+<% if @project.call %>
+Info Demande: <% call = @project.call %>
+
+Contact: <%= call.contact ? call.contact.name : call.contact_name %> <%= call.phone_number %>
+Description: <%= call.description %>
+Source: <%= call.display_source %>
+Type: <%= display_work_type_or_call_type call %>
+<% end %>

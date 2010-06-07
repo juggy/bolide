@@ -1,0 +1,22 @@
+<div class='page_header'>
+  <h1><%= @building.name %></h1>
+</div>
+
+<div class='innercol'>
+<% form_for :building, @building, :url => building_url(@building), :html => {:method => :put, :onsubmit => "clearBlanks(); return true;"} do |f| %>
+  <%= render :partial => 'form', :locals => {:f => f} %>
+  <div class="submit"> 
+    <%= submit_tag _("Sauver"), :disable_with => 'en cours...' %> ou <%= link_to 'annuler', building_path(@building), :class => 'action' %>
+  </div>
+
+<% end %>
+
+</div>
+
+<% content_for :sidebar do %>
+  <% if current_user.has_permission?('destroy_buildings') %>
+    <div class='new'>
+      <%= link_to _("Fusionner cet immeuble"), find_duplicate_building_path(@building), :class => "new" %>
+    </div>
+  <% end %>
+<% end %>

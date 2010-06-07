@@ -1,0 +1,2 @@
+module MaterialCategoriesHelper
+end

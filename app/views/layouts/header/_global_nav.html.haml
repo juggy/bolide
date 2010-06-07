@@ -1,0 +1,47 @@
+#Navigation.Navigation
+  .body
+    %ul{:class=>"home section list-h left"}
+      %li{:class=>"first last"}
+        %a{:href=>dashboard_path}
+          %span{:class=>"link"}
+            %span{:class=>"label T"} H
+    %ul{:class=>"projects section list-h left"}
+      %li{:class=>"first #{"selected" if( calls?)}"}
+        %a{:href=>projects_path(:collection=>"call")}
+          %span{:class=>"link"}
+            %span{:class=>"label T"} DEMANDES
+      %li{:section=>"projects", :class=>"expandable do-showNavigation #{"selected" if( projects?)}"}
+        %span{:class=>"link"}
+          %a{:href=>projects_path}
+            %span{:class=>"label T"} PROJETS
+            %span{:class=>"smaller"} ...
+      %li{:section=>"tickets", :class=>"expandable do-showNavigation #{"selected" if( work_sheets?)}"}
+        %span{:class=>"link"}
+          %a{:href=>work_sheets_path}
+            %span{:class=>"label T"} BONS DE TRAVAIL
+            %span{:class=>"smaller"} ...
+      -if current_user.has_permission?('show_schedule') || current_user.has_permission?('update_schedule')
+        %li{:section=>"schedule", :class=>"expandable do-showNavigation last #{"selected" if( schedules?)}"}
+          %span{:class=>"link"}
+            %a{:href=>daily_schedules_path}
+              %span{:class=>"label T"} CÉDULES
+              %span{:class=>"smaller"} ...
+    %ul{:class=>"inventory section list-h left"}
+      %li{:class=>"first #{"selected" if( buildings?)}"}
+        %a{:href=>buildings_path}
+          %span{:class=>"link"}
+            %span{:class=>"label T"} IMMEUBLES
+      %li{:class=>"#{"selected" if( companies?)}"}
+        %a{:href=>companies_path}
+          %span{:class=>"link"}
+            %span{:class=>"label T"} COMPAGNIES
+      %li{:class=>"#{"selected" if( contacts?)}"}
+        %a{:href=>contacts_path}
+          %span{:class=>"link"}
+            %span{:class=>"label T"} CONTACTS
+      %li{:class=>"last #{"selected" if( equipments?)}"}
+        %a{:href=>equipments_path}
+          %span{:class=>"link"}
+            %span{:class=>"label T"} ÉQUIPEMENTS
+    .clearer &nbsp;
+  

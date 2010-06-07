@@ -1,0 +1,7 @@
+- if current_user.has_permission?("modify_alert")
+  
+  %h2 Alerte
+  .info L'alerte apparaît en haut de l'écran dans la fiche et dans les projets de ce client.
+  = link_to_function 'ajouter', "$('alert_form').show()" if party.alert.blank?
+  #alert_form{ :style => ('display:none' if party.alert.blank?)}
+    = f.text_area :alert, :size => '70x5'

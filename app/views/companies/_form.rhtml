@@ -1,0 +1,32 @@
+  <p>
+    <b>Nom</b><br />
+    <%= f.text_field :name %>
+  </p>
+  
+  <%= f.tag_list("Company") %>
+  
+  <!-- <p><%= _("Entente") %> <br/> 
+    <%#= f.select :contract_type_id, select_options_from_table(ContractType) %>
+  </p> -->
+  
+  <p>
+    Gestionnaire de compte:<br />
+    <%= f.select :manager_id, User.to_select_options({:all_label => _("Choisir un gestionnaire")}, Role.users_with_role('gestionnaire de compte')) %>
+  </p>
+  
+  <p>
+    No ICC:<br/>
+    <%= f.text_field :icc_number %>
+    <!-- <span class='info'>(pour importation)</span> -->
+  </p>
+    
+  <%= render :partial => '/parties/addresses_form', :locals => {:party => @company} %>
+  <%= render :partial => '/parties/contact_data_form', :locals => {:party => @company} %>
+
+  <h2><%= _("Instructions Internes") %></h2>
+  <div style="border-bottom: 0px;">
+    <p><%= f.text_area :internal_instructions , {:cols => 70, :rows => 5} %></p>
+  </div>
+  
+  <%= render :partial => '/parties/alert_form', :locals => {:f => f, :party => @company} %>
+

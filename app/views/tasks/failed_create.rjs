@@ -1,0 +1,3 @@
+page[:task_body].focus
+page.visual_effect 'highlight', :task_body
+page[:task_submit_button].enable

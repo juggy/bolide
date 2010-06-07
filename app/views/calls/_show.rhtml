@@ -1,0 +1,48 @@
+<table class='standard'>
+  <tr class='<%= cycle("odd","even") %>'>
+    <td width="150">Contact:</td>
+    <td><% if call.contact %>
+      <%= link_to call.contact.name, call.contact  %>
+    <% else %>
+      <%= call.contact_name %>
+    <% end %><br /> <%= call.phone_number %></td>
+  </tr>
+  <tr class='<%= cycle("odd","even") %>'>
+    <td>Compagnie:</td>
+    <td><% if call.client %>
+      <%= link_to call.client.name, call.client %>
+    <% else %>
+      <%= call.company_name %>
+    <% end %></td>
+  </tr>
+  <tr class='<%= cycle("odd","even") %>'>
+    <td>Adresse:</td>
+    <td><% if call.building %>
+      <%= link_to call.building.name, call.building %>
+      <%= display_address(call.building.address) %>
+    <% else %>
+      <%= call.address %>
+    <% end %></td>
+  </tr>
+  <tr class='<%= cycle("odd","even") %>'>
+    <td>Contact(s) sur site:</td>
+    <td><%= simple_format call.contact_on_site %></td>
+  </tr>
+  <tr class='<%= cycle("odd","even") %>'>
+    <td>Description:</td>
+    <td><%= simple_format call.description %></td>
+  </tr>
+  <tr class='<%= cycle("odd","even") %>'>
+    <td>Source:</td>
+    <td><%= call.display_source %></td>
+  </tr>
+  <tr class='<%= cycle("odd","even") %>'>
+    <td>Type:</td>
+    <td><%= display_work_type_or_call_type call %></td>
+  </tr>
+  <tr class='<%= cycle("odd","even") %>'>
+    <td>Référé par:</td>
+    <td><%= call.call_reference %> <%= call.reference %></td>
+  </tr>
+    
+</table>

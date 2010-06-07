@@ -1,0 +1,35 @@
+.page_header
+  %h1 
+    Absences
+    - if !params["min_start_date"].blank? || !params["max_start_date"].blank?
+      = "entre le #{params["min_start_date"]} et le #{params["max_start_date"]}"
+
+.innercol
+  .report_filter{:style => 'margin-bottom: 20px'}
+    - form_tag do
+      = hidden_field_tag :_method, :get
+      entre
+      = calendar_date_select_tag "min_start_date", params["min_start_date"], :size => 10
+      et le 
+      = calendar_date_select_tag "max_start_date", params["max_start_date"], :size => 10
+      = submit_tag 'afficher'
+      %br
+      
+  .absences
+    - @reasons = AbsenceType.all
+    - @employees_id = {}
+    - @grand_total = Hash.new(0)
+    - @absences = Absence.all(:conditions => ["start_date >= ? and start_date <= ?", params[:min_start_date], params[:max_start_date] ])
+    - @absences_grouped_by_contact = @absences.group_by(&:employee_id)
+    
+    - Team.all.each do |team|
+      = render :partial => 'absence_group_table', :locals => {:title => "Équipe: #{team.leader.full_name}", :members => team.all_members}
+    
+    = render :partial => 'absence_group_table', :locals => {:title => "Sans Équipe", :members => User.active.all(:conditions => "team_leader_id is null", :include => :contact).reject {|u| u.contact.nil? || !u.contact.is_employee? || !current_user.has_hr_permission?(u) } }
+    
+    = render :partial => 'absence_group_table', :locals => {:title => "Anciens Employés", :members => User.all(:conditions => "deleted = 1", :include => :contact).reject {|u| u.contact.nil? || !current_user.has_hr_permission?(u) || @absences_grouped_by_contact[u.contact.id].nil?} }
+    
+    %h1 Grand total
+    %table.standard
+      = render :partial => 'absence_header_row'
+      = render :partial => 'absence_total_row', :locals => {:total => @grand_total}

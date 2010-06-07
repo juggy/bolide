@@ -1,0 +1,34 @@
+- team_total = Hash.new(0)
+%h3{:style => 'margin-bottom: 8px'}= title
+%table.standard
+  = render :partial => 'absence_header_row'
+  
+  - members.each do |member|
+    - if @employees_id[member.id].nil?
+      - @employees_id[member.id] = true
+      - contact = member.contact
+      - next if !contact
+      - alt_tr do
+        %td
+          = link_to member.full_name, hr_contact_path( :id => contact.id, :anchor => 'absences')
+        - absences = @absences_grouped_by_contact[contact.id] || []
+        
+        - gr_absences = absences.group_by(&:reason_id)
+        - @reasons.each do |reason|
+          - absence = gr_absences[reason.id]
+          - nb = absence ? absence.sum {|ab| ab.days} : 0
+          - team_total[reason] += nb
+          %td.right= nb
+      
+        - nb_justified = absences.reject(&:justified).sum(&:days)
+        - team_total[:justified] += nb_justified
+        - total = absences.sum(&:days)
+        - team_total[:total] += total
+        %td.right{:style => 'border-left: 1px solid #999'}= nb_justified
+        %td.right{:style => 'border-left: 2px solid #999; font-weight: bold;'}= total
+        
+      
+  = render :partial => 'absence_total_row', :locals => {:total => team_total}
+
+- team_total.each {|k,v| @grand_total[k] += v}
+%div{:style => 'margin-bottom: 24px'}

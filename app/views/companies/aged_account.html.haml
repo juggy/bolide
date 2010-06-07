@@ -1,0 +1,24 @@
+= party_page_header @company
+
+.innercol
+  
+  %h1 Comptes Agés
+  %table.standard
+    %tr.odd
+      %td{:style => 'width:150px;'} Montant total dû
+      %td= number_to_currency @aged_account.total_due
+    %tr.even
+      %td Montant de la retenue
+      %td= number_to_currency @aged_account.countercharge
+    %tr.odd
+      %td 30 jours
+      %td= number_to_currency @aged_account.due_30_to_60
+    %tr.even
+      %td 60 jours
+      %td= number_to_currency @aged_account.due_60_to_90
+    %tr.odd
+      %td 90 jours
+      %td= number_to_currency @aged_account.due_90_to_120
+    %tr.even
+      %td 120 jours et +
+      %td= number_to_currency @aged_account.due_over_120

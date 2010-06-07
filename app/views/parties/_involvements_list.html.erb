@@ -1,0 +1,41 @@
+  <% if @party.involvements.size > 0 %>
+    <h1>Projets impliqués</h1>
+  
+    <table class='standard'>
+      <tr>
+        <th style='width:100px;'>Statut</th>
+        <th style='width:100px;'>Date Entrée</th>
+        <th>Role</th>
+        <th>Projet</th>
+      </tr>
+    
+      <% previous_state_name = nil %>
+      <% involvements = @party.involvements.find(:all, :include => [:project]) %>
+      <% involvements_map = involvements.inject({}) {|h,i| h[i.project] = i ;h} %>
+      <% projects = involvements.collect(&:project) %>
+      <% projects = projects.sort_by {|p| p.list_sort_id } %>
+      <% for project in projects %>
+        <% involvement = involvements_map[project] %>
+        <!-- <p><%= link_to involvement.project.display_name, involvement.project %>: <%= involvement.role %></p> -->
+      
+        <tr class='<%= cycle("odd","even") %>'>
+          <% if previous_state_name != project.state_name %>
+            <td style='border-bottom-width:0px;'>
+              <span style='font-weight:bold;'><%= project.state_name %></span>
+              <% previous_state_name = project.state_name %>
+            </td>
+          <% else %>
+            <td style='border-width:0px;'>&nbsp;</td>
+          <% end -%>
+          <td><%= project.created_at.to_date.localize %></td>
+          <td><%= involvement.role %></td>
+          <td>
+            <span style='text-decoration:underline;'><%= project.contract_number %></span> 
+            <%= link_to project.display_name, project_path(project) %>
+          </td>
+
+        </tr>
+      
+      <% end %>
+    </table>
+  <% end %>

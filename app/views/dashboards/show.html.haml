@@ -1,0 +1,85 @@
+/ - content_for :additional_headers do
+/   = stylesheet_link_tag 'quote_calendar', :media => :all
+
+%style
+  :sass
+    .quote_calendar
+      li
+        :margin-bottom 4px
+    .in_production
+      li
+        :margin-bottom 4px
+    tbody#dashboard_recent_activities
+      tr td
+        :vertical-align middle
+        :color black !important
+    .project
+      &.quoted
+        :text-decoration line-through
+      .bsdq
+        :text-decoration underline
+      .estimator
+        :font-weight bold
+    .header
+      h1
+        :margin-bottom 10px
+        
+      a
+        :float right
+    .day
+      :margin-bottom 15px
+    / .quote_calendar .project
+    /   :max-height 60px
+    /   :overflow hidden
+    
+.page_header
+  %h1 
+    Tableau de bord
+
+.innercol
+  - @in_dashboard = true
+  %div{:style => "width: 48%; float: left; margin-right: 15px"}
+    - if @dashboard.show_quote_calendar?
+      .quote_calendar
+        .header
+          = link_to "aller au calendrier &raquo;", quote_calendar_url
+          %h1
+            Soumissions de la semaine
+        .body
+          /= render :partial => 'quote_calendar/calendar', :locals => {:calendar => @calendar, :small => true}
+          = render :partial => 'quote_calendar', :locals => {:calendar => @dashboard.calendar}
+    
+    - if @dashboard.show_in_production?
+      .in_production
+        .header
+          %h1 Projets en cours
+        .body
+          %ul
+            - @dashboard.work_sheets.each do |ws|
+              %li
+                .date= ws.scheduled_date.localize(:short_day)
+                = link_to "[#{ws.contract_number}]", [ws.project, ws]
+                = ws.display_name
+                %div
+                  %span{:style => "text-decoration: underline"}= ws.foreman.short_name
+                  = "#{ws.done_days} / #{ws.real_days} jours"
+                  / %strong= number_to_percentage (ws.done_days/ws.real_days * 100, :precision => 0)
+              
+  - if @dashboard.show_tasks?
+    .task{:style => "width: #{@dashboard.tasks_only? ? 100 : 48 }%; float: left;"}
+      .header
+        = link_to "voir toutes les tâches &raquo;", tasks_url
+        %h1 Tâche de la semaine
+      .body
+        #task_list_wrapper
+          = render :partial => 'tasks/list'
+  
+  - if @dashboard.show_activities?
+    .activities{:style => 'clear:both;'}
+      .header
+        %h1 Activités sur mes projets
+      .body
+        %table.standard
+          %tbody#dashboard_recent_activities
+            - @include_project = true
+            = render :partial => 'parties/activities_list', :locals => {:activities => @dashboard.activities }

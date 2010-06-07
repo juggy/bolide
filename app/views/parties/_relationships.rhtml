@@ -1,0 +1,12 @@
+<div class='section'>
+
+<h1><%= _("Relations Principales") %></h1>
+
+<% relationships.each do |r| %>
+<div class='relationship <%= dom_class(r.third_party) %>'>
+  <%= r.description %><br />
+  <%= link_to r.third_party.name, r.third_party %> <%= "(#{r.third_party.title})" if (r.tag && r.third_party.is_a?(Contact) && !r.third_party.title.blank?) %>
+</div>
+<% end %>
+
+</div>

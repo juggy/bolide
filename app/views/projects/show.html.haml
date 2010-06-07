@@ -1,0 +1,43 @@
+.ProjectDetail
+  = render :partial=> "/projects/page_header"
+  .body 
+    - if @project.duplicate?
+      .warning
+        %h3 Ce projet est un doublon!
+        - form_tag not_duplicate_project_url(@project) do
+          Voir projet:
+          = link_to @project.duplicate.display_name, @project.duplicate
+          = hidden_field_tag :id, :value =>@project.id
+          = submit_tag "Ce n'est pas un doublon!"
+    - else
+      - if @project.category == :call
+        = render :partial => '/projects/show_call' 
+      
+      - if @project.category == :quote_in_progress || params[:view] == 'quote' || @project.category == :prospect
+        = render :partial => '/projects/show_quote'
+
+      - if @project.category == :closed
+        Projet terminé le #{@project.work_end_date.to_date.localize(:long) rescue ""}
+        = render :partial => '/projects/show_warranty_infos'
+    
+    = render :partial => '/parties/task_list', :locals => {:party => @project}
+    = render :partial => '/parties/recent_activities', :locals => {:party => @project}
+  
+- content_for :sidebar do
+  - unless @project.duplicate?
+    - sidebar_group do
+      - sidebar_row do
+        = render :partial => '/tasks/add_task', :locals => {:party => @project}
+      - sidebar_row do 
+        = render :partial => '/notes/add_note', :locals => {:party => @project}
+      - sidebar_row do
+        = render :partial => '/linked_messages/add_message', :locals => {:party => @project}
+      - sidebar_row do
+        = button "Attacher un fichier", new_file_attachment_path(:project_id => @project.id), :type=>:create, :size=>:big, :icon=>"/images/design/icon-file.png"
+      - if Account.current_account.tc?  
+        - sidebar_row do 
+          = button "Message & Info", call_path(@project, :format => :pdf)
+        - sidebar_row do 
+          = button "Suivi de contrat (FO-033)", {:controller => "projects", :action => "project_followup" ,:id => @project, :format => :pdf }
+        - sidebar_row do 
+          = button "R.E.C.Q.", {:controller => "projects", :action => "recq" ,:id => @project, :format => :pdf }

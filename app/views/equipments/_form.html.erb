@@ -1,0 +1,59 @@
+<p>
+  <label for="equipment_no">No:</label><br/>
+  <%= f.text_field :no %>
+</p>
+<p>
+  <label for="equipment_description">Description:</label><br/>
+  <%= f.text_field :description %>
+</p>
+<p>
+  <label for="equipment_brand">Marque:</label><br/>
+  <%= f.text_field :brand %>
+</p>
+<p>
+  <label for="equipment_model">Modèle:</label><br/>
+  <%= f.text_field :model %>
+</p>
+<p>
+  <label for="equipment_serial_no">No série:</label><br/>
+  <%= f.text_field :serial_no %>
+</p>
+
+<p>
+  <%= f.label :license_plate, "No immatriculation" %><br/>
+  <%= f.text_field :license_plate %>
+</p>
+<p>
+  <%= f.label :weight, "Poids (kg)" %><br/>
+  <%= f.text_field :weight, :size => 10 %>
+</p>
+
+<p>
+  <label for="equipment_supplier">Fournisseur:</label><br/>
+  <%= f.text_field :supplier %>
+</p>
+<p>
+  <label for="equipment_purchased_on">Date d'achat:</label><br/>
+  <%= f.calendar_date_select :purchased_on %>
+</p>
+<p>
+  <label for="equipment_cost">Montant:</label><br/>
+  <%= f.text_field :cost, :size => 10 %>$
+</p>
+<p>
+  <label for='equipment_last_annual_maintenance'>Dernière maintenance annuelle</label><br/>
+  <%= f.calendar_date_select :last_annual_maintenance %>
+</p>
+<p>
+  <label for='equipment_kilometrage'>kilometrage</label><br/>
+  <%= f.text_field :kilometrage %> km
+</p>
+<p>
+  <label for='equipment_last_km_maintenance'>Dernier entretien (km)</label><br/>
+  <%= f.text_field :last_km_maintenance %>
+</p>
+<p>
+  <label for='equipment_tc_company_id'>Compagnie propriétaire</label><br/>
+  <%= f.select :tc_company_id, select_options_from_table(TcCompany) %> 
+</p>
+

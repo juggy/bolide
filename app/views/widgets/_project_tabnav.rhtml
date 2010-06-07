@@ -1,0 +1,49 @@
+<%  
+render_tabnav :project, :html => {:class => 'page_tabnav'} do 
+    
+  # this generates a tab for every controller in your app
+  # you'll probably want to delete this and
+  # add tabs one by one as shown below
+
+  add_tab do |t|
+    t.named _("Vue principale")
+    t.links_to hash_for_project_path(:id => @project.id, :view => nil)
+    #t.highlights_on lambda { params[:view].blank? }
+  end
+  
+  add_tab do |t|
+    t.named _("Intervenants")
+    t.links_to hash_for_project_involvements_path(:project_id => @project.id)
+  end
+  
+  add_tab do |t|
+    t.named _("Bons de travail")
+    t.links_to hash_for_project_work_sheets_path(:project_id => @project.id)
+    t.highlights_on lambda { ['work_sheets', 'interventions'].include?(params[:controller]) }
+  end
+  
+  # if current_user.has_permission?('access_accounting_infos')
+    if @project.contract_summary
+      add_tab do |t|
+        t.named _("Comptabilité")
+        t.links_to hash_for_project_contract_summaries_path(:project_id => @project.id)
+        t.highlights_on lambda { !@contract_summary.nil? || !@accounting_items.nil? }
+      end
+    end
+  # end
+  
+  if @project.call
+    add_tab do |t|
+      t.named _("Info")
+      t.links_to hash_for_project_calls_url(:project_id => @project.id)
+    end
+  end
+  
+  add_tab do |t|
+    t.named _("Historique")
+    t.links_to hash_for_history_project_url(:id => @project.id)
+  end
+
+end
+
+%>

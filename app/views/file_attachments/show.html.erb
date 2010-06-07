@@ -1,0 +1,30 @@
+<div class='page_header'>
+  <h1>Fichier</h1>
+  <p><%= link_to _("Retour"), :back %></p>
+</div>
+<div class='innercol'>
+  <table>
+    <tr>
+      <td>Fichier:</td> 
+      <td><%= link_to( @file_attachment.attachment.filename, @file_attachment.attachment.public_filename, :popup => true) if @file_attachment.attachment && @file_attachment.attachment.filename %></td>
+    </tr>
+    <tr>
+      <td>Date:</td> 
+      <td><%= @file_attachment.updated_at.localize(:short) %></td>
+    </tr>
+    <tr>
+      <td>Catégorie:</td>
+      <td><%= content_tag('span', @file_attachment.category.name, :class => 'category') if @file_attachment.category %></td>
+    </tr>
+    <tr>
+      <td>Ajouté par:</td>
+      <td><%= highlight_current_user( @file_attachment.user ) %></td>
+    </tr>
+    <tr>
+      <td>Description:</td>
+      <td><%= simple_format @file_attachment.body %></td>
+    </tr>
+  </table>
+  <br />
+  <%= link_to _("Supprimer"), file_attachment_url(@file_attachment), :method => :delete, :class => 'action' %>
+</div>

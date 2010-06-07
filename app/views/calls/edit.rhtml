@@ -1,0 +1,27 @@
+<h1>Editing call</h1>
+
+<%= error_messages_for :call %>
+
+<% form_for(:call, :url => call_path(@call), :html => { :method => :put }) do |f| %>
+  <p>
+    <b>Phone number</b><br />
+    <%= f.text_field :phone_number %>
+  </p>
+
+  <p>
+    <b>Party</b><br />
+    <%= f.text_field :party_id %>
+  </p>
+
+  <p>
+    <b>Description</b><br />
+    <%= f.text_area :description %>
+  </p>
+
+  <p>
+    <%= submit_tag "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', call_path(@call) %> |
+<%= link_to 'Back', calls_path %>

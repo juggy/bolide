@@ -1,0 +1,13 @@
+<%= party_page_header @party %>
+
+<div class='innercol'>
+  
+  <%= render :partial => 'list', :locals => {:relations => @party.relationships.principal, :title => _("Relations principales") } %>
+  <%= render :partial => 'list', :locals => {:relations => @party.relationships.secondary, :title => _("Relations secondaires") } %>
+  <%= render :partial => 'list', :locals => {:relations => @party.relationships.inactive,  :title => _("Anciennes relations") } %>
+  
+</div>
+
+<% content_for :sidebar do %>
+  <div class='new'><%= link_to _('Nouvelle relation'), new_party_relation_path(@party), :class => 'new' %></div>
+<% end %>

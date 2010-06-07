@@ -1,0 +1,56 @@
+<%= mailbox_page_header(:user_select => true) %>
+
+<div class='innercol'>
+  
+  <%= render :partial => 'filter' %>
+  
+  <% message_list(@messages) do %>
+  
+    <% form_tag trash_url, :method => :delete do  %>
+      <table id="inbox_messages" class="message_rows">
+ 
+        <tr class='message_header'>
+          <td class="checkbox_toggle" align="left" colspan="5" style='width:100%;'>
+            <% if current_user.has_permission?('destroy_messages') %>
+              <% check_all_delete( :delete_label => "Supprimer" ) {} %>
+            <% end -%>
+          </td>
+        </tr>
+        
+      <% for message in @messages %>
+        <tr <%= sent_status(message) %>>
+          <td class="checkbox_toggle">
+            <% if current_user.has_permission?('destroy_messages') %>
+              <%= check_box_tag "ids[#{message.id}]" %>
+            <% end -%>
+          </td>
+          <td class="name">
+            <% if message.draft?  %>
+              <strong><%= "Brouillon" %></strong><br/>
+            <% end -%>
+              À: <%= display_recipient_list(message.message_recipients.kind_to) %>
+          </td>
+          <td class="subject">
+            <%= subject_wrap message %>
+          </td>
+          <td width=30>
+            <%= message_icons message %>
+          </td>
+          <td class="date" width=20>
+            <%= shortest_date( message.created_at ) %>
+          </td>
+        </tr>
+      <% end %>
+      
+      </table>
+    <% end %>
+
+  <%end%>
+
+</div>
+
+<% content_for :sidebar do %>
+  <div class='new'>
+      <%= link_to _("Nouveau message"), new_message_url, :class => :new %>
+  </div>
+<% end %>

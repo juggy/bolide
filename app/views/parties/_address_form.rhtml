@@ -1,0 +1,22 @@
+  <% fields_for( "#{party_type}[addresses_attrs][]", address, {}) do |address_form| %>
+  <div class='address' <%= "id='#{dom_id(address)}'" if !address.new_record? %>>
+    <p>
+      <%= text_field_with_inline_label(address_form, _("Description (ex: siege social)"), address.location, :location, {:index => ""} ) %>
+      <% if address.new_record? %>
+        <%= link_to_function image_tag("remove.png", :border => 0), "$(this).up('.address').remove()" %>
+      <% else %>
+        <%= address_form.hidden_field( :id, :index => "", :id => "#{dom_id(address)}_id" )  %>
+        <%= link_to_remote image_tag("remove.png", :border => 0), :url => address_url(address), :method => :delete, :confirm => _("Êtes-vous sûrs?") %>
+      <% end %>
+      </p>
+    <p>
+      <%= text_area_with_inline_label(address_form, _("Rue"), address.street, :street, {:cols => 29, :rows => 2, :index => ""} ) %></p>
+    <p>
+      <%= text_field_with_inline_label(address_form, _("Ville"), address.city, :city, {:index => ""} ) %></p>
+    <p>
+      <%= text_field_with_inline_label(address_form, ("Province"), address.state, :state, {:index => "", :size => 20} ) %>
+      <%= text_field_with_inline_label(address_form, ("Code Postal"), address.zip, :zip, {:index => "", :size => 8} ) %></p>
+    <p>
+      <%= text_field_with_inline_label(address_form, ("Pays"), address.country, :country, {:index => ""} ) %></p>
+  </div>
+  <% end %>

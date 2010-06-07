@@ -1,0 +1,27 @@
+%tr{:id=>dom_id(item)}
+  %td{:class=>"tag"}
+    = check_box_tag "", "", false, :data_update => dom_id(item,'edit'), :data_url => complete_form_task_url( item ),:id => dom_id(item,'complete_check'), :class=>"task_complete_check"
+    - if item.category
+      .category.right= item.category.name
+  %td{:class=>"description"}
+    = item.body
+    - if @context != "Party" && item.party 
+      (Re:
+      = link_to item.party.name, url_for(item.party)
+      )
+    - if @context != "Project" && item.project
+      .project
+        %span{:class=>"title"} Projet:
+        = link_to item.project.display_name, project_url(item.project)
+      - if item.project.estimator && !@in_dashboard
+        %span{:class=>'estimator'}= item.project.estimator
+    %div{:id=>dom_id(item,'edit')}
+  %td{:class=>"person"}
+    - if !@in_dashboard
+      %span{:class=>"highlight"}= highlight_current_user( item.user, item.private? )
+  %td{:class=>"date"}
+    - unless item.scheduled_date.to_s.blank?
+      = item.scheduled_date.to_s
+  %td{:class=>"actions"}
+    = button nil, edit_task_url( item ), :icon=>"/images/design/icon-edit.png", :size=>:small,  :remote=>true, :update=>dom_id(item,'edit')
+ 

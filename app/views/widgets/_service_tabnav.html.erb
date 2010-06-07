@@ -1,0 +1,48 @@
+<%  
+# this partial renders a tabnav, you can call it in your views with:
+#   <%= tabnav :project % > (just the tabnav) 
+# or, if you want a boxed tabnav:
+#   <% tabnav :project do % >
+#     your html here
+#   <% end % >
+# (remove the space between % and >, we don't want to mess up your brand new tabnav :-))
+#
+# you can pass render_tabnav a few options:
+#   :generate_css => true|false #=> generates a default inline css for the tabnav, defaults to false
+#   :html => aHash #=> sets html options for the tabnav's div (es :html => {:class=> 'myCssClass', :id=>'myCssId'}) 
+#     
+render_tabnav :service, :html => {:class => 'page_tabnav'} do 
+  
+  add_tab do |t|
+    t.named _("Bons de travail")
+    t.links_to hash_for_work_sheets_path
+    #t.highlights_on lambda { !@work_sheets.nil? || !@work_sheet.nil? }
+  end
+
+  add_tab do |t|
+    t.named _("Interventions")
+    t.links_to hash_for_interventions_path
+    #t.highlights_on lambda { !@work_sheets.nil? || !@work_sheet.nil? }
+  end
+
+  add_tab do |t|
+    t.named "&nbsp;"
+  end
+  
+  # add_tab do |t|
+  #   t.named _("Céduler")
+  #   t.links_to :controller => 'work_sheet_dispatch', :action => 'to_schedule'
+  # end
+  
+  add_tab do |t|
+    t.named _("Compléter")
+    t.links_to :controller => 'work_sheet_dispatch', :action => 'acceptation'
+  end
+  
+  add_tab do |t|
+    t.named _("Facturer")
+    t.links_to :controller => 'work_sheet_dispatch', :action => 'to_invoice'
+  end
+  
+end 
+%>

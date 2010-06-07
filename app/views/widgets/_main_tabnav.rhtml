@@ -1,0 +1,206 @@
+<%-  
+# this partial renders a tabnav, you can call it in your views with:
+#   <%= tabnav :main % > (just the tabnav) 
+# or, if you want a boxed tabnav:
+#   <% tabnav :main do % >
+#     your html here
+#   <% end % >
+# (remove the space between % and >, we don't want to mess up your brand new tabnav :-))
+#
+# you can pass render_tabnav a few options:
+#   :generate_css => true|false #=> generates a default inline css for the tabnav, defaults to false
+#   :html => aHash #=> sets html options for the tabnav's div (es :html => {:class=> 'myCssClass', :id=>'myCssId'}) 
+#     
+render_tabnav :main do 
+    
+  # this generates a tab for every controller in your app
+  # you'll probably want to delete this and
+  # add tabs one by one as shown below
+  # controller_names.each do |name|
+  #   add_tab do |t|
+  #     t.named name.camelize
+  #     t.titled "Go to #{name.camelize}"
+  #     t.links_to :controller => name
+  #   end
+  # end 
+  
+  # if current_user.has_permission?('create_messages')
+  #   add_tab do |t|
+  #     t.html = {:id => 'message_tab'}
+  #     msg_count = current_user.received_messages.unread.count
+  #     msg_str = msg_count > 0 ? "(#{msg_count})" : ""
+  #     t.named(_("Messages") + " <span id='inbox_count'>#{msg_str}</span>" )
+  #     t.links_to hash_for_inbox_url
+  #     t.highlights_on lambda { ['messages','inbox','outbox','trash', 'no_inbox'].include?(params[:controller]) }
+  #   end
+  # end
+  
+  # add_tab do |t|
+  #   t.named _("Tâches")
+  #   t.links_to hash_for_tasks_path
+  # end
+  
+  # add_tab do |t|
+  #   t.named "&nbsp;"
+  # end
+  
+  add_tab do |t|
+    t.named _("<span id='home_tab'>&nbsp;&nbsp;&nbsp;&nbsp;</span>")
+    t.links_to hash_for_dashboard_url
+  end
+  
+  add_tab do |t|
+    t.named _("Demandes")
+    t.links_to hash_for_projects_url(:collection => 'call')
+    t.highlights_on lambda {
+      (!@project.nil? && @project.new_call? )
+    }
+  end
+  
+  add_tab({:auto_link_highlight => false}) do |t|
+    t.named _("Projets")
+    t.links_to hash_for_projects_path
+    t.highlights_on lambda { 
+        @force_project_tab_highlight ||
+        (params[:controller] == 'projects' && params[:collection] != 'call' && @project.nil?) ||
+        (!@project.nil? && !@project.new_call? && !@project.service?) ||
+        params[:controller] == 'quote_calendar'
+      }
+  end
+  
+  # add_tab({:auto_link_highlight => false}) do |t|
+  #   t.named _("Service")
+  #   t.links_to hash_for_work_sheets_path
+  #   t.highlights_on lambda { 
+  #       !@force_project_tab_highlight && (
+  #       
+  #         (!@work_sheets.nil? && @project.nil?) ||
+  #         (!@project.nil? && @project.service? ) ||
+  #         (params[:controller] == 'interventions') ||
+  #         (!@invoice.nil?)
+  #       )
+  #     }
+  # end
+  
+  add_tab({:auto_link_highlight => false}) do |t|
+    t.named _("Bons de travail")
+    t.links_to hash_for_work_sheets_path
+    t.highlights_on lambda { 
+        params[:controller] != 'project_schedule' &&
+        params[:controller] != 'dashboards' &&
+        !@force_project_tab_highlight && (
+        
+          (!@work_sheets.nil? && @project.nil?) ||
+          (!@project.nil? && @project.service? ) ||
+          (params[:controller] == 'interventions') ||
+          (!@invoice.nil?)
+        )
+      }
+  end
+  
+  if current_user.has_permission?('show_schedule') || current_user.has_permission?('update_schedule')
+    add_tab do |t|
+      t.named _("Cédule")
+      t.links_to hash_for_daily_schedules_url
+      t.highlights_on lambda {
+        ['project_schedule', 'service_programs', 'daily_schedules', 'teams'].include?(params[:controller])
+      }
+    end
+  end
+  
+  add_tab do |t|
+    t.named "&nbsp;"
+  end
+  
+  add_tab do |t|
+    t.named _("Immeubles")
+    t.links_to hash_for_buildings_path
+    t.highlights_on lambda { !@party.nil? && @party.is_a?(Building) }
+  end
+  
+  add_tab do |t|
+    t.named _("Compagnies")
+    t.links_to hash_for_companies_path
+    t.highlights_on lambda { !@party.nil? && @party.is_a?(Company) }
+  end
+  
+  add_tab do |t|
+    t.named _("Contacts")
+    t.links_to hash_for_contacts_path
+    t.highlights_on lambda { !@party.nil? && @party.is_a?(Contact) }
+  end
+  
+
+  
+  add_tab do |t|
+    t.named "&nbsp;&nbsp;"
+  end
+  
+  
+  # add_tab do |t|
+  #   t.named _("Rapports")
+  #   t.links_to '/reports/list'
+  #   t.highlights_on lambda { params[:controller].starts_with?("reports") }
+  # end
+  
+  add_tab do |t|
+    t.named _("Équipements")
+    t.links_to hash_for_equipments_url
+    t.highlights_on lambda { params[:controller] == "equipments" } 
+  end
+
+  if Account.current_account.tc? && current_user.has_permission?('admin')
+  
+    add_tab do |t|
+      t.named _("Temps")
+      t.links_to hash_for_time_entries_url
+      t.highlights_on lambda { params[:controller] == "time_entries" } 
+    end
+  
+  end
+  # if current_user.has_permission?('access_estimation')
+  #   add_tab do |t|
+  #     t.named _("Estimation")
+  #     t.links_to hash_for_estimations_url
+  #     # t.highlights_on lambda { params[:controller] == "equipments" } 
+  #   end
+  # end    
+  
+  #add_tab do |t|
+  #  t.named 'Home'
+  #  t.titled 'Home Page'
+  #  t.links_to :controller => 'welcome'
+  #end 
+  #  
+  # you can use restful routes with:
+  #
+  #add_tab do |t|
+  #  t.named 'Users'
+  #  t.links_to hash_for_users_path
+  #end
+  #
+  #add_tab do |t|
+  #  t.named 'Customers'
+  #  t.links_to :controller => 'customers'
+  #end
+  #  
+  # # A tab can be initialized with a Hash like this:
+  # 
+  # add_tab :name => 'welcome', :link => {:controller=>'welcome'}
+  #
+  # # You can have a dynamic name or link 
+  # # (this partial is evaluated in the page context, so it sees every helper or instance variable)
+  #  
+  # add_tab do |t|
+  #   t.named "#{current_user} details"
+  #   t.links_to :controller => 'users', :action => 'show', :id => current_user.id
+  # end
+  #
+  # # You can have an image inside 
+  #
+  # add_tab do |t|
+  #   t.named image_tag('test')
+  #   t.links_to :controller => 'users', :action => 'show', :id => current_user.id
+  # end
+end 
+-%>

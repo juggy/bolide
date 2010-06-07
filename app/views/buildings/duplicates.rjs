@@ -1,0 +1,11 @@
+if @duplicates.size > 0 || params[:check_duplicates_again]
+  page[:duplicates].replace_html( render :partial => 'duplicates')
+  page[:real_submit].show
+  page << "$('check_duplicates_button').value = '#{_("revérifier")}';"
+  page[:check_duplicates_button].enable
+  page.insert_html( :top, :new_form, hidden_field_tag('check_duplicates_again', '1') ) unless params[:check_duplicates_again]
+else
+  #page.alert("ca va sauver de vrai")
+  page << 'clearBlanks();'
+  page << "$('new_form').submit();"
+end

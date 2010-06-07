@@ -1,0 +1,58 @@
+<div class='page_header'>
+  <h1><%= _("Liste des compagnies") %><%= ": #{params[:tag]}" unless params[:tag].blank? %></h1>
+</div>
+
+<div class='innercol'>
+
+  <% if !params.has_key?(:tag) %>
+    <h1><%= _("Derniers Ajouts") %></h1>
+  <% else %>
+    <% form_tag print_companies_url(params.only("tag")) do %>
+    <%= hidden_field_tag :_method, :get %>
+    <%= select_tag('manager_id', options_for_select(User.to_select_options({:all_label => _("Choisir un gestionnaire")}, Role.find_by_name('gestionnaire de compte').users.active) ) ) %>
+    <%= submit_tag 'Imprimer' %>
+    <% end -%>
+  <% end %>
+  <table class='index'>
+    <% if @companies.respond_to?(:total_pages) %>
+      <% if @companies.total_pages > 1 %>
+      <tr><td colspan="3"><%= pagination @companies %></td></tr>
+      <% end %>
+    <% end %>
+    
+    <% for company in @companies %>
+      <% cache "parties/#{company.id}/simple_contact_info" do %>
+        <tr>
+          <td>
+            <%= link_to company.name, company_path(company) %><br />
+            <%= display_party_contract(company) %>
+          </td>
+          <td class="contact_details">
+            <%= render :partial => '/parties/simple_contact_info', :locals => {:party => company} %>
+          </td>
+        </tr>
+      <% end %>
+    <% end %>
+    
+    <% if @companies.respond_to?(:total_pages) %>
+      <% if @companies.total_pages > 1 %>
+      <tr><td colspan="2"><%= pagination @companies %></td></tr>
+      <% end %>
+    <% end %>
+    
+  </table>
+
+  <br />
+
+  
+  
+</div>
+
+<% content_for :sidebar do %>
+  <% if current_user.has_permission?('create_companies') %>
+    <div id="add_party">
+      <%= link_to _('Nouvelle compagnie'), new_company_path, :class => 'new' %>
+    </div>
+  <% end -%>
+  <%= render :partial => '/parties/tag_list', :locals => {:party_type => 'Company'} %>
+<% end %>

@@ -1,0 +1,14 @@
+<% [  [_("Tel"),    "phone_numbers",      {}],
+      [_("Email"),  "emails",             {:link_prefix=>"mailto:"}],
+      [_("Web"),    "websites",           {:link_prefix=>"http://"}],
+      [_("Autres"), "other_contact_data", {}] 
+   ].each do |info| %>
+  <% collection = party.send(info[1]) %>
+  <% if collection.length > 0 %>
+    <ul>
+    <% for item in collection %>
+      <li><%= display_contact_data item, info[2] %></li>
+    <% end %>
+    </ul>
+  <% end %>
+<% end %>

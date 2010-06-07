@@ -1,0 +1,169 @@
+= party_page_header @contact
+
+.innercol
+  #competences
+    .header
+      %h1 
+        %span= link_to_function "ajouter une compétence", "$('new_competence_form').toggle();", :class => 'action'
+        Compétences
+    .body
+      #new_competence_form{:style => "#{"display:none;" unless @show_competence_form }background-color: lightyellow;padding:5px;"}
+        - @competence ||= @contact.competences.new        
+        - form_for([@contact, @competence]) do |f|
+          %div
+            = error_messages(@competence)
+            = f.hidden_field :employee_id
+            = f.label :course_id, "Cours:"
+            = f.select :course_id, Course.all.collect {|c| [c.name, c.id] }
+            %br
+            %div{:style => 'padding: 5px 0'}
+              = f.label :course_date, "Suivi le:"
+              = std_calendar_date_field :competence, :course_date
+              &nbsp;&nbsp;&nbsp;
+              = f.label :expires_on, "Expire le:"
+              = std_calendar_date_field :competence, :expires_on
+              &nbsp;&nbsp;&nbsp;
+              = f.label :next_course_date, "À suivre le:"
+              = std_calendar_date_field :competence, :next_course_date
+            = f.label :note, "Note:&nbsp;&nbsp;"
+            = f.text_area :note, :size => '65x3'
+          = submit_tag 'Sauver'
+      #competences_table
+        %table.standard
+          %tr
+            %th Cours
+            %th Suivi le
+            %th Expire le
+            %th À suivre le
+            %th{:style => "width:30px"} &nbsp;
+            - @contact.competences.each do |competence|
+              %tr{:class => [competence_expiry_class(competence), cycle('odd', 'even')].join(" ") }
+                %td= link_to competence.name, edit_contact_competence_path(@contact, competence)
+                %td= competence.course_date
+                %td
+                  %span= competence.expires_on
+                %td= competence.next_course_date
+                %td= link_to image_tag('trash.gif', :border => 0), contact_competence_path(@contact,competence), :method => 'delete', :title => 'supprimer', :confirm => 'Êtes-vous sûr?'
+      
+  #personal_infos
+    .header
+      %h1 
+        %span= link_to "modifier", edit_contact_employee_info_path(@contact), :title => 'modifier informations personnelles', :class => 'action'
+        Informations personnelles
+    .body
+      %table.standard
+        - info = @contact.get_employee_info
+        - alt_tr do
+          %th employé préférentiel
+          %td= info.prefered ? "Oui" : "Non"
+        - alt_tr do
+          %th niveau compétence
+          %td= info.level
+        - alt_tr do
+          %th num. employé
+          %td= info.employee_number
+        - alt_tr do
+          %th date d'embauche
+          %td= info.hired_on
+        - alt_tr do
+          %th syndicat
+          %td= info.union
+        - alt_tr do
+          %th{:style => "width:150px;"} adresse
+          %td
+            %pre= info.address
+        - alt_tr do
+          %th téléphone maison
+          %td= info.home_number
+        - alt_tr do
+          %th cellulaire
+          %td= info.cell_number
+        - alt_tr do
+          %th date de naissance
+          %td= info.birthday
+        - alt_tr do
+          %th contact urgence
+          %td
+            %pre= info.urgency_contact
+        
+  #absences
+    .header
+      %h1 
+        %span= link_to_function "ajouter une absence", "$('new_absence_form').toggle();", :class => 'action'
+        Absences
+    .body
+      #new_absence_form{:style => "#{"display:none;" unless @show_absence_form }background-color: lightyellow;padding:5px;"}
+        - @absence ||= @contact.absences.new
+        - form_for([@contact, @absence]) do |f|
+          = render :partial => '/absences/form', :locals => {:f => f}
+      #absences_table
+        - if @contact.absences.size > 0
+          - years = @contact.absences.group_by {|ab| ab.start_date.localize("%Y")}
+          - years.each do |year, absences|
+            %div{:style => "padding-top:8px;"}
+              %span{:style => "font-size:120%;font-weight:bold;"}== #{year}
+              = link_to_function "détails", "$('year_#{year}').toggle()"
+              == :
+              - absences.group_by {|ab| ab.reason}.each do |reason, abs|
+                %strong== #{reason}:
+                = pluralize(abs.sum {|ab| ab.days}, "jour")
+                |
+              %strong Justifié:
+              == #{absences.select(&:justified).sum(&:days)} / #{absences.sum(&:days)} jours
+            %div{:id => "year_#{year}", :style => "display:none;"}
+              %table.standard
+                %tr
+                  %th{:colspan => 2, :style => "width:150px"} Date
+                  %th{:style => "width:70px"} Jours
+                  %th{:style => "width:100px"} Raison
+                  %th Note
+                  %th{:style => "width:50px"} Justifié
+                  %th{:style => "width:40px"} &nbsp;
+                  - absences.each do |absence|
+                    %tr{:class => [absence_justified_class(absence), cycle('odd', 'even')].join(" ") }
+                      %td{:style => "width:60px"}
+                        %strong= show_only_on_change(absence.start_date.localize("%B"))
+                      %td{:style => "width:90px"}
+                        = absence.start_date.localize("%a %e")
+                        - if absence.end_date
+                          == - #{absence.end_date.localize("%a %e")}
+                      %td= pluralize(absence.days, "jour")
+                      %td= absence.reason
+                      %td= absence.note
+                      %td= absence.justified ? "Oui" : "Non"
+                      %td
+                        = link_to image_tag('edit.png', :border => 0), edit_contact_absence_path(@contact,absence), :title => 'modifier'
+                        = link_to image_tag('trash.gif', :border => 0), contact_absence_path(@contact,absence), :method => 'delete', :title => 'supprimer', :confirm => 'Êtes-vous sûr?'
+
+
+  #comments
+    .header
+      %h1 
+        %span= link_to_function "ajouter une note/fichier", "$('new_comment_form').toggle();", :class => 'action'
+        Notes / Fichiers
+      .body
+        #new_comment_form{:style => "#{"display:none;" unless @show_absence_form }background-color: lightyellow;padding:5px;"}
+          - @comment ||= @contact.get_employee_info.comments.new
+          - form_for(@comment, :url => create_comment_contact_employee_info_url(@contact), :html => {:multipart => true}) do |f|
+            = f.text_area :comment, :size => "60x7", :style => "width: 100%"
+            attacher un fichier:
+            = f.file_field :uploaded_data
+          
+            %br
+            = f.submit "sauver"
+        #edit_comment_form
+
+    .body
+      %table.standard
+        - @contact.get_employee_info.comments.each do |comment|
+          - alt_tr do
+            %td{:style => "width:80px"}= comment.created_at.localize(:short)
+            %td
+              = simple_format comment.comment
+              - if comment.attachment
+                = image_tag 'attachment.png'
+                = link_to comment.attachment.filename, comment.attachment.public_filename, :popup => true
+            %td= comment.user
+            %td{:style => "width:30px"}= link_to_remote image_tag('edit.png', :border => 0), :url => edit_comment_contact_employee_info_url(@contact, :comment_id => comment.id), :method => :get
+            %td{:style => "width:30px"}= link_to image_tag('trash.gif', :border => 0), delete_comment_contact_employee_info_url(@contact, :comment_id => comment.id), :method => 'delete', :title => 'supprimer', :confirm => 'Êtes-vous sûr?'
+              

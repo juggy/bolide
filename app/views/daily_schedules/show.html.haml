@@ -1,0 +1,95 @@
+%style
+  :sass
+    #schedule_legend
+      :border 1px solid #BBB
+      :padding 4px
+      :float right
+      :width 120px
+      .header
+        :font-size 14px
+        :font-weight bold
+        :color #666
+        :margin-bottom 4px
+    .on-absent
+      :display none
+      &.absent
+        :display inherit
+        
+    .on-edit
+      :display none
+    .editable tr
+      :border-bottom 1px solid #CCC
+      td
+        :padding 4px 0
+    .editable
+      .on-edit
+        :display inherit
+      .on-non-edit
+        :display none
+    
+    .hoverable
+      .on-hover
+        :visibility hidden
+      &:hover .on-hover
+        :visibility visible
+    .completed, .present
+      :background-color yellow !important
+    .absent .name
+      :text-decoration line-through !important
+    .doublon
+      :background-color bisque
+    table.intervention_table
+      :border-collapse collapse
+      td
+        :padding 2px
+    address
+      :padding 0
+      :margin 0
+:javascript
+  function check_double(name) {
+    els = $$(name); 
+    els.invoke('removeClassName', 'doublon'); 
+    if (els.size() > 1) {     
+      els.invoke('addClassName', 'doublon'); 
+    }
+  }
+
+.page_header
+  %h1
+    %span
+      = link_to "retour", daily_schedules_url( :year => @schedule.date.year, :month => @schedule.date.month), :class => 'action'
+    == Cédule du #{@schedule.date.localize(:short)}
+
+.innercol
+  
+  - if params[:print] != "true"
+    #schedule_legend.no-print
+      = link_to "version imprimable (sans absence)", {:print => true}
+      .header
+        Légende
+      .body
+        %ul
+          %li.doublon doublon
+          %li.present vérifié
+          %li.absent
+            .name absent
+        
+    %ul
+  = render :partial => 'info'
+  - if current_user.has_permission?('update_schedule') && params[:print] != "true"
+    #schedule_form{:style => 'display:none; margin: 15px'}
+      - remote_form_for @schedule do |f|
+        = f.select :weather, weather_select_options, :include_blank => 'choisir météo...'
+        %br
+        Note:
+        %br
+        = f.text_area :note
+        %br
+        %br
+        = f.submit 'sauver'
+        ou
+        = link_to_function 'annuler', "$('schedule_form').toggle();"
+  
+  - @departments.each do |department|
+    = render :partial => 'department', :locals => {:title => department.name, :foremen => department.foremen}
+  

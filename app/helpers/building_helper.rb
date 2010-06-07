@@ -1,0 +1,3 @@
+module BuildingHelper
+
+end

@@ -1,0 +1,53 @@
+<div class='page_header'>
+  <h1>Supprimer un contact</h1>
+</div>
+
+<div class='innercol'>
+  <h1>Vous vous apprêtez à supprimer <%= @contact.display_name %></h1>
+  
+  <% if @contact.projects.count > 0 %>
+    <div class='error'>
+      Attention! ce contact ne peut être supprimé car il est client sur des projets.
+    </div>
+  
+  <% else %>
+    <div class='warning'>
+      Attention! cette opération est finale.
+    </div>
+    <br />
+    <p>Tous les éléments qui suivent seront également supprimés puisqu'ils dépendent de ce contact:</p>
+    <table class='standard'>
+      <!-- <tr>
+        <td><%= @contact.relationships.count %> relations</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><%= @contact.involvements.count %> liens intervenants</td>
+        <td></td>
+      <tr/>
+      <tr>
+        <td><%= @contact.activities.count %> activités (historiques)</td>
+        <td></td>
+      <tr/>
+      <tr>
+        <td></td>
+        <td></td>
+      <tr/> -->
+      <% @contact.class.reflect_on_all_associations.sort_by {|a| a.name.to_s}.each do |ass| %>
+        <% if ass.options[:dependent] == :destroy %>
+        <tr>
+          <td><%= @contact.send(ass.name).count %> <%=t "merge.#{ass.name}" %></td>
+          <td></td>
+        </tr>
+        <% end -%>
+      <% end %>
+    </table>
+    
+    <div class='warning'>
+      Attention! cette opération est finale.
+    </div>
+    <br />
+    <%= button_to _("Supprimer définitivement"), contact_path(@contact), :method => "delete", :confirm => _("êtes-vous sûr?") %>
+  <% end %>
+  
+</div>

@@ -1,0 +1,16 @@
+<%= render :partial => 'page_header' %>
+
+<div class='innercol'>
+  
+  <%= render :partial => '/parties/projects_list', :locals => {:party => @contract, :show_all => false} %>
+  
+</div>
+
+<% content_for :sidebar do %>
+  <h1>Client</h1>
+  <p><%= link_to display_icon(@contract.client, @contract.client.quick_search_name), @contract.client %></p>
+  <h1>Immeubles</h1>
+  <% for building in @contract.buildings %>
+    <p><%= link_to display_icon(building, building.quick_search_name), building %></p>
+  <% end -%>
+<% end -%>

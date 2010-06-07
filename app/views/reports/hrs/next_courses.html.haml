@@ -1,0 +1,33 @@
+.page_header
+  %h1 Cours planifiés
+- dom_ids = []
+.innercol
+  - @competences.each do |competence|
+    - ym = competence.next_course_date.localize("%B %Y")
+    - if show_only_on_change(ym, ym)
+      %h1= ym
+    
+    - day = competence.next_course_date.localize("%e %b")
+    - if show_only_on_change(day, day ) 
+      %h2= day
+    
+    - course = competence.course.name
+    - if show_only_on_change(course, course ) 
+      %h3= course
+    
+    - id = dom_id(competence.employee, competence.next_course_date.strftime("%e%b"))
+    - dom_ids << "'#{id.strip}'"
+    .employee{:class => id}= competence.employee.full_name
+
+:javascript
+  function check_double(name) {
+    els = $$(name); 
+    els.invoke('removeClassName', 'doublon'); 
+    if (els.size() > 1) {     
+      els.invoke('addClassName', 'doublon'); 
+    }
+  }
+  
+  ids = [#{dom_ids.join(",")}];
+  //alert(ids);
+  ids.each( function(el) { check_double(el) } );

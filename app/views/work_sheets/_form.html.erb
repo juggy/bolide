@@ -1,0 +1,202 @@
+<%= error_messages @work_sheet %>
+
+<% form_for([@project,@work_sheet]) do |f| %>
+  <br />
+
+  <%= f.hidden_field :project_id %>
+  
+  <p class='warning'>
+    <b>Département:</b><br/>
+      
+      <script type="text/javascript" charset="utf-8">
+        function replace_default_description( dept) {
+          var el = $('work_sheet_template_' + dept );
+          // alert(value);
+          // alert(el);
+          if ( el != null) {
+            el.onclick();
+          }
+        }
+        
+        function add_default_description( dept) {
+          var el = $('work_sheet_template_add_' + dept );
+          // alert(value);
+          // alert(el);
+          if ( el != null) {
+            el.onclick();
+          }
+        }
+        
+      </script>
+      
+      <% Department.all.each do |dept| %>
+    
+          <%= f.radio_button :department_id, dept.id %> 
+          <%= dept %> <br/>
+          
+          <%= observe_field "work_sheet_department_id_#{dept.id}", :function => "replace_default_description('#{dept.id}');" %>
+      <% end -%>
+      
+  </p>
+  <p>
+    Statut: <br />
+    <% if @work_sheet.invoiced? %>
+      Facturé
+    <% else %>
+      <div id='state_select_container'>
+        <%= f.select :state, WorkSheet.state_select_options( @work_sheet.department ) %>
+      </div>
+    <% end -%>
+  </p>
+  
+  <p>
+    <b>Contact</b><br />
+    <%= f.select :contact_id, possible_work_sheet_contacts_options %>
+  </p>
+
+
+
+  <p>
+    Type de travaux: <br />
+    <%= f.select :work_type_id, select_options_from_table(WorkType) %>
+  </p>
+  
+  <p>Technologie: <br />
+    <%= f.select :technology_id, select_options_from_table(Technology) %>
+  </p>
+  
+  <p>Superficie:<br />
+    <%= f.text_field :area %> pi. carré
+  </p>
+  
+  <p>Hauteur:<br />
+    <%= f.text_field :height %> pi.
+  </p>
+  
+  <p>
+    Chargé de projet: <br />
+    <%= f.select :project_manager_id, User.to_select_options({:all_label => _("Choisir un chargé de projet")}, Role.find_by_name('chargé de projet').users.active) %>
+  </p>
+  
+  <p>
+    Gestionnaire: <br />
+    <%= f.select :manager_id, User.to_select_options({:all_label => _("Choisir un gestionnaire")}, Role.find_by_name('gestionnaire de compte').users.active) %>
+  </p>
+  
+  <p>
+    <b>Description:</b><br />
+    <div style='float:right; width:30%'>
+      <script type="text/javascript" charset="utf-8">
+        function replace_description(description) {
+          if ( $('work_sheet_description').value.strip().length == 0 ||
+                confirm('Êtes-vous sûr de vouloir remplace la description actuelle par le gabarit?')) {
+                  $('work_sheet_description').value = description;
+          }
+        }
+        function add_to_description(description) {
+          var desc = $('work_sheet_description');
+          desc.value = desc.value + "\r\n\r\n" + description;
+        }
+      </script>
+      choisir un gabarit:
+      <ul style='list-style-type:disc;'>
+        <% if @work_sheet.project.building && @work_sheet.project.building.building_instruction.present? %>
+        <li>
+          instructions immeubles:
+          <br/>
+          <%= link_to_function "remplacer", 
+                "replace_description(\"#{escape_javascript @work_sheet.project.building.building_instruction }\"); return false;" %>
+          ou
+          <%= link_to_function "ajouter", 
+                "add_to_description(\"#{escape_javascript @work_sheet.project.building.building_instruction}\"); return false;" %>
+          
+        </li>
+        <% end -%>
+        <% WorkSheetTemplate.all.each do |template| %>
+          <li>
+            <%= template.title %>:
+            <br/>
+            <%= link_to_function "remplacer", 
+                  "replace_description(\"#{escape_javascript template.description}\"); return false;", 
+                  :id => ("work_sheet_template_#{template.department_id}" if template.department.present?) %>
+            ou
+            <%= link_to_function "ajouter", 
+                  "add_to_description(\"#{escape_javascript template.description}\"); return false;", 
+                  :id => ("work_sheet_template_add_#{template.department_id}" if template.department.present?) %>
+      
+          </li>
+        <% end -%>
+      </ul>
+    </div>
+    <div style='width: 65%'>
+      <%= f.text_area :description , :rows => 30, :style => 'width:100%' %>
+    </div>
+    <div style='clear:both;'></div>
+  </p>
+  
+  <h1>Prévision</h1>
+  <br/>
+  <p>
+    Chef d'équipe: <br />
+    <%= f.select :foreman_id, User.to_select_options({:all_label => _("Choisir un chef d'équipe")}, Role.find_by_name("chef d'équipe").users.active) %>
+  </p>
+  
+  
+  <p>
+    Date cédulée:<br/>
+    <%= f.calendar_date_select :scheduled_date, :size => 10 %>
+  </p>
+  
+  <p>
+    Temps prévu:<br/>
+    <%= f.text_field :scheduled_time, :size => 10 %>
+  </p>
+  
+  
+  <h1>Info Département Contrat</h1>
+  <br/>
+  <p>
+    Date souhaitée:<br/>
+    <span class='info'>contrainte du client</span>
+    <%= f.calendar_date_select :ideal_start_date, :size => 10 %>
+  </p>
+  <p>
+    Nbre de travailleurs:<br/>
+    <%= f.text_field :team_size, :size => 10 %>
+  </p>
+  <p>
+    Nb jours prévus:<br/>
+    <%= f.text_field :estimated_days, :size => 10 %>
+  </p>
+  <p>
+    Nb jours extra:<br/>
+    <%= f.text_field :extra_days, :size => 10 %>
+  </p>
+  <p>
+    Nb jours executés:<br/>
+    <%= f.text_field :done_days, :size => 10 %>
+  </p>
+  <p>
+    Date fin cédulée:<br/>
+    <%= f.calendar_date_select :scheduled_end_date, :size => 10 %>
+  </p>
+  
+  
+  <% unless @work_sheet.state == 'new' %>
+    <h1>Compte-rendu</h1>
+    <br/>
+    <p>
+      <%= f.text_area :result_description , :rows => 4, :cols => 50 %>
+    </p>
+  <% end %>
+  
+  <%= text_field_tag "bogus", "", :style => 'display:none;' %> <!-- form auto submits on enter if there s only one text field -->
+  <p>
+    <%= button_form_submit %>
+  </p>
+  
+<% end %>
+
+<% if @work_sheet.new_record? %>
+  <%= javascript_tag "add_default_description('service')" %>
+<% end -%>

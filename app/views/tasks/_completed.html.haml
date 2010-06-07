@@ -1,0 +1,17 @@
+%tr{:class=>"task", :id=>dom_id(item, 'history')}
+  %td{:class=>"tag"} Tâche
+  %td{:class=>"date"}= item.updated_at.localize(:short)
+  %td{:class=>"description"}
+    - if item.category
+      .category.right= item.category.name
+    = item.body
+    - if @context != "Party" && item.party 
+      (Re:
+      = link_to item.party.name, url_for(item.party)
+      )
+    - if @context != "Project" && item.project
+      .project
+        %span{:class=>"title"} Projet:
+        = link_to item.project.display_name, project_url(item.project)
+  %td{:class=>"person"}= highlight_current_user( item.user )
+  %td{:class=>"actions"}

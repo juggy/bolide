@@ -1,0 +1,17 @@
+%ul
+  %li
+    %span{:class=>"title"} Gestionnaire
+    %span{:class=>"person"}= missing_data(project.manager,"short_name", "gestionnaire?") 
+  %li
+    %span{:class=>"title"} Estimateur
+    %span{:class=>"person"}= missing_data(project.estimator,"short_name", "estimateur?")
+  - if project.documenter 
+    %li
+      %span{:class=>"title"} Documents
+      %span{:class=>"person"}= project.documenter.short_name 
+  - for involvement in project.involvements.active
+    %li
+      %span{:class=>"title"}
+        = involvement.role
+        = "(#{truncate(involvement.party.company.name, :length=>17).gsub(/\s/, "&nbsp;")})" if involvement.party.is_a?(Contact) && involvement.party.company
+      %span{:class=>"person"}= involvement.party.name

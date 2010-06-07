@@ -1,0 +1,55 @@
+<div id='intervention_form_wrapper'>
+  
+  <h1>
+    <%= link_to_remote 'supprimer', {:url => dispatch_intervention_url(@intervention), :method => :delete}, :class => 'action' %>
+    Modifier intervention de '<%= @intervention.foreman %>' le <%= @intervention.date.localize %>
+  </h1>
+
+  <%= error_messages_for :intervention %>
+
+  <% remote_form_for(@intervention, :url => dispatch_intervention_url(@intervention)) do |f| %>
+
+  <br/>
+  <p>
+    <% work_sheet = @intervention.work_sheet %>
+    <%= display_work_sheet(work_sheet) %>
+  </p>
+  <br/>
+  <p style='font-size: 16px;'>
+    <b>Temps</b><br/>
+    <span style='width:60px;float:left;text-align:right;'>prévu:</span> <%= f.text_field :scheduled_time, :size => '5', :style => 'text-align:right;' %> h<br/>
+    <span style='width:60px;float:left;text-align:right;'>réel:</span> <%= f.text_field :work_time, :size => '5', :style => 'text-align:right;' %> h<br/>
+  </p>
+  
+  <br/>
+  <p style='font-size: 16px;'>
+    <b>Option de facturation:</b> 
+    <%= f.select :invoice_type, Intervention.invoice_type_select_options %>
+  </p>
+  <br/>
+    
+  </p>
+  
+    <p>
+      <b>Résultat:</b><br />
+      <%= f.text_area :result_description, :size => '40x6' %>
+    </p>
+
+    <p>
+      <%= f.check_box :completed %>
+      <b>Intervention complétée</b>
+    </p>
+
+    <p>
+      <%= f.check_box :work_sheet_completed, :disabled => @intervention.work_sheet_completed %>
+      Bon de travail terminé
+    </p>
+  
+    <div class='submit'>
+      <%= f.submit "Sauver" %> ou 
+        <%= link_to_function 'annuler', "$('intervention_form_wrapper').remove();" %>
+    </div>
+  <% end %>
+
+
+</div>

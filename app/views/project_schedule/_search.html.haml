@@ -1,0 +1,7 @@
+#work_sheet_search{:style => "background-color: lightblue; padding: 8px; margin: 8px 0; width: 422px"}
+  %strong
+    Chercher un bon de travail:
+  %br
+  = text_field_tag "term", "", {:autocomplete => "off", :id => "work_sheet_search_name", :style => "width:400px" }
+  #work_sheet_search_name_auto_complete.auto_complete{ :style => "display:hidden;"}
+  = work_sheet_search_auto_complete "work_sheet_search_name"

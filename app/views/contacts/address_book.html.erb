@@ -1,0 +1,58 @@
+<table width="200">
+  <!-- SEARCH FORM -->
+  <tr>
+    <td width="20">
+      <img alt="" align="bottom" border="0" src="/images/very_small_logo.png" />
+    </td>
+    <td>
+      <% form_tag :controller => "contacts", :action => "address_book" do %>
+          <%= text_field_tag :party_name, params[:party_name], :size => 10 %>
+          <%= hidden_field_tag :collection, "contact" %>
+          <%= hidden_field_tag :access_key, params[:access_key] %>
+          <%= submit_tag "chercher", :name => nil %>
+      <% end %>
+    </td>
+  </tr>
+  <!-- RESULTS -->
+  <tr>
+    <td colspan="2">
+      <% if flash[:notice] %>
+        <p class='flash_notice'><%= flash[:notice] %></p>
+      <% end %>
+      <% if @parties %>
+        <% if @parties.size.zero? %>
+          <p class='flash_warning'>Aucun contact trouvé.</p>
+        <% else %>
+          <table>
+          <% for party in @parties %>
+            <tr>
+              <td colspan="2">
+                <hr>
+                <b><%=h party.name %><b/>
+              </td>
+            </tr>
+              <% [  [_("Téléphone"),    "phone_numbers",      {}],
+                    [_("Email"),  "emails",             {:link_prefix=>"mailto:"}],
+                    [_("Web"),    "websites",           {:link_prefix=>"http://"}],
+                    [_("Autres"), "other_contact_data", {}] 
+                 ].each do |info| %>
+                <% collection = party.send(info[1]) %>
+                <% collection = collection.own if info[1] == 'emails' %>
+                <% if collection.size > 0 %>
+                  
+                      <% for item in collection %>
+                      <tr>
+                        <td width="40"><font size="1"><%= info[0] %>:</font></td>
+                        <td><font size="1"><%= display_contact_data item, info[2] %></font></td>
+                      </tr>
+                      <% end %>
+                <% end %>
+              <% end %>
+            </tr>
+          <% end %>
+          </table>
+        <% end %>
+      <% end %>
+    </td>
+  </tr>
+</table>

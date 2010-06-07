@@ -1,0 +1,20 @@
+= button "Attacher un courriel", linked_messages_path(:type=>party.class.to_a, :id=>party.id), :type=>:create, :icon=>"/images/design/icon-message.png", :size=>:big, :remote=>true, :update=>"email_suggestions", :html=>{:id=>"email_new_button", :data_type=>"email"}
+#email_form_wrapper.form_wrapper{:style=>"display: none"}
+  - group "Attacher un courriel" do
+    #filter 
+      Filtre: 
+      = text_field_tag(:filter_message, "suggestions", :id=>"email_filter")
+    - form_tag linked_messages_path, :method=>"post", :class=>"w-form-h" do
+      = hidden_field_tag("id", party.id)
+      = hidden_field_tag("type", party.class.to_a)
+      %table{:id=>"email_suggestions"}
+      
+      #email_boite
+        .title
+          Votre boite de réception:
+        .link
+          = link_to "reception-#{current_user.id}@#{Account.current_account.subdomain}.ccubeapp.com", "mailto:reception-#{current_user.id}@#{Account.current_account.subdomain}.ccubeapp.com"
+      = button "Attacher"
+      %span
+        ou 
+        = link_to "annuler", "#email", :class=>"cancel"

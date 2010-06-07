@@ -1,0 +1,9 @@
+<div class='page_header'>
+  <h1><span><%= link_to 'Modifier', edit_contact_path(party), :class => 'action' %></span> <%=h party.name %></h1>
+  <h2><%= party.title %> <%= link_to( party.company_name, party.company ) if party.company  %></h2>
+  <%= tag_list(party) %>
+</div>
+
+<div class="page_menu">
+  <%= @party = party ; tabnav :party %>
+</div>

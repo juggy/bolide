@@ -1,0 +1,12 @@
+<div class='page_header'>
+  <h1>Dernières activités</h1>
+</div>
+
+<div class='innercol'>
+  <table class='standard'>
+    <tbody id='recent_activities'>
+      <% @include_project = true %>
+      <%= render :partial => 'parties/activities_list', :locals => {:activities => @activities } %>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,41 @@
+<%= party_page_header @contact %>
+
+<div class='innercol'>
+  
+  <%= render :partial => '/parties/projects_list', :locals => {:party => @contact} %>
+  <%= render :partial => '/parties/involvements_list' if @contact.user_id %>
+  <%= render :partial => '/parties/task_list', :locals => {:party => @contact} %>
+  <%= render :partial => '/parties/recent_activities', :locals => {:party => @contact} %>
+
+</div>
+
+<% content_for :sidebar do %>
+  <div class='section'>
+  <% if @contact.user_id && current_user.has_permission?("admin") %>
+    <div class='new'>
+      <%= link_to _("Modifier Fiche Utilisateur"), {:controller => 'users', :action => 'edit', :id => @contact.user_id}, :class => :action %>
+    </div>
+  <% end %>
+  <%= render :partial => '/tasks/add_task', :locals => {:party => @contact} %>
+  <%= render :partial => '/notes/add_note', :locals => {:party => @contact} %>
+  <%= render :partial => '/linked_messages/add_message', :locals => {:party => @contact} %>
+  <%= render :partial => '/parties/add_file', :locals => {:party => @contact } %>
+  </div>
+  <div class='section'>
+  
+  <h1><%= @contact.name %></h1>
+  <div>
+    <%= render :partial => '/parties/contact_info', :locals => {:party => @contact} %>
+  </div>
+  </div>
+  <% if @contact.company %>
+    <div class='section'>
+    <h1><%= @contact.company.name %></h1>
+      <div>
+        <%= render :partial => '/parties/contact_info', :locals => {:party => @contact.company} %>
+      </div>
+    </div>
+  <% end %>
+  <%= render :partial => '/parties/relationships', :locals => {:party => @contact, :relationships => @contact.relationships.principal} %>
+
+<% end %>

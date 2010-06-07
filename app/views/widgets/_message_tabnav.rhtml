@@ -1,0 +1,43 @@
+<%  
+# this partial renders a tabnav, you can call it in your views with:
+#   <%= tabnav :party % > (just the tabnav) 
+# or, if you want a boxed tabnav:
+#   <% tabnav :party do % >
+#     your html here
+#   <% end % >
+# (remove the space between % and >, we don't want to mess up your brand new tabnav :-))
+#
+# you can pass render_tabnav a few options:
+#   :generate_css => true|false #=> generates a default inline css for the tabnav, defaults to false
+#   :html => aHash #=> sets html options for the tabnav's div (es :html => {:class=> 'myCssClass', :id=>'myCssId'}) 
+#     
+render_tabnav :message, :html => {:class => 'page_tabnav'} do 
+    
+  add_tab do |t|
+    t.named _("Reçus")
+    t.links_to hash_for_inbox_url
+  end
+
+  add_tab do |t|
+    msg_count ||= current_user.sent_messages.unsent.count
+    t.named(_("Envoyés") + (msg_count > 0 ? " (#{msg_count})" : "") )
+    t.links_to hash_for_outbox_url
+  end
+
+  add_tab do |t|
+    t.named _("Destinataire inconnu")
+    t.links_to hash_for_no_inbox_url
+  end
+
+  add_tab do |t|
+    t.named _("Poubelle")
+    t.links_to hash_for_trash_url
+  end
+  
+  add_tab do |t|
+    t.named _("Archives")
+    t.links_to hash_for_archive_box_url
+  end
+  
+end 
+%>

@@ -1,0 +1,143 @@
+<div class='page_header service_header'>
+  <h1>Céduler des bons de travail</h1>
+</div>
+<div class='page_menu service_header'>
+  <%= tabnav :service %>
+</div>
+
+<style type="text/css" media="screen">
+  div.intervention_form {
+    z-index: 999;
+    height: 0px;
+    width: 80%;
+    position:fixed;
+    top: 33px;
+    left: 100px;
+  }
+  .intervention {
+    background-color:#EEE;
+    border: 1px solid #777;
+    border-top-width: 12px;
+    padding: 2px;
+    margin: 4px;
+  }
+  .intervention.draggable {
+    cursor: move;
+  }
+  .intervention .completed {
+    text-decoration: line-through;
+  }
+  a.add_intervention {
+    display:block;
+    width: 100%;
+    padding: 10px auto;
+    color: #888;
+}
+  a.add_intervention:hover {
+    color: black;
+    font-weight:bold;
+  }
+  a.add_intervention:visited {
+    color: #888;
+  }
+  .interventions {
+    height:100%;
+    display:block;
+  }
+  #intervention_form_wrapper {
+/*    position: absolute;*/
+    right:0px;
+/*    top:-20px;*/
+    background-color:white; 
+    border:2px solid black;
+    padding:10px; 
+    width:100%;
+    display:block;
+    z-index: 999;
+    clear:both;
+  }
+  #intervention_form_wrapper form {
+    margin-top:5px;
+  }
+  table.standard.schedule th {
+    text-align:center;
+  }
+  table.standard.schedule td.first {
+   font-weight:bold;
+   border-left: none;
+   font-size: 13px;
+   vertical-align:middle;
+  }
+  table.standard.schedule td {
+    border-left: 1px solid black;
+    height:100%;
+  }
+  table.standard.schedule table.standard td {
+    border-left: none;
+  }
+    table.standard.schedule tr {
+      height:30px;
+    }
+  table.standard.schedule table.standard tr {
+    height: auto;
+  }
+  .hover {
+    background-color: #DFD;
+  }
+  .intervention span.hours {
+    font-weight: bold;
+    text-decoration: underline;
+  }
+  .add_intervention_wrapper {
+    border: 1px solid #EEE;
+    margin: 4px;
+    padding:10px 0;
+    text-align:center;
+  }
+</style>
+<script type="text/javascript" charset="utf-8">
+
+  function remove_previous_form() {
+    form = $('intervention_form_wrapper');
+    if (form != undefined)
+      form.remove();
+  }
+</script>
+<div class='innercol'>
+  <%= display_flash(:notice) %>
+
+  <h1>Il y a <%= @work_sheets.size %> bons de travail à céduler</h1>
+
+  <table class='standard schedule'>
+    
+    <thead>
+      <th>Chef d'equipe</th>
+      <th width='25%'><%= @yesterday_label %></th>
+      <th width='25%'>Aujourd'hui</th>
+      <th width='25%'><%= @tomorrow_label %></th>
+      <!-- <th width='25%'>Plus tard</th> -->
+    </thead>
+    
+    <% for foreman in @foremans %>
+      <% tr_class = cycle 'odd','even' %>
+      <tr class='<%= tr_class %>'>
+        <td class='first'><%= foreman.full_name %></td>
+        <!-- YESTERDAY -->
+        <td>
+          <%= render_interventions foreman, @yesterday, {:drop => true, :new => false} %>
+        </td>
+        <!-- TODAY -->
+        <td>
+          <%= render_interventions foreman, @today, {:drop => true, :new => true} %>
+        </td>
+        <!-- TOMORROW -->
+        <td>
+          <%= render_interventions foreman, @tomorrow, {:drop => true, :new => true} %>
+        </td>
+        <!-- <td></td> -->
+      </tr>
+    <% end %>
+    
+  </table>
+  
+</div>

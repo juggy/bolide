@@ -1,0 +1,24 @@
+= render :partial => '/projects/page_header'
+
+.innercol
+  %h1== Mis-à-jour #{@bidder.name}
+  - form_for([@project, @bidder]) do |f|
+    %div
+      = error_messages(@bidder)
+      %br
+      = f.label :bid, "Prix:"
+      %br
+      = f.text_field :bid, :size => 12
+      $
+      / %br
+      / = f.label :position
+      / %br
+      / = f.text_field :position, :size => 4
+      / %br
+      %br
+      %br
+      = f.check_box :won
+      = f.label :won, "gagnant"
+      %br
+      
+    = form_submit

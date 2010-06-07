@@ -1,0 +1,31 @@
+.page_header
+  %h1 Journées fériées
+
+.innercol  
+  
+  #holiday_form.w-search
+    .header
+      %h1 Ajouter des journées fériées
+    .body
+      - form_for Holiday.new do |f|
+        .group
+          = f.label :name, "Titre (optionnel)"
+          = f.text_field :name
+        .group
+          = f.label :date, "Date"
+          = f.calendar_date_select :date
+        .group
+          = f.label :end_date, "Date Fin (optionnel)"
+          = f.calendar_date_select :end_date
+        %br
+        = f.submit "Ajouter au calendrier"
+  %table.standard
+    - @holidays.each do |holiday|
+      - month_name = show_only_on_change(holiday.date.localize("%B %Y"))
+      - if month_name
+        - alt_tr do
+          %td.month_name{:colspan => 3, :style => 'font-weight: bold;'}= month_name
+      - alt_tr do
+        %td= holiday.date
+        %td= holiday.name
+        %td= link_to( image_tag('trash.gif'), holiday_url(holiday), :method => :delete, :confirm => 'Êtes-vous sûrs?')

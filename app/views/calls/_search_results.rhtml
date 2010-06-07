@@ -1,0 +1,50 @@
+<br />
+
+<h2>2/ Identification du client :</h2>
+  
+<% unless @search_results.size > 0 %>
+  <p style="color:red">aucune fiche trouvée</p>
+  <%= javascript_tag "Effect.Appear('call_form',{duration:0.5});" %>
+<% else %>
+  
+  <% [Contact, Company, Building].each do |model| %>
+    <% call_method = model.to_s.underscore %>
+    <% call_method = "client" if call_method == 'company' %>
+    <% model_results = (@results[model] or []) %>
+    <% if model_results.size > 0 %>
+      <h2><%= _("Choisir un") %> <%= call_method == 'building' ? 'immeuble' : call_method %></h2>
+      <table class="index">
+      <% for result in model_results  %>
+        <tr>
+          <td width="20"><%= radio_button_tag "call[#{call_method}_id]", result.id, false, {:onclick => "Effect.Appear('call_form',{duration:0.5});"} %></td>
+          <td>
+            <%= result.name %>
+            <% if result.is_a?(Contact) && result.company %>
+              <br /><%= result.company_name %>
+            <% end %>
+            <% if result.is_a?(Company) && result.manager %>
+              <br />Gestionnaire de compte: <%= result.manager.full_name %>
+            <% end %>
+            <% if result.contract_type %> 
+              <br /><%= display_party_contract(result) %>
+            <% end %>
+          </td>
+          <td class="contact_details">
+            <% if result.is_a?(Building) %>
+              <%= display_address(result.address) %>
+            <% else %>
+              <%= render( :partial => '/parties/simple_contact_info', :locals => {:party => result})  %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+
+        <tr>
+          <td><%= radio_button_tag "call[#{call_method}_id]", nil, false, {:onclick => "Effect.Appear('call_form',{duration:0.5});"} %></td>
+          <td colspan="2">Nouveau</td>
+        </tr>
+      </table>
+    <% end %>
+  <% end %>
+
+<% end %>

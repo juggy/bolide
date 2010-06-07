@@ -1,0 +1,50 @@
+<%= mailbox_page_header(:user_select => true) %>
+
+<div class='innercol'>
+  
+  <% message_list(@message_recipients) do %>
+
+    <% form_tag trash_url, :method => :delete do  %>
+      <table id="inbox_messages" class="message_rows">
+
+        <tr class='message_header'>
+          <td class="checkbox_toggle" align="left" colspan="5" style='width:100%;'>
+            
+            <% check_all_delete( check_all_trash_options ) do %>
+              <%= submit_tag "Récupérer" %>
+            <% end %>
+          </td>
+        </tr> 
+
+      <% for recipient in @message_recipients %>
+        <tr <%= message_status(recipient)%>>
+          <td class="checkbox_toggle">
+            <%= check_box_tag "ids[#{recipient.message.id}]" %>
+          </td>
+          <td class="name">
+              <%=h recipient.sender(:short) %>
+          </td>
+          <td class="subject">
+            <%= subject_wrap recipient.message %>
+          </td>
+          <td>
+            <%= message_icons recipient.message %>
+          </td>
+          <td class='date'>
+            <%= shortest_date(recipient.created_at) %>
+          </td>
+        </tr>
+      <% end %>
+      
+      </table>
+    <% end %>
+
+  <%end%>
+
+</div>
+
+<% content_for :sidebar do %>
+  <div class='new'>
+    <%= link_to _("Nouveau message"), new_message_url, :class => :new %>
+  </div>
+<% end %>

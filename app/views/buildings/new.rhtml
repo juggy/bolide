@@ -1,0 +1,27 @@
+<div class='page_header'>
+  <h1><%= _("Nouvel immeuble") %></h1>
+</div>
+
+<div class='innercol'>
+<% form_for :building, @building, :url => buildings_url, :html => { :onsubmit => "clearBlanks();return true;", :id => 'new_form'} do |f| %>
+  <%= render :partial => 'form', :locals => {:f => f} %>
+  
+  <div id="duplicates">
+  </div>
+  <div id="fake_submit">
+    <%= button_to_function _("Sauver"), 
+          remote_function( :before => "$(this).disable();",
+                      :url => {:action => "duplicates"}, 
+                            :with => "Form.getElements('new_form').collect( function(value, index) {
+                              if (!value.hasClassName('blank')) return value.serialize();
+                            }).join('&')" ),
+          :id => "check_duplicates_button" %>
+  </div>
+  <div class="submit" id="real_submit" style="display:none;">
+    <%= submit_tag "Sauver, ce n'est pas un doublon" %> <%= _("ou") %> <%= link_to 'annuler', buildings_path, :class => 'action' %>
+  </div>
+  
+  
+<% end %>
+
+</div>

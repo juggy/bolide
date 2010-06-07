@@ -1,0 +1,11 @@
+<div id="contact_data">
+  <% party_type = party.class.to_s.downcase %>
+  <% if party.new_record? %>
+    <%= render( :partial =>'/parties/contact_datum_form', :locals => {:contact_datum => ContactDatum.new, :party_type => party_type} ) %>
+  <% else %>
+    <% party.contact_data.each do |contact_datum| %>
+      <%= render( :partial =>'/parties/contact_datum_form', :locals => {:contact_datum => contact_datum, :party_type => party_type} ) %>
+    <% end %>
+  <% end %>
+</div>
+<%= link_to_function( image_tag('add.png', :border => 0, :style => 'padding-right:5px;') + _("Ajouter un téléphone, email...") ) {|page| page.insert_html( :bottom, :contact_data, render( :partial =>'/parties/contact_datum_form', :locals => {:contact_datum => ContactDatum.new, :party_type => party_type} ) ) } %>

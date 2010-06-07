@@ -1,0 +1,6 @@
+<html>
+  <body style='font: 10px verdana;'>
+    <%= @message.text? ? simple_format(@message.text) : @message.body %>
+  <br />
+  </body>
+</html>

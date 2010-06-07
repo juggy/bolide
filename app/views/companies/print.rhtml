@@ -1,0 +1,34 @@
+<h1><%= _("Liste des compagnies") %><%= ": #{params[:tag]}" unless params[:tag].blank? %></h1>
+<%= link_to("retour", companies_url(:tag => params[:tag])) %>
+
+<table class='standard'>
+  
+  <% for company in @companies %>
+    <tr class='<%= cycle("odd","even") %>'>
+      <td>
+        <strong><%= company.name %></strong><br />
+        <%= display_party_contract(company) %>
+      </td>
+      <td>
+        <% for address in company.addresses %>
+          <%= simple_format address.to_s %>
+        <% end -%>
+      </td>
+      <td>
+        <%= render :partial => '/parties/simple_contact_info', :locals => {:party => company} %>
+      </td>
+      <td>
+        <% for rel in company.inverse_relationships %>
+          <% third_party = rel.first_party %>
+          <%# next if !third_party.principal %>
+          <% next if !third_party.is_a?(Contact) %>
+          <% next if !rel.principal? %>
+          
+          <strong><%= third_party.name %><%= ", #{third_party.title}" if third_party.title.present? %> (<%= rel.description %>)</strong><br/>
+          <%= render :partial => '/parties/simple_contact_info', :locals => {:party => third_party} %>
+        <% end -%>
+        <!-- <strong><%= company.manager %></strong><br /> -->
+      </td>
+    </tr>
+  <% end %>    
+</table>

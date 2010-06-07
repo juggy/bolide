@@ -1,0 +1,30 @@
+<div class='page_header'>
+  <h1>Accepter des bons de travail</h1>
+</div>
+<div class='page_menu'>
+  <%= tabnav :service %>
+</div>
+
+<div class='innercol'>
+  <%= display_flash(:notice) %>
+  
+  <h1>Il y a <%= @work_sheets.size %> bons de travail à accepter</h1>
+  
+  <% form_tag do %>
+  <table class='standard'>
+    
+    <% for work_sheet in @work_sheets %>
+    <tr class='<%= cycle 'odd','even' %>'>
+      <td> 
+        <%= check_box_tag "work_sheets[#{work_sheet.id}]" %>
+        <%= display_work_sheet(work_sheet) %>
+      </td>
+    </tr>
+    <% end %>
+    
+  </table>
+  
+  <%= form_submit %>
+  <% end -%>
+  
+</div>

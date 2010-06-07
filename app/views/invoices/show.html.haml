@@ -1,0 +1,32 @@
+.page_header.service_header
+  %h1 
+    Facturation service:
+    = "##{@work_sheet.project.call_number}"
+    =h @work_sheet.display_name
+
+.page_menu.service_header
+  = tabnav :invoice
+      
+.innercol
+  -display_flash(:warning)
+  %h2 Entête de facture
+  -form_for([@work_sheet,@invoice]) do |f|
+    =render :partial => "form", :locals => {:f => f}
+    
+
+    %h2 Détails des Interventions correspondantes à cette facture
+    %table{:class => "standard"}
+      %tr
+        %th{:width => 20}
+        %th= "Chef d'équipe"
+        %th= "Date de l'intervention"
+        %th= "Temps prévu (h)"
+        %th= "Temps réel (h)"
+        %th= "Type"
+        %th= "Complétée?"
+      = render :partial => "intervention", :collection => @invoice.interventions
+
+
+- content_for :sidebar do
+  =link_to 'Supprimer cette facture', work_sheet_invoice_path(:work_sheet_id => @invoice.work_sheet.id, :id => @invoice.id), :confirm => 'Etes vous sûr?', :method => :delete, :class => "delete"
+  

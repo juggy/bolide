@@ -1,0 +1,25 @@
+.page_header
+  %h1= "Fusionner #{@party.name}"
+
+.innercol
+  = display_flash(:warning)
+  .warning 
+    Attention! Il n'est pas possible d'annuler cette opération une fois complétée.
+  %br
+  - form_tag merge_contact_path(@party) do
+    %div{:style => "background-color: lightblue; padding: 5px"}
+      Chercher le contact à éliminer:
+      = auto_complete_party_id_text_field( :duplicate, :duplicate_id, :url => {:collection => @party.class.to_s.downcase, :reject_id => @party.id}, :size => 40 )
+    
+    %br
+    %div
+      = "Lors de la fusion, tout ce qui suit sera lié à #{@party.name}"
+      %ul{:style => 'list-style: inside'}
+        - @party.class.reflect_on_all_associations.sort_by {|a| t("merge.#{a.name}") }.each do |ass|
+          - if ![:contact_data, :inverse_relationships].include?(ass.name) && ass.macro == :has_many && !ass.through_reflection
+            %li= t("merge.#{ass.name}")
+    
+    .warning
+      Attention! Il n'est pas possible d'annuler cette opération une fois complétée.
+      
+    = form_submit

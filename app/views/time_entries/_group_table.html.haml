@@ -1,0 +1,36 @@
+- times = {}
+- projects.each {|p| times[p] = @times[p]}
+%table.standard
+  %tr
+    %th Projet
+    - @categories.each do |cat|
+      %th.right{:style=> 'width:60px'}= cat
+    %th.right{:style=> 'width:60px'} Total
+  - projects.each do |project|
+    - category_times = times[project]
+    - alt_tr do
+      %td= project.display_name
+      - @categories.each do |category|
+        - time = category_times[category]
+        %td.right
+          - time_entry time
+      %td.right
+        - time_entry category_times.values.sum
+        
+  %tr
+    %td
+      %strong Total
+    - @categories.each do |cat|
+      %td.right
+        - time_entry times.collect {|p| p[1][cat] }.flatten.compact.sum
+    %td.right
+      - time_entry times.collect {|p| p[1].values }.flatten.sum
+      
+  %tr
+    %td
+      %strong== Moyenne (#{times.keys.size} projets)
+    - @categories.each do |cat|
+      %td.right
+        - time_entry( times.collect {|p| p[1][cat] }.flatten.compact.sum / times.keys.size)
+    %td.right
+      - time_entry( times.collect {|p| p[1].values }.flatten.sum / times.keys.size)

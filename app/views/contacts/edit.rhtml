@@ -1,0 +1,25 @@
+<div class='page_header'>
+  <h1><%= @contact.name %></h1>
+</div>
+
+<div class='innercol'>
+
+  <%= error_messages @contact %>
+
+  <% form_for(:contact, :url => contact_path(@contact), :html => { :method => :put, :onsubmit => "clearBlanks();return true;" }) do |f| %>
+
+    <%= render :partial => 'form', :locals => {:f => f} %>
+    <%= form_submit %>
+  <% end %>  
+</div>
+
+<% content_for :sidebar do %>
+  <% if current_user.has_permission?('destroy_contacts') %>
+    <!-- <div class='new'>
+      <%#= link_to _("Supprimer ce contact"), delete_contact_path(@contact), :class => "new" %>
+    </div> -->
+    <div class='new'>
+      <%= link_to _("Fusionner ce contact"), find_duplicate_contact_path(@contact), :class => "new" %>
+    </div>
+  <% end %>
+<% end %>

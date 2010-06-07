@@ -1,0 +1,60 @@
+<table class='standard'>
+  <tr>
+    <th style='width:30px;'>&nbsp;</th>
+    <th>Chef d'équipe</th>
+    <th>Date</th>
+    <th>Temps</th>
+    <th>&nbsp;</th>
+    <th>Commentaires</th>
+    <% if editable %>
+      <th>&nbsp;</th>
+      <th>&nbsp;</th>
+      <th>&nbsp;</th>
+    <% end -%>
+  </tr>
+
+<% for intervention in interventions %>
+  <tr class='<%= cycle "odd","even" %>'>
+    <td><%= image_tag( 'ok.png' ) if intervention.completed? %></td>
+    <td><%= intervention.foreman %></td>
+    <td><%= intervention.date.localize %></td>
+    <td class='hours'><%= display_hours( intervention.work_time) if intervention.work_time %></td>
+    <td class='hours'><%= display_days( intervention.work_days) if intervention.work_days %></td>
+    <td><%= simple_format h( intervention.result_description) %></td>
+    <% if editable %>
+      <td><%= link_to image_tag('print.png', :border => :none), formatted_work_sheet_intervention_path(intervention.work_sheet, intervention, :pdf) %></td>
+      <td><%= link_to image_tag('edit.png', :border => :none), edit_work_sheet_intervention_path(@work_sheet, intervention) %></td>
+      <td><%= link_to image_tag('trash.gif', :border => :none), [@work_sheet,intervention], :confirm => 'êtes-vous sûrs?', :method => :delete %></td>
+    <% end -%>
+  </tr>
+<% end %>
+
+  <% if interventions.size > 1 %>
+  <tr>
+    <td></td>
+    <td></td>
+    <td style='text-align:right;'>Total:</td>
+    <td class='hours'><%= display_hours( interventions.inject(0.0) {|total, i| total += (i.work_time || 0.0) } ) %></td>
+    <td class='hours'><%= display_days( interventions.inject(0.0) {|total, i| total += (i.work_days || 0.0) } ) %></td>
+    <td></td>
+    <% if editable %>
+      <td></td>
+      <td></td>
+      <td></td>
+    <% end -%>
+  </tr>
+  <% end -%>
+  <tr>
+    <td></td>
+    <td></td>
+    <td style='text-align:right;'>Estimé:</td>
+    <td class='hours'><%= display_hours( @work_sheet.scheduled_time ) %></td>
+    <td class='hours'><%= display_days( @work_sheet.estimated_days ) %></td>
+    <td></td>
+    <% if editable %>
+      <td></td>
+      <td></td>
+      <td></td>
+    <% end -%>
+  </tr>
+</table>

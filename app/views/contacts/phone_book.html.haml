@@ -1,0 +1,16 @@
+%h1= "Liste téléphonique #{params['tag']}"
+- if Account.current_account.tc?
+  Toitures Couture: 450-678-2569 -- 1-866-806-8648 -- fax: 450-678-2534
+%table.standard
+  - @contacts.in_groups_of(3).each do |group|
+    - alt_tr do
+      - group.each do |contact|
+        %td
+          - if contact
+            %strong= "#{contact.last_name} #{contact.first_name}"
+            %ul
+              - contact.phone_numbers.each do |phone|
+                - next if phone.personal?
+                %li= !phone.name.blank? ? "#{phone.name}: #{phone.value}" : phone.value
+          
+  

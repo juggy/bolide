@@ -1,0 +1,59 @@
+.page_header
+  %h1
+    %span= link_to 'rapport', {:action => :report}, {:class => 'action'}
+    Feuille de route
+
+.innercol
+  
+  %style
+    :sass
+      #time_entry_project_no
+        :width 260px
+      .hoverable
+        .on-hover
+          :display none
+
+        &:hover .on-hover
+          :display block
+    
+    
+  :javascript
+    function next_entry() {
+      //$('new_time_entry').reset();
+      $('project_id').value = $('time_entry_time').value = $('time_entry_category_id').value = $('time_entry_project_no').value = null;
+      
+      $('time_entry_time').focus();
+    }
+  
+  .section.w-search
+    .header
+      %h1 Entrez du temps:
+    .body
+      - remote_form_for @time_entry, :loading => "$('loader').show();", :complete => "$('loader').hide();" do |f|
+        %table
+          %tr
+            %td.left Date
+            %td.left Temps
+            %th &nbsp;
+            %th Projet
+            %th &nbsp;
+          %tr
+            %td= f.calendar_date_select :date, :size => 10
+            %td
+              = f.text_field :time, :size => 6
+              hrs
+            %td= f.select :category_id, select_options_from_table(TimeEntryCategory, :all_label => 'choisir une catégorie...')
+            %td
+              = auto_complete_project_id_text_field :time_entry, :project_id
+              /= f.text_field :project_id
+            %td
+              = f.submit "Ajouter", :disable_with => 'attendre ...'
+              = image_tag "loader.gif", :id => "loader", :style => "display:none;"
+  
+  :javascript
+    $('time_entry_time').focus();
+  
+  %h1 Derniers ajouts
+  %table.standard#recent_time_entries
+    - @time_entries.each do |entry|
+      = render :partial => 'entry', :locals => {:entry => entry}

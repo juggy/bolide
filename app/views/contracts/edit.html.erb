@@ -1,0 +1,16 @@
+<div class='page_header'>
+  <h1><%= @contract.name %></h1>
+</div>
+
+<div class='innercol'>
+  
+  <%= error_messages @contract %>
+
+  <% form_for(:contract, :url => object_url, :html => { :method => :put }) do |f| %>
+    <%= render :partial => "form", :locals => { :f => f } %>
+    <p>
+      <%= form_submit %>
+    </p>
+  <% end %>
+  
+</div>

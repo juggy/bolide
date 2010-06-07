@@ -1,0 +1,6 @@
+- group "Dernières activités" do
+  .recent_activities
+    %table
+      %tbody{:id=>"recent_activities"}
+        = render :partial => '/parties/activities_list', :locals => {:activities => party.activities.history.find(:all, :limit => 10) } 
+    = button("voir toute l'historique", url_for(:action => 'history', :id => party) ) if party.activities.history.length > 10

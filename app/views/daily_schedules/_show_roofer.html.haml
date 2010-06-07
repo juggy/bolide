@@ -1,0 +1,18 @@
+%tr{:id => dom_id(ir), :class => "roofer hoverable #{ir.status if params[:print] != "true" } roofer_#{ir.roofer_id}"}
+  %td
+    %span.on-hover
+      / = link_to_remote image_tag('trash.gif'), :url => {:action => 'delete_intervention_roofer', :id => ir}, :confirm => "Enlever #{ir.roofer}?" 
+    %span.employee_number
+      = ir.roofer.employee_number
+    %span.name
+      = ir.roofer.name_and_level
+  %td
+    .on-non-edit
+      = ir.condition
+      - if (absence = ir.absence) && params[:print] != "true"
+        == (#{absence.reason}, #{absence.note}, #{absence.days} j)
+
+-if params[:print] != "true"
+  :javascript
+    check_double('.roofer_#{ir.roofer_id}');
+        

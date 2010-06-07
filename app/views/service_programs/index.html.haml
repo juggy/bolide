@@ -1,0 +1,109 @@
+- content_for :additional_headers do
+  = stylesheet_link_tag 'service_programs', :media => :all
+  = javascript_include_tag 'service_programs'
+  
+#update_spinner{:style => "display:none;"}
+  = image_tag 'spinner.gif'
+  %span{:style => "font-size: 16px; font-weight: bold;"} mise-à-jour...
+
+#edit_work_sheet_placeholder{:style => "display:none"}
+  &nbsp;
+
+.page_header.project_header
+  %h1 Agenda
+.page_menu.project_header
+  = tabnav :schedule
+
+.innercol
+  %h1.month_nav
+    / == Semaine du #{@program.start_date} au #{@program.end_date}
+    %div{:style => 'float:right'}
+      = link_to_next_week( @program.start_date )
+    %div
+      = link_to_previous_week( @program.start_date )
+    
+  %table.service_program#service_program
+    %thead
+      %tr.week
+        %th.foreman &nbsp;
+        - @program.days.each do |day|
+          %th{:class => calendar_classes_for(day) }
+            = day.localize("%a %e %b")
+            = daily_schedule_link( day )
+            - if (h = CompanyCalendar.holiday_on( day )).present?
+              .holiday_name= h.name
+    
+    - @program.foremen.each do |foreman|
+      
+      - alt_tr do
+        %td.foreman= foreman.short_name
+        
+        - @program.days.each do |date|
+          %td{ :class => "#{'unavailable' if !foreman.available_on?(date)} #{calendar_classes_for(date)}" }
+            - drop_zone_id = dom_id(foreman, date)
+            .drop_zone{:id => drop_zone_id}
+
+              - @program.work_sheets_for(foreman, date).each do |daily_work_sheet|
+                - work_sheet = daily_work_sheet.work_sheet
+                - current_dom_id = daily_work_sheet.intervention? ? nil : first_dom_id_only(work_sheet)
+                .work_sheet{:id => current_dom_id, :class => "#{daily_work_sheet.css_classes} #{'draggable' if current_dom_id} #{'promised' if work_sheet.promised?}", :title => work_sheet.display_name}
+                  = drag_handle if current_dom_id
+                  %span.days= daily_work_sheet.time
+                  %strong= edit_work_sheet_link(work_sheet)
+                  - if work_sheet.team_size
+                    %strong= "#{work_sheet.team_size}H"
+                  = work_sheet.default_display_name(params[:department])
+                = draggable_work_sheet(current_dom_id)
+            - if @program.unscheduled?(date) 
+              = program_drop_zone( foreman, date, drop_zone_id )
+  
+  - if !@program.past_schedule?
+    #unschedule_zone{:style => "padding: 20px; text-align: center;"}
+      unschedule
+  
+    = program_drop_zone( nil, nil, 'unschedule_zone')
+    
+    .no-print            
+      %h1 Autres bons de travail
+      .search_work_sheet{:style => "background-color: lightblue; padding: 8px; margin: 8px 0; width: 422px"}
+        %strong Chercher un bon de travail:
+        = text_field_tag "schedule_search", ""
+        = observe_field("schedule_search", :function => "search(value);", :frequency => 0.8)
+      .other_work_sheets
+        - @program.work_sheets.select {|ws| ws.department.id.to_s == params[:department_id]}.sort_by {|ws| [ws.scheduled_date, "i", ws.id].zip.join('') }.each do |work_sheet|
+          - current_dom_id = first_dom_id_only(work_sheet)
+          - done = work_sheet.remaining_days.nil? || work_sheet.remaining_days <= 0.0
+          - classes = []
+          - classes << 'draggable' if current_dom_id
+          - classes << 'done' if done
+          - classes << 'promised' if work_sheet.promised?
+          - if current_dom_id
+            .work_sheet.unscheduled{:id => current_dom_id, :class => classes.join(" ")}
+              = drag_handle unless done
+              %strong
+                = edit_work_sheet_link(work_sheet)
+              = work_sheet.default_display_name(params[:department])
+              %br
+              - if work_sheet.foreman
+                %strong= work_sheet.foreman.short_name
+              - if work_sheet.scheduled_date
+                %span.date= work_sheet.scheduled_date
+              %span.days= "#{work_sheet.remaining_days} jours"
+              - if work_sheet.team_size
+                %span= "à #{work_sheet.team_size} hommes"
+            
+            = draggable_work_sheet(current_dom_id) unless done
+
+:javascript
+
+  $$('#service_program .work_sheetss').each( function(element) {
+    element.observe('mouseenter', workSheetHoverStart);
+    element.observe('mouseleave', workSheetHoverEnd);
+  });
+  
+- if flash[:last_work_sheet_id]
+  :javascript
+    var domid = "work_sheet_" +#{flash[:last_work_sheet_id]};
+    Effect.ScrollTo(domid, {offset: -200, duration: 0}); 
+    new Effect.Highlight(domid, {duration: 15});
+    // console.log(domid);

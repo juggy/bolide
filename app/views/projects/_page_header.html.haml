@@ -1,0 +1,27 @@
+.header
+  .left
+    %h3{:class=>"title"}= @project.display_name
+    %h4{:class=>"subtitle"} Statut: #{@project.state_name}
+    - unless @project.contract_number.blank? || @project.service?
+      %h4{:class=>"subtitle"} No de contrat: #{@project.contract_number}
+    - unless @project.area_real.blank?
+      %h4{:class=>"subtitle"} Superficie réelle: #{@project.area_real} pi. carré
+    = tag_list(@project)
+    = has_instruction(@project) 
+    - if @project.client
+      = has_instruction(@project.client, "Note importante #{@project.client.name}")
+    - if @project.building && @project.building.file_attachments.size > 0 
+      - file_attachments.each do |item| 
+        = image_tag 'FileAttachment.png'
+        = link_to item.attachment.filename, item.attachment.public_filename, :popup => true   
+  .right
+    = button "Modifier", edit_project_path(@project), :type=>:update
+  .clearer
+  - tab_group do
+    - tab "Vue principale", project_path(@project), :selected=>(params[:controller] == "projects")
+    - tab "Intervenants", project_involvements_path(@project), :selected=>(params[:controller] == "involvements")
+    - tab "Bons de travail", project_work_sheets_path(@project), :selected=>(params[:controller] == "work_sheets")
+    - if @project.contract_summary
+      - tab "Comptabilité", project_contract_summaries_path(@project), :selected=>(params[:controller] == "contract_summaries")
+    - tab "Info", project_calls_path(@project), :selected=>(params[:controller] == "calls")
+    - tab "Historique", history_project_path(@project), :selected=>(params[:action] == "history")

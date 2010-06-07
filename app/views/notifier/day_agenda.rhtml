@@ -1,0 +1,11 @@
+<% @tasks.each do |task| %>
+<%= task.category.name + " - " if task.category %><%= task.scheduled_at.strftime('%H:%M') unless task.scheduled_at.to_s.include?("23:59:00") %>
+<%= task.body %> 
+---
+<% end %>
+
+--
+NE PAS REPONDRE A CE COURRIEL
+---------------------------------------------------------------
+Ce message a été envoyé automatiquement par C3, il vous 
+rappelle votre agenda de la journée.

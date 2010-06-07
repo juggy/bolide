@@ -1,0 +1,123 @@
+.page_header
+  %h1
+    %span
+      = link_to 'retour liste des projets', projects_url, :class => 'action'
+    Réunion ventes
+  - form_tag do
+    = hidden_field_tag :_method, :get
+    Estimateur: 
+    = select_tag "estimator_id", options_for_select( User.to_select_options({:all_label => _("choisir...")}, Role.find_by_name('estimateur').users.active), params[:estimator_id].to_i), :onchange => "this.form.submit();"
+    = select_tag 'collection', options_for_select( [['en soumission', 'quote_in_progress' ], ['nouveau prospect', 'prospect'], ['prospect chaud', 'hot_prospect']], params[:collection] ), :onchange => "this.form.submit();"
+    / %br
+    / - case params[:collection]
+    /   - when "quote_in_progress"
+    /     = "à fermer d'ici le #{params[:max_date]}"
+    /   - when "prospect"
+    /     = "fermé entre le #{params[:min_date]} et le #{params[:max_date]}"
+    /   - when "hot_prospect"
+      
+    Date soum entre 
+    = calendar_date_select_tag "min_date", params["min_date"], :size => 10, :onchange => "this.form.submit();"
+    et le 
+    = calendar_date_select_tag "max_date", params["max_date"], :size => 10, :onchange => "this.form.submit();"
+
+.innercol
+  %table.standard
+  
+    %tbody
+  - prospect_status_options = select_options_from_table(ProspectStatus, :all_label => 'prospect ...')
+  - for project in @projects
+    - loader_id = dom_id(project, :loading)
+    - remote_form_for(project, :url => project_meeting_url(project), :method => 'put', :loading => "$('#{loader_id}').show();", :complete => "$('#{loader_id}').hide();") do |f|
+      .header{:style => "clear:both; padding: 5px; background-color: #CCC"}
+        .div{:style => "float:right"}
+          = link_to_function "fermer", "new Effect.toggle('edit_project_#{project.id}', 'slide', {duration: 0.3})", :class => 'action'
+        .div{:style => "float:right; margin: 0 20px; color: darkgreen; font-weight: bold;font-size: 14px"}
+          - if project.quoted_amount && project.quoted_amount > 0.0
+            = number_to_currency project.quoted_amount
+        = project.building_id ? display_party_contract(project.building) : ""
+        %span{:style => "text-decoration:underline"}= project.quote_number
+        %strong= project.display_name
+      %table.standard{:style => "margin-bottom:20px"}
+        %tbody
+          - alt_tr do
+            %td
+              %table.standard
+                / %tr
+                /   %th No appel
+                /   %td
+                /     %span= project.call_number
+                /   %th Date entrée
+                /   %td= project.created_at.to_date.localize
+                %tr
+                  %th{:style => 'width:25%'} Technologie
+                  %td{:style => 'width:25%'}= f.select :technology_id, select_options_from_table(Technology)
+                  %th{:style => 'width:25%'} Superficie
+                  %td{:style => 'width:25%'}= f.text_field :area, :size => 5
+                %tr
+                  %th Type
+                  %td= f.select :work_type_id, select_options_from_table(WorkType)
+                  %th Nb hres
+                  %td= f.text_field :quoted_roofer_time, :size => 5
+                  / %th Source
+                  / %td= project.source ? project.source.name : ""
+                - if project.call && !project.call.reference.blank?
+                  %tr
+                    %th Référé par
+                    %td{:colspan=>3}= project.call.reference
+                %tr
+                  %th Client
+                  %td{:colspan=>3}= project.client ? project.client.name : ""
+                %tr
+                  %th Intervenants
+                  %td{:colspan=>3}
+                    - for involvement in project.involvements.active
+                      = "#{involvement.party.name} (#{involvement.role})" 
+                      %br
+                      
+              / %strong
+              /    Client:
+              /    = project.client ? project.client.name : ""
+              /  %br
+              - if project.quote_date
+                Soumissionné le
+                = project.quote_date.to_date.localize(:short) 
+            %td{:style => "width:350px"}
+              .editable
+                = text_area_tag :note, "", :size => "40x2", :style => "width:340px", :id => dom_id(project, :note_area)
+                = f.select :state, project.next_state_select_options(current_user)
+                = f.select :prospect_status_id, prospect_status_options
+                = f.submit "sauver"
+                = image_tag 'spinner.gif', :id => loader_id, :style => 'display:none;'
+              %br
+              Notes:
+              %div{:id => dom_id(project, :new_note)}
+              - if project.notes.size > 0 
+                = simple_format( truncate project.notes.first.body, :length => 300 ) 
+                %br
+              - if project.caution_type 
+                = "Caution: #{project.caution_type.name}" 
+                %br
+              - if !project.addenda.blank? 
+                = "Addenda: #{project.addenda}" 
+                %br
+
+            %td{:style => "width:140px"}
+              Fermeture:
+              %br
+              = f.calendar_date_select :close_quote_by, :size => 13
+              
+              = project.close_quote_by ? late_date(project.close_quote_by) : ""
+              = project.bsdq_date? ? "BSDQ" : ""
+              %br
+              %br
+              - visit_date = project.visit_date
+              - unless visit_date.blank?  
+                Visite: 
+                = visit_date.to_date.localize(:short) rescue "" 
+                %br
+              %br
+              %br
+              entré il y a
+              = Time.now.to_date - project.created_at.to_date
+              jours

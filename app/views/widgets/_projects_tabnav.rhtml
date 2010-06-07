@@ -1,0 +1,60 @@
+<%  
+# this partial renders a tabnav, you can call it in your views with:
+#   <%= tabnav :project % > (just the tabnav) 
+# or, if you want a boxed tabnav:
+#   <% tabnav :project do % >
+#     your html here
+#   <% end % >
+# (remove the space between % and >, we don't want to mess up your brand new tabnav :-))
+#
+# you can pass render_tabnav a few options:
+#   :generate_css => true|false #=> generates a default inline css for the tabnav, defaults to false
+#   :html => aHash #=> sets html options for the tabnav's div (es :html => {:class=> 'myCssClass', :id=>'myCssId'}) 
+#     
+render_tabnav :projects, :html => {:class => 'page_tabnav'} do 
+    
+  # this generates a tab for every controller in your app
+  # you'll probably want to delete this and
+  # add tabs one by one as shown below
+
+  # add_tab do |t|
+  #   t.named _("Demandes")
+  #   t.links_to hash_for_projects_url(:collection => 'call')
+  # end
+  
+  add_tab do |t|
+    t.named _("En soumission")
+    t.links_to hash_for_projects_url(:collection => 'quote_in_progress')
+  end
+  
+  add_tab do |t|
+    t.named _("Prospect")
+    t.links_to hash_for_projects_url(:collection => 'prospect')
+  end
+  
+  add_tab do |t|
+    t.named _("En exécution")
+    t.links_to hash_for_projects_url(:collection => 'active')
+  end
+    
+  add_tab do |t|
+    t.named _("Complétés")
+    t.links_to hash_for_projects_url(:collection => 'closed')
+  end
+  
+  add_tab do |t|
+    t.named "&nbsp"
+  end
+  
+  add_tab do |t|
+    t.named "Agenda soumissions"
+    t.links_to( hash_for_quote_calendar_url ) 
+  end
+  
+  add_tab do |t|
+    t.named "Réunion ventes"
+    t.links_to hash_for_project_meetings_url(:collection => 'quote_in_progress')
+  end
+  
+end 
+%>

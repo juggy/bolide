@@ -1,0 +1,13 @@
+<div class='page_header'>
+  <h1><%= _("Travaux en cours au 31 déc.") %> <%= @accounting_item.financial_year %></h1>
+</div>
+
+<div class='innercol'>
+  <%= error_messages @accounting_item %>
+
+  <% form_for(:accounting_item, :url => project_accounting_item_path(@project, @accounting_item), :html => { :method => :put }) do |f| %>
+    <%= render :partial => 'form', :locals => {:f => f} %>
+    <%= form_submit %>
+  <% end %>
+  
+</div>

@@ -1,0 +1,10 @@
+- form_for(@comment, :url => update_comment_contact_employee_info_url(@contact, :comment_id => @comment.id), :html => {:multipart => true}) do |f|
+  = f.text_area :comment, :size => "60x7", :style => "width: 100%"
+  - if @comment.attachment
+    fichier:
+    = @comment.attachment.filename
+  - else
+    attacher un fichier:
+    = f.file_field :uploaded_data
+  %br
+  = f.submit "sauver"

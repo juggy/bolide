@@ -1,0 +1,13 @@
+%tr{:class=>"message", :id=>dom_id(item)}
+  %td{:class=>"tag"}= item.message.type_title
+  %td{:class=>"date"}= item.updated_at.localize(:short)
+  %td{:class=>"description"}
+    - email_title = item.subject.blank? ? "Pas de titre" : truncate(item.subject, :length => 50)
+    - with_tooltip(truncate(item.message.text_body, :length => 200, :omission => "...")) do
+      = link_to email_title, item.message
+    - @attachments = item.message.attachments
+    - if @attachments.length > 0 
+      .Attachment
+        #{@attachments.length} Attachement(s)
+  %td{:class=>"person"}= highlight_current_user( item.user )
+  %td{:class=>"actions"}

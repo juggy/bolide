@@ -1,0 +1,47 @@
+= party_page_header(@contact)
+
+.innercol
+  %h1 Informations personnelles
+  - form_for @employee_info, :url => contact_employee_info_path(@contact), :method => :put do |f|
+    %p
+      = f.label :prefered, 'employé préférentiel'
+      %br
+      = f.check_box :prefered
+    %p
+      = f.label :level_id, 'niveau compétence'
+      %br
+      = f.select :level_id, select_options_from_table(EmployeeLevel)
+    %p
+      = f.label :employee_number, 'num. employé'
+      %br
+      = f.text_field :employee_number, :size => 4
+    %p
+      = f.label :hired_on, "date d'embauche"
+      %br
+      = std_calendar_date_field :employee_info, :hired_on
+    %p
+      = f.label :union, "syndicat"
+      %br
+      = f.text_field :union
+    %p
+      = f.label :address, 'adresse'
+      %br
+      = f.text_area :address, :size => '60x3'
+    %p
+      = f.label :home_number, 'téléphone maison'
+      %br
+      = f.text_field :home_number
+    %p
+      = f.label :cell_number, 'cellulaire'
+      %br
+      = f.text_field :cell_number
+    %p
+      = f.label :birthday, 'date de naissance'
+      %br
+      = std_calendar_date_field :employee_info, :birthday
+    %p
+      = f.label :urgency_contact, 'contact urgence'
+      %br
+      = f.text_area :urgency_contact, :size => '60x3'
+
+    = form_submit

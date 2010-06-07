@@ -1,0 +1,7 @@
+page << "if ($('recent_activities')) {"
+  page.insert_html :top, "recent_activities", {:partial => 'item', :locals => {:item => @note} }
+  page.visual_effect :highlight, dom_id( @note )
+page << "}"
+page[:note_form_wrapper].hide
+page[:note_new_button].show
+page[:new_note].reset

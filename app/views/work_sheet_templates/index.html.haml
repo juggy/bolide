@@ -1,0 +1,20 @@
+.page_header
+  %h1 Liste des gabarits de bon de travail
+
+.innercol
+
+  %table.standard
+    %tr
+      %th Titre
+      %th &nbsp;
+    - @work_sheet_templates.each do |work_sheet_template|
+      - alt_tr do
+        %td= link_to work_sheet_template.title, edit_object_url(work_sheet_template)
+        %td= link_to image_tag('trash.gif', :border => 0), object_url(work_sheet_template), :confirm => 'Êtes-vous sûrs?', :method => :delete, :title => 'supprimer'
+
+
+- content_for :sidebar do
+  .new
+    = link_to 'Nouveau gabarit', new_object_url, :class => 'new'
+  
+  = render :partial => 'config/list'

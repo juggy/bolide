@@ -1,0 +1,52 @@
+<%= f.hidden_field :client_id %>
+<table class='standard'>
+  <tr>
+    <td>Client</td>
+    <td><%= @contract.client.name %></td>
+  </tr>
+  
+  <tr>
+    <td><%= _("Type") %></td>
+    <td><%= f.select :contract_type_id, select_options_from_table(ContractType) %></td>
+  </tr>
+  <!-- <tr>
+    <td><%= _("No") %></td>
+    <td><%= f.text_field :number %></td>
+  </tr> -->
+  <tr>
+    <td><%= _("Debut") %></td>
+    <td><%= f.calendar_date_select :start_on %></td>
+  </tr>
+  <tr>
+    <td><%= _("Fin") %></td>
+    <td><%= f.calendar_date_select :end_on %></td>
+  </tr>
+</table>
+
+<h2>Immeubles liés à l'entente</h2>
+
+<span class='info'>Chercher:</span>
+<%= text_field_with_auto_complete :building, :name, {:autocomplete => 'off', :size => 26}, 
+        :url => auto_complete_for_building_name_contracts_path,
+        :after_update_element => 
+             "function(element,value)  {
+              var temp  = element.value.strip();
+              $('building_name').value = '';" +  
+              remote_function( :url=> on_auto_complete_building_name_contracts_path(), 
+                :with=>"'building_id='+ temp" ) +  
+              "; return false;}" %>
+<br/><br/>
+<div id='contract_buildings'>
+  <% related_building = @contract.related_buildings %>
+  <% for building in (@contract.buildings - related_building) %>
+    <%= render :partial => 'contract_building', :locals => {:building => building, :checked => @contract.buildings.include?(building)} %>
+  <% end -%>
+  
+  <% if related_building.size > 0 %>
+  <br/>
+    <span>Immeubles reliés à ce client</span>
+    <% for building in related_building %>
+       <%= render :partial => 'contract_building', :locals => {:building => building, :checked => @contract.buildings.include?(building)} %>
+     <% end -%>
+   <% end -%>
+</div>

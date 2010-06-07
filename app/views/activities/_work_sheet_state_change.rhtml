@@ -1,0 +1,11 @@
+<tr valign="top" class="state_change <%= cycle("odd","even", {:name => :history}) %>" id="<%= dom_id(item) %>">
+  <%= display_project_name(item) %>
+  <td width="100"><%= display_activity_icon(item) %></td>
+  <td width="100"><%= item.updated_at.localize(:short) %></td>
+  <td colspan="2">
+      <span class='user_highlight'><%= highlight_current_user( item.user ) %></span>
+      <%= link_to "Bon de travail ##{item.work_sheet.id}", project_work_sheet_url(item.work_sheet.project, item.work_sheet) %>:
+      <%= content_tag('span', item.category.name, :class => 'category') if item.category %>
+      <%= item.description %>
+  </td>
+</tr>

@@ -1,0 +1,20 @@
+= party_page_header @company
+
+.innercol
+  - unless @company.courses.empty?
+    #courses
+      - @company.courses.each do |course|
+        .course
+          %h1= "Certification: #{course.name}"
+          %p= course.description
+          %table.standard
+            %tr
+              %th Employé
+              %th Suivi le
+              %th Expire le
+            - course.competences.sort_by {|c| c.employee.full_name }.each do |competence|
+              %tr{:class => [competence_expiry_class(competence), cycle('odd', 'even')].join(" ") }
+                %td= competence.employee.full_name
+                %td= competence.course_date
+                %td
+                  %span= competence.expires_on

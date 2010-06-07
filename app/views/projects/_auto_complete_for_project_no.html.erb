@@ -1,0 +1,8 @@
+<ul>
+  <% for project in @projects %>
+  <li>
+    <div style="text-align: left;" class="informal"><%= display_icon(project, project.quick_search_name) %></div>
+    <div style="display:none;" class="auto_id"><%= project.id %></div>
+  </li>
+  <% end %>
+</ul>

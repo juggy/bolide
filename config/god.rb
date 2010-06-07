@@ -7,7 +7,8 @@ pids = {
   'bfeature'=>'/u/apps/bolide/shared/pids/unicorn.pid',
   'bstream'=>'/u/apps/bolide/shared/pids/live.unicorn.pid',
   'bhost'=>'/u/apps/bolide/current/helpers/vhost/bhost.pid',
-  'bstat'=>'/u/apps/bolide/current/helpers/statistics/bstat.pid'
+  'memcachedb' => '/var/run/memcachedb.pid'
+  #,'bstat'=>'/u/apps/bolide/current/helpers/statistics/bstat.pid'
 }
 
 pids.each do |name, pid_path|

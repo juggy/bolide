@@ -1,0 +1,42 @@
+-content_for :filtre do
+  
+  -filter_for @search, "Filtres de recherche", :url => {:controller => :projects, :collection => params[:collection]} do |f|
+    = hidden_field_tag :collection, params[:collection]
+    = render :partial => 'projects/list/role_filter', :locals => {:f => f}
+    = f.select :client_building_contracts, select_options_from_table(ContractType, {:all_label=>_("tous")}), {:selected => params[:search][:client_building_contracts].to_i}, {:onchange => "this.form.submit();"}
+    = button "Filtrer"
+        
+- content_for :full_content do  
+     
+  .ProjectList
+    %table
+      %thead
+        %tr
+          = column_header "No", @search, :call_number
+          = column_header "Client", @search, :client_name 
+          = column_header "Immeuble", @search, :building_name 
+          = column_header "Intervenants"
+          = column_header "Entrée", @search, :created_at
+      %tbody
+        - for project in projects
+          %tr
+            - party = project.client
+            - building = project.building
+            %td
+              = link_to project.call_number, project, :class => "process#{project.is_defined? ? "" : "_priority"}"
+              
+            %td
+              = party ? link_to(party.name, party, :class=>"off") : missing_data(party,"name","client?")
+              %br
+              = "source: #{project.call.display_source}" if project.call && !project.call.display_source.blank?
+            %td{:class=>"tags"}
+              = building ? link_to(building.name, building, :class=>"off") : missing_data(party,"name","immeuble?")
+              - if project.building
+                .tag.right
+                  = display_party_contract(project.building)
+              %br
+              = "type: #{display_work_type_or_call_type project.call}" if project.call && project.call.call_type && !project.call.call_type.blank?
+            %td{:class=>"people"}
+              = render :partial=>"/projects/list/project_involvements", :locals=>{:project=>project}
+            %td= project.created_at.to_date.localize(:short).gsub(/\s/, "&nbsp;")
+    = will_paginate projects, :renderer=>UiPaginationRenderer, :previous_label=>"Précédente", :next_label=>"Prochaine"

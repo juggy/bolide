@@ -1,0 +1,18 @@
+%div
+  = label :title, "Titre:"
+  %br
+  = f.text_field :title, :size => 60
+
+%div
+  = label :department, "Utilisez ce gabarit comme défaut pour le département:"
+  %br
+  = f.select :department, select_options_from_table(Department)
+
+
+%div
+  = label :description, "Description:"
+  %br
+  = f.text_area :description, :size => "60x30"
+
+
+= form_submit

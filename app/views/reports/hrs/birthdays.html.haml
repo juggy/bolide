@@ -1,0 +1,14 @@
+.page_header
+  %h1== Liste des anniversaires: #{DateLocalization.date_helper_month_names[@current_month]}
+
+.innercol
+  %p
+    - (1..12).each do |index|
+      = link_to_unless index == @current_month, DateLocalization.date_helper_month_names[index], birthdays_reports_hr_url(:month => index)
+      |
+  %table.standard
+    - @employees.each do |employee|
+      - alt_tr do
+        %td{:style => "width:100px;"}= employee.birthday.localize("%a, %e %b")
+        %td= employee.contact.full_name
+  

@@ -1,0 +1,52 @@
+-content_for :filtre do
+  
+  -filter_for @search, "Filtres de recherche", :url => {:controller => :projects, :collection => params[:collection]} do |f|
+    = render :partial => 'projects/list/role_filter', :locals => {:f => f}
+    = button "Filtrer"
+
+-content_for :sidebar do
+  - sidebar_group do
+    - if @late_quote_count && @late_quote_count > 0
+      - sidebar_row do
+        .late_quote{:style=> "color:red; font-size:16px; padding: 8px; text-align: center;"}
+          == #{@late_quote_count} soumissions en retard
+    -sidebar_row do
+      .quote_count{:style=> "font-size:16px; padding: 0 8px 8px; text-align: center;"}
+        == #{@quote_count} soumissions en cours
+    -sidebar_row do
+      = button("Imprimer", print_quote_in_progress_list_url(params[:search].only("estimator_id", "manager_id")), :icon=>"/images/print.png", :popup => true, :class => 'printer',:style => 'margin: 0 auto;' )
+
+- content_for :full_content do
+   
+  .ProjectList
+    %table
+      %thead
+        %tr
+          = column_header "No", @search, :no
+          = column_header "Project", @search, :name
+          = column_header "Client", @search, :client_name
+          = column_header "Intervenants"
+          = column_header "Entrée", @search, :created_at
+          = column_header "Visite", @search, :visit_date
+          = column_header "Fermeture", @search, :close_quote_by
+          = column_header
+      %tbody
+        - for project in projects
+          %tr
+            %td= project.quote_number
+            %td{:colspan=>2, :class=>"tags"}
+              - if project.building
+                .tag.right
+                  = display_party_contract(project.building)
+              .name
+                = link_to project.display_name, project_path(project) 
+              .client-name
+                = missing_data(project.client,"name", "client?")
+              
+            %td{:class=>"people"}
+              = render :partial=>"/projects/list/project_involvements", :locals=>{:project=>project}
+            %td= project.created_at.to_date.localize(:short)
+            %td= project.visit_date.localize(:short).gsub(/\s/, "&nbsp;") rescue ""
+            %td= late_date(project.close_quote_by) if project.close_quote_by
+            %td= project.bsdq_date? ? "BSDQ" : ""
+    = will_paginate projects, :renderer=>UiPaginationRenderer, :previous_label=>"Précédente", :next_label=>"Prochaine"

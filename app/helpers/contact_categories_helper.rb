@@ -1,0 +1,2 @@
+module ContactCategoriesHelper
+end

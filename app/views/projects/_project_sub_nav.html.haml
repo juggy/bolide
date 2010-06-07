@@ -1,0 +1,29 @@
+.SubNavigation
+  %ul{:class=>"steps list-h left"}  
+    %li{:class=>"step first #{"current" if quote_in_progress?}"}
+      %a{:href=>projects_path(:collection=>"quote_in_progress")}
+        %span{:class=>"link"} EN SOUMISSION
+        %span{:class=>"count"}= Project.quote_in_progress.size
+    %li{:class=>"step #{"current" if prospect?}"}
+      %a{:href=>projects_path(:collection=>"prospect")}
+        %span{:class=>"link"} PROSPECT
+        %span{:class=>"count"}= Project.prospect.size
+    %li{:class=>"step #{"current" if active?}"}
+      %a{:href=>projects_path(:collection=>"active")}
+        %span{:class=>"link"} EN EXÉCUTION
+        %span{:class=>"count"}= Project.active.size
+    %li{:class=>"step last #{"current" if closed?}"}
+      %a{:href=>projects_path(:collection=>"closed")}
+        %span{:class=>"link"} COMPLÉTÉS
+        %span{:class=>"count"}= Project.closed.size
+      %span{:class=>"decoration tail"}
+  %ul{:class=>"links list-h left"}
+    %li
+      %a{:href=>quote_calendar_path}
+        %span{:class=>"link"} AGENDA SOUMISSIONS
+      %span{:class=>"decoration tail"}
+    %li
+      %a{:href=>project_meetings_path(:collection=>"quote_in_progress")}
+        %span{:class=>"link"} RÉUNION VENTES
+      %span{:class=>"decoration tail"}
+  .clearer &nbsp;

@@ -1,0 +1,8 @@
+<ul>
+<% for user in @users do -%>
+  <li>
+    <div class="id" style="display:none"><%= user.id.to_s.strip %></div>
+    <div class="full_name"><span class="informal"><%=h user.full_name  %></span></div>
+  </li>
+<% end -%>
+</ul>

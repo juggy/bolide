@@ -1,0 +1,9 @@
+<%= render :partial => '/projects/page_header' %>
+
+<div class='innercol'>
+  <%= render :partial => '/projects/show_warranty_infos' %>
+  <%= render :partial => '/projects/show_bidders' %>
+  <%= render :partial => '/projects/show_quote' %>
+  <h1>Information sur la demande</h1>
+  <%= render :partial => '/calls/show', :locals => {:call => @call} %>
+</div>

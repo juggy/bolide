@@ -1,0 +1,3 @@
+page[:note_body].focus
+page.visual_effect 'highlight', :note_body
+page[:note_submit_button].enable

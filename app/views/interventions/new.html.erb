@@ -1,0 +1,11 @@
+<%= render :partial => '/projects/page_header' %>
+
+<div class='innercol'>
+  
+  <%= error_messages @intervention %>
+  
+  <h1>Bon de travail #<%= @work_sheet.id %> - <%= @work_sheet.call_number %> - Nouvelle intervention</h1>
+  
+  <%= render :partial => 'form' %>
+  
+</div>

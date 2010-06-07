@@ -1,0 +1,9 @@
+page << "if ($('task_list')) {"
+  @context = "Project" if @task.project
+  page.insert_html :top, "#{@task.scheduled_date.qualify.to_s}_table", {:partial => 'item', :locals => {:item => @task } }
+  page["#{@task.scheduled_date.qualify.to_s}"].show
+  page.visual_effect :highlight, dom_id( @task )
+page << "}"
+page[:task_form_wrapper].hide
+page[:task_new_button].show
+page[:new_task].reset

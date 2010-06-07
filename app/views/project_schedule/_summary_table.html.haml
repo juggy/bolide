@@ -1,0 +1,154 @@
+%style
+  :sass
+    table 
+      td.day
+        :width 5px !important
+        :padding 0 !important
+        :border-bottom 1px solid white
+        :cursor pointer
+      td.scheduled
+        :background-color lightblue !important
+      td.color1
+        :background-color #55A8E6 !important
+      td.color2
+        :background-color #88C2E6 !important
+      td.color3
+        :background-color lightblue !important
+      td.color4
+        :background-color #55A8E6 !important
+      td.color5
+        :background-color #88C2E6 !important
+      td.color6
+        :background-color lightblue !important
+      td.color7
+        :background-color #55A8E6 !important
+      td.color8
+        :background-color #88C2E6 !important
+      td.color9
+        :background-color lightblue !important
+  
+      / td.over-scheduled
+      /   :background-color blue !important
+      td.holiday
+        :background-color #BBB !important
+      td.weekend
+        :background-color lightgrey !important
+      td.new-ws
+        :border-left 1px solid blue
+
+- date_range = (Date.today..(Date.today + 90.days)).to_a
+- work_sheet_count = 0
+- work_days_count = 0.0
+- max_date = nil
+- if show_prevision?
+  - program = ServiceProgram.new(:department_id => params[:department_id], :start_date => Date.today, :end_date => (Date.today + 90.days), :week_factor => 0.6)
+
+%table.standard{:style=>"width:100%"}
+  %tr
+    %th &nbsp;
+    %th &nbsp;
+    %th &nbsp;
+    %th.right Termine le
+    - if show_prevision?
+      %th{:style=>"width:10px; border-right: 1px solid black;"} &nbsp;
+      %th{:colspan => 90, :style=>"width:450px"}
+        3 prochain mois
+  /- groups = (group == 'all') ? ['contract', 'service', 'tinman'] : [group]
+  - departments = (group == 'all') ? Department.active : [Department.find(params[:department_id])]
+  - departments.each do |department|
+    - alt_tr do
+      %td{:style=>"width:200px"}
+        - new_opts = { :grouped_by => params[:grouped_by], :user_id => nil, :department_id => params[:department_id] }
+        - if params.only(:grouped_by, :user_id, :department_id) == new_opts
+          = "Non attribué #{ department }"
+        - else
+          = link_to_unless_current "Non attribué #{ department}", new_opts
+          
+      %td.right{:style=>"width:65px"}
+        - work_sheet_count += (wsc = WorkSheet.for_schedule(nil, department.id, params[:grouped_by]).count )
+        == #{wsc} bons
+      %td.right{:style=>"width:80px"}
+        - work_days_count = (remdays = WorkSheet.for_schedule(nil, department.id, params[:grouped_by]).sum(:remaining_days))
+        == #{remdays} jours
+      %td.right{:style=>"width:80px"}
+      - if show_prevision?
+        %td{:style=>"width:10px; border-right: 1px solid black;"}
+          &nbsp;
+        - date_range.each do |day|
+          %td.day{:class => calendar_classes_for(day), :style => ("border-left: 1px solid grey;" if day.day == 1)}
+            - if day.day == 1
+              .monthname{:style => "position:absolute; font-weight: bold;"}= day.localize("%b")
+            
+        / = day.day == 1 ? day.month : ""
+        
+  - users.each do |user|
+    - alt_tr({:class => ("selected" if user.id.to_s == params[:user_id])}) do
+      %td
+        - new_opts = { :grouped_by => params[:grouped_by], :user_id => user.id, :department_id => params[:department_id] }
+        - if params.only(:grouped_by, :user_id, :department_id) == new_opts
+          = user
+        - else
+          = link_to_unless_current user.to_s, new_opts
+          
+        / "/project_schedule?grouped_by=#{params[:grouped_by]}&user_id=#{user.id}&department=#{params[:department]}"
+      %td.right
+        - work_sheet_count += (wsc = WorkSheet.for_schedule(user.id, params[:department_id], params[:grouped_by]).count)
+        == #{wsc} bons
+      %td.right
+        - work_days_count += (remdays = WorkSheet.for_schedule(user.id, params[:department_id], params[:grouped_by]).sum(:remaining_days))
+        == #{remdays} jours
+      %td.right
+        - if show_prevision?
+          - max_date = [max_date, (mdate = program.max_date_for(user) )].compact.max
+          == #{mdate}
+        - else
+          = WorkSheet.for_schedule(user.id, params[:department_id], params[:grouped_by]).all.collect(&:planned_end_date).compact.max
+      - if show_prevision?
+        - color = "color0"
+        %td{:style=>"width:10px; border-right: 1px solid black;"}
+        - date_range.each do |day|
+          - wss = program.work_sheets_for(user, day)
+          - color = color.succ if wss.size > 0 && show_only_on_change(wss[0].work_sheet.contract_number).present?
+          - day_classes = calendar_classes_for(day) + "#{color if wss.size > 0} #{"scheduled" if wss.size > 0} #{"over-scheduled" if wss.size > 1} #{"new-ws" if wss.size > 0 && show_only_on_change(wss[0].work_sheet.contract_number).present?}"
+          - day_style = ("border-left: 1px solid grey;" if day.day == 1)
+          - day_title = ("#{day.to_s}: " + wss.collect {|ws| ws.work_sheet.display_name}.join(" / "))
+          - day_click = (wss.size > 0 && ws = wss[0].work_sheet) ? "window.location = '#{url_for({ :action => 'show', :grouped_by => 'foreman_id', :user_id => ws.foreman_id, :department_id => ws.department_id, :anchor => dom_id(ws, 'edit') })}'" : nil
+          %td.day{:class => day_classes, :style => day_style, :title => day_title, :onclick => day_click}
+            = user.available_on?(day) ? "" : "/"
+            = wss.size > 1 ? "x" : ""
+      
+  - alt_tr do
+    %td TOTAL
+    %td.right== #{work_sheet_count} bons
+    %td.right== #{work_days_count} jours
+    %td.right= max_date
+    - if show_prevision?
+      %th{:style=>"width:10px; border-right: 1px solid black;"} &nbsp;
+      %th{:colspan => 90, :style=>"width:450px; border-bottom: none"} &nbsp;
+      
+  - if show_prevision?
+    %tr
+      %td{:colspan => 95, :style=>"border-bottom: none"} &nbsp;
+    
+    %tr 
+      %th jusqu'au
+      %th.right ouvrables par équipe
+      %th.right total à vendre
+      %th.right restants à vendre
+      - if show_prevision?
+        %th{:style=>"width:10px; "} &nbsp;
+        %th{:colspan => 90, :style=>"width:450px; border-bottom: none"} &nbsp;
+    
+    - WorkWeekExpectation.active.each do |wwe|
+      %tr
+        %td
+          %strong= wwe.end_date.localize(:long)
+          = "(#{wwe.days_per_week} j / sem)"
+        %td.right= "#{number_with_precision(wwe.work_days_left, :precision => 1)} j"
+        - days_left = wwe.work_days_left_for(users)
+        %td.right= "#{number_with_precision(days_left, :precision => 1)} j"
+        %td.right= "#{number_with_precision(days_left - work_days_count, :precision => 1)} j"
+        - if show_prevision?
+          %td{:style=>"width:10px; "} &nbsp;
+          %td{:colspan => 90, :style=>"width:450px; border-bottom: none"} &nbsp;
+      

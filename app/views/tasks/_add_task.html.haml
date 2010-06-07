@@ -1,0 +1,13 @@
+= button "Ajouter une tâche", "#", :type=>:create, :icon=>"/images/design/117-todo.png", :size=>:big, :html=>{:id=>"task_new_button", :data_type=>"task"}
+#task_form_wrapper.form_wrapper{:style=>"display: none"}
+  .body
+    - @party = party rescue nil
+    - @task = @party ? @party.tasks.build(:user => current_user) : Task.new(:user => current_user)
+  
+    - remote_ui_form_for(@task, :html => {:id => 'new_task_form'} ) do |f|
+      - group "Ajouter une tâche" do
+        = render :partial => "/tasks/form", :locals => {:f => f} 
+        = button "Ajouter", nil, :type=>:create
+        %span
+          ou
+          = link_to "annuler", "#task", :class=>"cancel"

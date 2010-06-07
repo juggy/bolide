@@ -1,0 +1,6 @@
+= party_page_header @contact
+
+.innercol
+  %h1== Modifier une absence
+  - form_for([@contact, @absence]) do |f|
+    = render :partial => '/absences/form', :locals => {:f => f}      

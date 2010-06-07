@@ -1,0 +1,7 @@
+page << "if ($('recent_activities')) {"
+  page[:recent_activities_wrapper].show
+  page.insert_html :top, "recent_activities", {:partial => 'completed', :locals => {:item => @task} }
+  page.visual_effect :highlight, dom_id( @task, 'history' )
+page << "}"
+
+page[dom_id(@task)].remove

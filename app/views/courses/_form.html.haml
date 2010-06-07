@@ -1,0 +1,14 @@
+- form_for(@course) do |f|
+  %p
+    = f.label :name, "Nom:"
+    %br
+    = f.text_field :name, :style => 'width:90%;'
+  %p
+    = f.label :description, "Description:"
+    %br
+    = f.text_area :description, :rows => '4', :style => 'width:90%;'
+  %p
+    Compagnie:
+    %br
+    = auto_complete_party_id_text_field( :course, :company_id, :url => {:collection => 'company'}, :size => 40, :value => (@course.company ? @course.company.name : "") )
+  = form_submit

@@ -1,0 +1,15 @@
+<% if current_user.has_permission?('access_accounting_infos') %>
+  <h1>Résumé</h1>
+  <div class='new'>
+    <%= link_to _("Complet"), project_contract_summaries_path(:project_id => project.id, :display => ""), :class => 'Money' %>
+  </div>
+  <div class='new'>
+    <%= link_to _("Main d'oeuvre"), project_contract_summaries_path(:project_id => project.id, :display => "mo"), :class => 'Money' %>
+  </div>
+
+  <h1>Travaux en cours</h1>
+  <div class='new'>
+    <% caption = project.has_accounting_items? ? "Voir travaux en cours" : "Ajouter des travaux en cours"%>
+    <%= link_to "#{caption}", project_accounting_items_path(:project_id => project.id), :class => 'Money' %>
+  </div>
+<% end -%>

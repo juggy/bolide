@@ -1,0 +1,86 @@
+<div class='page_header'>
+  <h1>Facturation service entre le <%= params["min_date"] %> et le <%= params["max_date"] %></h1>
+</div>
+
+<div class='innercol'>
+  <div class='report_filter'>
+    <% form_tag do %>
+      <%= hidden_field_tag :_method, :get %>
+      Grouper par: 
+      <%= select_tag "group",
+                options_for_select(stats_group, params[:group]) %>
+      <%= select_tag "invoice_type", options_for_select( Intervention.invoice_type_select_options.unshift(["tous", "all"]), params[:invoice_type]) %>
+      facturé entre le <%= calendar_date_select_tag "min_date", params["min_date"], :size => 10 %>
+      et le <%= calendar_date_select_tag "max_date", params["max_date"], :size => 10 %>
+      <%= submit_tag 'voir' %>
+      <%= check_box_tag('format', value = "csv", checked = false)%> au format csv?
+    <% end -%>
+  </div>
+  
+  <div class='report_filter'>
+    <h2>Index</h2>
+    <ul style='list-style:disc inside;'>
+      <% @grouped_stats.keys.sort_by(&:to_s).each do |group_name| %>
+        <li><%= link_to report_group_name(group_name), "##{report_group_dom_id(group_name)}" %></li>
+      <% end -%>
+    </ul>
+  </div>
+  
+  <% if current_user.has_permission?('show_complete_reports') %>
+    <h1>Total Global (<%= @invoices.size %> factures)</h1>
+    <%= render :partial => 'summary_table', :locals => {:stats => @invoices} %>
+  <% end -%>
+  
+  <% ordered_keys = @grouped_stats.keys.sort_by(&:to_s)
+     ordered_keys.each do |group_name|
+      stats = @grouped_stats[group_name] %>
+  <div class='report_group' id='<%= report_group_dom_id(group_name) %>'>
+    <h1><%= report_group_name(group_name) %> - (<%= stats.size %> factures)</h1>
+    <h2>Résumé</h2>
+    <%= render :partial => 'summary_table', :locals => {:stats => stats} %>
+
+    
+    <h2>Détail</h2>    
+    <table class='standard report'>
+      <thead>
+        <tr>
+          <th># Facture</th>
+          <th>Date Facture</th>
+          <th>Fin des travaux</th>
+          <th class="right">Hres réelles</th>
+          <th class="right">Cout M.O.</th>
+          <th class="right">Cout Materiaux</th>
+          <th class="right">Cout Equipement</th>
+          <th class="right">Montant facturé</th>
+          <th class="right">Profit</th>
+          <th class="right">% profit</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for invoice in stats %>
+          <tr class='<%= cycle("odd","even") %>'>
+            <td colspan='10' style='text-align:left;padding-top: 5px;'>
+              <%= invoice.contract_number %> - <%= invoice.call_number %> - <%= link_to invoice.project.display_name, project_work_sheet_path(invoice.project, invoice.work_sheet) %>
+            </td>
+          </tr>
+          <tr class='<%= cycle("odd","even") %>'>
+            <td class="left" style='width:7%;'><%= link_to invoice.invoice_no, work_sheet_invoice_url(invoice.work_sheet, invoice) %></td>
+            <td class="left" style='width:8%;'><%= invoice.invoice_date %></td>
+            <td class="left" style='width:8%;'><%= invoice.work_end_date %></td>
+            <td style='width:7%;'><%= display_hours invoice.real_time %></td>
+            <td style='width:12%;'><%= number_to_currency invoice.roofer_cost %></td>
+            <td style='width:12%;'><%= number_to_currency invoice.materials_cost %></td>
+            <td style='width:12%;'><%= number_to_currency invoice.machinery_cost %></td>
+            <td style='width:12%;'><%= number_to_currency invoice.invoice_amount %></td>
+            <td style='width:12%;'><%= number_to_currency invoice.profit %></td>
+            <td style='width:10%;'><%= invoice.profit_pct.finite? ? number_to_percentage( invoice.profit_pct, :precision => 2) : '-' %></td>
+          </tr>
+        <% end -%>
+        <tr>
+          <td colspan='10'>
+      </tbody>
+    </table>
+  </div>
+  <% end -%>
+  
+</div>

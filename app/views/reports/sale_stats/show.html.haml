@@ -1,0 +1,99 @@
+.page_header
+  %h1== Statistiques de vente par #{grouped_by} entre le #{params["min_start_date"]} et le #{params["max_start_date"]}
+
+:javascript
+  function toggle_group(dom_id) {
+    $$('.stats-group').each( function(el) { $(el).hide();} );
+    $(dom_id).show();
+  }
+
+%style
+  :sass
+    table.summary
+      :border 1px solid black
+      thead th
+        :vertical-align bottom
+      td
+        :text-align center
+        &.right
+          :text-align right
+
+.innercol  
+  .report_filter
+    - form_tag do
+      = hidden_field_tag :_method, :get
+      Grouper par: 
+      = select_tag "group", options_for_select(stats_group, params[:group])
+      entre 
+      = calendar_date_select_tag "min_start_date", params["min_start_date"], :size => 10
+      et le 
+      = calendar_date_select_tag "max_start_date", params["max_start_date"], :size => 10 
+      = submit_tag 'grouper'
+  
+  / =debug @invoiced_amounts
+  .report_group
+    %table.standard.summary{:style => 'width:700px'}
+      %thead
+        %tr{:style => 'border-bottom: 1px solid black'}
+          %th &nbsp;
+          %th{:style => 'text-align:center;width:40px'} nb demandes
+          %th{:style => 'width:100px;'} &nbsp;
+          %th{:style => 'text-align:center;width:40px;font-size: 11px;color:#666;'} %
+          %th{:style => 'text-align:center;width:40px;'} nb
+          %th{:style => 'text-align:center;width:40px;font-size: 11px;color:#666;'} %
+          %th{:style => 'text-align:center;width:40px;'} nb gagnés
+          %th{:style => 'text-align:right;width:100px;border-left: 1px solid #EEE'} gagnés $
+    
+      - ordered_keys = @stats_summary.keys.sort_by(&:to_s)
+      - ordered_keys.each do |group_name|
+        - stats = @stats_summary[group_name]
+        %tr{ :style => 'border-top:1px solid #AAA;'}
+          %td.right{:rowspan => 2, :style => 'vertical-align: middle;'}= link_to_function( report_group_name(group_name), "toggle_group('#{report_group_dom_id(group_name)}');" )
+          %td{:rowspan => 2, :style => 'vertical-align: middle; border-right: 1px solid #AAA; text-align: right; padding-right: 20px'}= stats[:calls]
+          %td.right
+            %strong estimation
+          %td.right{ :style => 'font-size: 11px;color:#666;'}= number_to_percentage(stats[:quotes] / stats[:calls].to_f * 100.0, :precision => 1) 
+          %td{:style => 'text-align: right; padding-right: 20px'}= stats[:quotes] 
+          %td.right{ :style => 'font-size: 11px;color:#666;'}= number_to_percentage(stats[:won] / stats[:quotes].to_f * 100.0, :precision => 1) 
+          %td{:style => 'text-align: right; padding-right: 20px'}= stats[:won] 
+          %td.right{:style => 'border-left: 1px solid #AAA;'}= number_to_currency stats[:amount_won], :precision => 0
+        %tr{ :style => 'border-top:1px solid #EEE;'}
+          / %td.right &nbsp;
+          / %td.right &nbsp;
+          %td.right 
+            %strong service
+          %td.right{ :style => 'font-size: 11px;color:#666;'}= number_to_percentage(stats[:service] / stats[:calls].to_f * 100.0, :precision => 1) 
+          %td{:style => 'text-align: right; padding-right: 20px'}= stats[:service] 
+          %td.right &nbsp;
+          %td.right &nbsp;
+          %td.right{:style => 'border-left: 1px solid #AAA;'}= number_to_currency stats[:amount_service], :precision => 0 
+
+      %tr{ :style => 'border-top:1px solid black; font-size: 110%'}
+        - stats = @stats_total
+        %td.right{:rowspan => 2, :style => 'vertical-align: middle;'}
+          %strong Total
+        %td{:rowspan => 2, :style => 'vertical-align: middle;'}= stats[:calls]
+        %td.right
+          %strong estimation
+        %td.right{ :style => 'font-size: 11px;color:#666;'}= number_to_percentage(stats[:quotes] / stats[:calls].to_f * 100.0, :precision => 1) 
+        %td= stats[:quotes] 
+        %td.right{ :style => 'font-size: 11px;color:#666;'}= number_to_percentage(stats[:won] / stats[:quotes].to_f * 100.0, :precision => 1) 
+        %td= stats[:won] 
+        %td.right= number_to_currency stats[:amount_won], :precision => 0
+      %tr{ :style => 'border-top:1px solid #DDD;'}
+        / %td.right &nbsp;
+        / %td.right &nbsp;
+        %td.right 
+          %strong service
+        %td.right{ :style => 'font-size: 11px;color:#666;'}= number_to_percentage(stats[:service] / stats[:calls].to_f * 100.0, :precision => 1) 
+        %td= stats[:service] 
+        %td.right &nbsp;
+        %td.right &nbsp;
+        %td.right= number_to_currency stats[:amount_service], :precision => 0
+        
+        
+  - ordered_keys = @grouped_stats.keys.sort_by(&:to_s)
+  - ordered_keys.each do |group_name|
+    - stats = @grouped_stats[group_name]
+    = render :partial => 'report_group', :locals => {:group_name => group_name, :stats => stats}
+

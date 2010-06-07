@@ -1,0 +1,86 @@
+%div.avoid-page-break{:id => dom_id(intervention)}
+  %strong.hoverable{:id => dom_id(intervention, 'header'), :class => ('completed' if intervention.complete_time_sheet?), :style => 'padding-left: 12px'}
+    %span.on-hover
+      - if current_user.has_permission?('update_schedule') && params[:print] != "true"
+        = link_to_remote image_tag('trash.gif'), :url => {:action => 'delete_intervention', :id => intervention}, :confirm => "Enlever #{intervention.work_sheet.display_name}?"
+    = image_tag( 'ok.png' ) if intervention.completed? && params[:print] != "true"
+    = intervention.work_sheet.full_display_name
+    - if params[:print] != "true"
+      %span{:id =>dom_id(intervention, 'info')}= "[#{intervention.work_time} hres / #{intervention.work_days} j]"
+    %span.on-hover{:style => 'padding: 4px 0 0 10px'}
+      - if current_user.has_permission?('update_schedule') && params[:print] != "true"
+        = link_to_function 'ajouter un couvreur', "$('#{dom_id(intervention, 'add_roofer_form_wrapper')}').toggle();"
+        |
+        = link_to_function 'modifier', "$('#{dom_id(intervention)}').toggleClassName('editable');"
+  
+  - if current_user.has_permission?('update_schedule') && params[:print] != "true"
+    %div{:id => dom_id(intervention, 'add_roofer_form_wrapper'), :style => 'display:none'}
+      - remote_form_for intervention.roofer_assignments.new, :url => {:action => 'add_intervention_roofer'} do |f|
+        = f.hidden_field :intervention_id
+        = f.select :roofer_id, schedulable_user_select_options
+        = f.submit 'ajouter'
+  
+  %table{:style => 'vertical-align: top; width: 100%; margin-left: 32px'}
+    %tr
+      %td{:style => 'vertical-align: top; width: 20%;'}
+        = display_address intervention.building.address, false
+        == - #{intervention.building_type}
+        %br
+        == - #{intervention.technology}
+        %br
+        - if intervention.project_manager
+          == - Chargé: #{intervention.project_manager}
+          %br
+        - if intervention.work_sheet.scheduled_date
+          == - Début: #{intervention.work_sheet.scheduled_date.localize(:short)}
+        - if intervention.work_sheet.estimated_days
+          == (#{intervention.work_sheet.estimated_days} jours)
+        
+      - if params[:print] != "true"
+        %td{:style => 'vertical-align: top;'}
+      
+          %div
+            - remote_form_for intervention, :url => {:action => 'update_intervention', :id => intervention} do |f|
+
+              %div
+                %table.intervention_table{:id => dom_id(intervention, 'roofers_list')}
+                  - (@roofers || intervention.roofer_assignments).sort_by {|ir| ir.roofer.employee_number.to_s }.each do |ir|
+                    = render :partial => ((current_user.has_permission?('update_schedule') && params[:print] != "true") ? "edit_roofer" : "show_roofer"), :locals => {:ir => ir}
+            
+              .on-non-edit{:style => 'padding-left: 24px; margin-top: 14px'}
+                Résultat:
+                = simple_format intervention.result_description
+                
+              .on-edit{:style => 'padding:20px'}
+                - if current_user.has_permission?('update_schedule') && params[:print] != "true"
+                  
+                  .form-section{:style => "border: 1px solid #bbb; padding: 4px; margin-right: 20px; margin-bottom: 8px"}
+                    = f.check_box :complete_time_sheet
+                    = f.label :complete_time_sheet, 'feuille de temps complété?'
+                    / .form-section
+                    = f.text_field :work_days, :size => 4
+                    = f.label :work_days, 'journée'
+                    / .form-section
+                    = f.text_field :work_time, :size => 4
+                    = f.label :work_time, 'hres'
+                    / .form-section
+                    = hidden_field_tag :date, params[:date]
+                    
+                  .form-section{:style => "border: 1px solid #bbb; padding: 4px; margin-right: 20px"}
+                    = f.check_box :completed
+                    = f.label :completed, "intervention complétée"
+                    %br
+                    Résultat:
+                    %br
+                    = f.text_area :result_description, :size => "60x7"
+                    %br
+                    = f.check_box :work_sheet_completed, :disabled => intervention.work_sheet_completed
+                    = f.label :work_sheet_completed, "Bon de travail terminé"
+                    </p>
+                    
+                  %br
+                  = f.submit 'sauver les modifications'
+                  = link_to_function 'annuler', "$('#{dom_id(intervention)}').toggleClassName('editable');"
+                
+      
+        

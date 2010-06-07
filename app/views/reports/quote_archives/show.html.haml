@@ -1,0 +1,33 @@
+.page_header
+  %h1= "Soumissions entre le #{params["min_start_date"]} et le #{params["max_start_date"]}"
+
+.innercol
+  .report_filter
+    - form_tag do
+      = hidden_field_tag :_method, :get
+      entre
+      = calendar_date_select_tag "min_start_date", params["min_start_date"], :size => 10
+      et le 
+      = calendar_date_select_tag "max_start_date", params["max_start_date"], :size => 10
+      trié par
+      = select_tag "sort_by", options_for_select([ ["No soumission", "quote_number"], ["Nom du projet", "name"] ], params["sort_by"])
+      = check_box_tag('format', value = "csv", checked = false)
+      au format csv?
+      = submit_tag 'voir'
+  
+  %table.standard
+    %thead
+      %tr
+        %th No Soumission
+        %th Nom Projet / Client
+        %th{:style => 'width:200px'} Estimateur
+        %th Date fermeture
+        %th No Appel
+    %tbody
+      - @projects.each do |project|
+        - alt_tr do
+          %td= project.quote_number
+          %td= project.name
+          %td= project.estimator
+          %td= project.close_quote_by ? project.close_quote_by.to_date.localize : ""
+          %td= project.call_number

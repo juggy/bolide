@@ -1,0 +1,64 @@
+- if !@project.building || !@project.client 
+  .warning
+    %h5 Attention!
+    %ul
+      - unless @project.client
+        %li &raquo; cette demande n'a pas de client attribué
+      - unless @project.building
+        %li &raquo; cette demande n'est pas lié à un immeuble
+    = link_to _("traiter"), {:action => 'select', :id => @project}, :class => "process#{@project.is_defined? ? "" : "_priority"}" 
+- else
+  - duplicates = @project.possible_duplicates
+ 
+  - if !@project.contract
+    - if @project.building && @project.building.contract
+      .warning
+        %h5 Attention! une entente #{@project.building.contract_type.name} existe pour cet immeuble
+        - form_for @project do |f|
+          = link_to @project.building.contract.name, @project.building.contract
+          = f.hidden_field :contract_id, :value => @project.building.contract.id
+          = button "associer à l'entente"
+    -else
+      - if @project.client && @project.client.contracts.size > 0
+        .warning
+          %h5 Attention! une entente #{display_party_contract(@project.client)} existe pour ce client. Il n'est toutefois pas lié à cet immeuble.
+          
+          - contract = @project.client.contracts[0] 
+          - form_for @project do |f|
+            = link_to contract.name, contract
+            = f.hidden_field :building_contract_id, :value =>contract.id
+            = button "Cliquer ici pour associer l'immeuble et le projet à l'entente"
+      
+      - if Account.current_account.tc?
+        .help
+          %h5 Voulez-vous créer une nouvelle entente de base entre ce client et l'immeuble?
+
+          - form_for @project do |f|
+            = f.hidden_field :create_new_base_contract, :value => true
+            = button "Créer une nouvelle entente de base"
+    
+    
+  - elsif @project.contract
+    - if @project.building.icc_ref.blank?
+      .warning
+        %h5 Attention! il manque le numéro de compagnie sur l'immeuble pour compléter le numéro icc. Il est important de le compléter avant de passer en statut service.
+        = link_to "modifier l'immeuble: '#{@project.building.display_name}'", edit_building_url(@project.building)
+    - else 
+      .help
+        %h5 Une entente #{display_party_contract(@project.client)} est défini pour cette demande. Souhaitez vous créer un bon de travail?</p>
+        = button "Créer un bon de travail", new_project_work_sheet_path(@project)
+ 
+  - unless duplicates.empty?
+    .warning
+      %h5 Attention! Vérifier qu'il ne s'agit pas d'un doublon
+      - form_tag duplicate_project_url(@project) do
+        %ul
+          - duplicates.each do |duplicate|
+            %li
+              = radio_button_tag 'duplicate_id', duplicate.id
+              = link_to duplicate.quick_search_name, duplicate
+        = button 'Fermer et lier à ce projet'
+
+- if @project.call
+  - group "Information sur l'appel" do
+    = render :partial => '/calls/show', :locals => {:call => @project.call}

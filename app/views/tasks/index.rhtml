@@ -1,0 +1,18 @@
+<div class='page_header'>
+  <h1><%= _("À faire") %></h1>
+  <div class='page_tabs'>
+    <%= link_to _("voir tâches complétées"), url_for(:collection => 'completed') %>
+  </div>
+</div>
+
+<div class='innercol'>
+  <div id='task_list_wrapper'>
+  <%= render :partial => 'list' %>
+  </div>
+</div>
+
+<% content_for :sidebar do %>
+  <%= render :partial => '/tasks/add_task' %>
+  <%= render :partial => 'filter' %>
+<% end %>
+

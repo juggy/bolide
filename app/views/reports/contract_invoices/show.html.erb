@@ -1,0 +1,81 @@
+<div class='page_header'>
+  <h1>Facturation contrat</h1>
+</div>
+
+<% fields = [
+  ["total_income", :money],
+  ["total_cost", :money],
+  ["gross_profit", :money]
+  ]
+%>
+
+<div class='innercol'>
+  <div class='report_filter'>
+    <% form_tag do %>
+      <%= hidden_field_tag :_method, :get %>
+      <%= check_box_tag('format', value = "csv", checked = false)%> au format csv?
+      <%= submit_tag 'générer' %>
+    <% end -%>
+  </div>
+  <% stats = @stats %>
+  <div class='report_group'>
+    <h2>Résumé</h2>
+    <table class='report stats_report stats_summary'>
+      <tr>
+        <th>&nbsp;</th>
+        <th style='text-align: right;padding-right: 10px;'>Budget</th>
+        <th style='text-align: right;padding-right: 10px;'>Réel</th>
+        <th style='text-align: right;padding-right: 10px;'>Écart</th>
+      </tr>
+      <% for field in fields %>
+        <tr>
+          <td class='tr_header'><%= ContractSummary::FIELDS_TRANSLATION[field[0]] %>: </td>
+          <td><%= format_field( stats.sum {|line| line.send("budget_#{field[0]}")}, field[1]) %></td>
+          <td><%= format_field( stats.sum {|line| line.send("real_#{field[0]}")}, field[1]) %></td>
+          <td><%= format_field( stats.sum {|line| line.send("variation_#{field[0]}")}, field[1]) %></td>
+        </tr>
+      <% end -%>
+    </table>
+    
+    
+    <h2>Détails</h2>
+    <table class='standard report stats_report'>
+      <thead>
+        <tr>
+          <th>Projet</th>
+        <% for field in fields %>
+          <th colspan='3' class='group_start'><%= ContractSummary::FIELDS_TRANSLATION[field[0]] %></th>
+        <% end -%>
+        </tr>
+        <tr>
+          <th>&nbsp;</th>
+        <% for field in fields %>
+          <th style='text-align: right;' class='group_start'>Budget</th>
+          <th style='text-align: right;'>Réel</th>
+          <th style='text-align: right;'>Écart</th>
+        <% end -%>
+        </tr>
+      </thead>
+      <tbody>
+        <% for line in stats %>
+          
+          <tr class='<%= cycle("odd","even") %>'>
+            <td colspan='13' style='text-align:left;padding-top: 5px;width: 100%;'>
+              <%= link_to "#{line.contract_number} - #{line.project_name}", line.project %>
+            </td>
+          </tr>
+          <tr class='<%= cycle("odd","even") %>'>
+            <th>&nbsp;</th>
+          <% for field in fields %>
+            <td class='group_start'><%= format_field line.send("budget_#{field[0]}"), field[1] %></td>
+            <td><%= format_field line.send("real_#{field[0]}"), field[1] %></td>
+            <td><%= format_field line.send("variation_#{field[0]}"), field[1] %></td>
+          <% end -%>
+          </tr>
+        <% end -%>
+      </tbody>
+    </table>
+  </div>
+  
+  
+</div>

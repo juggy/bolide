@@ -1,0 +1,64 @@
+<div class='page_header'>
+  <h1><%= @message.subject%></h1>
+  <div class="message_header">
+    <span><%= @message.type_title %> <strong><%= @message.created_at.localize(:short) %></strong></span><br />
+    <strong>De:</strong> <%=h @message.sender %><br />
+    <strong>A:</strong> <%= display_recipient_list(@message.message_recipients.kind_to) %> <br />
+    <% if @message.message_recipients.cc.length > 0 %>
+    CC: <%= display_recipient_list(@message.message_recipients.cc) %> <br />
+    <% end %>
+  </div>
+  <%= link_to 'Retour', :back %>
+</div>
+
+<div class='innercol'>
+  <% if @message.can_be_made_private?(current_user) %>
+  <div id="make_message_private" style='float:right'>
+    <% form_for @message do |f| %>
+      Message privé: <%= f.check_box 'private' %>
+    <% end %><br /><%= observe_form dom_id(@message, 'edit'), :url => @message %>
+  </div>
+  <% end %>
+
+
+  <div id='linked_to'>
+    Attaché à:
+
+      <% if @message.attached? %>
+        <% @message.linked_messages.each do |link| %>
+          <span>
+            <%= link_to link.linked_to.display_name, link.linked_to %>
+            <%= link_to( (image_tag('remove.png', :border => 0)), linked_message_url(link), :method => :delete, :confirm => _("Êtes-vous sûr de vouloir détacher ce contact du message?") ) if @message.can_be_modified_by?(current_user) %>
+          </span>
+        <% end %>
+
+      <% end -%>
+  
+  </div>
+
+
+  <% @attachments = @message.attachments %>
+  <% if @attachments.length > 0 %>
+  <br/>
+  <div class="Attachment"> <%= @attachments.length %> Fichier(s):
+    <%= @attachments.collect {|attachment| link_to attachment.filename, attachment.public_filename, :popup => true }.join(" / ") %>
+  </div>
+  <% end %>
+
+  
+  <div class="message">
+    <iframe src="/messages/preview/<%=@message.id%>" width="100%" height="400" frameborder="0" style='border: 1px solid #AAA;'></iframe>
+  </div>
+  <%= link_to_function "Problème de formattage? cliquez pour voir la version texte", "$('text_message').toggle();", :class => 'action' %>
+  <div id='text_message' class='preserve_p' style="display:none;">
+        <%= simple_format @message.text_body %>
+  </div>
+
+</div>
+
+<% content_for :sidebar do %>
+  <h1>Actions</h1>
+  <ul>
+    <li><%= link_to _("version imprimable"), formatted_message_url(@message, :print), :popup => true, :class => 'action' %></li>
+  </ul>
+<% end %>

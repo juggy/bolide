@@ -1,0 +1,15 @@
+<div id="addresses_wrapper">
+  <div id="addresses">
+    <h2>Adresse(s) postale(s)</h2>
+    <% party_type = party.class.to_s.downcase %>
+    <% if party.new_record? %>
+      <%= render :partial => '/parties/address_form', :locals => {:address => Address.new, :party_type => party_type} %>
+    <% else %>
+      <% party.addresses.each do |address| %>
+        <%= render :partial => '/parties/address_form', :locals => {:address => address, :party_type => party_type} %>
+      <% end %>
+    <% end %>
+
+  </div>
+  <%= link_to_function( image_tag('add.png', :border => 0, :style => 'padding-right:5px;') + _("Ajouter une adresse") ) {|page| page.insert_html( :bottom, :addresses, render( :partial =>'/parties/address_form', :locals => {:address => Address.new, :party_type => party_type} ) ) } %>
+</div>

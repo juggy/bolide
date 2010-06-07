@@ -1,0 +1,28 @@
+<html>
+  <head>
+    <%= stylesheet_link_tag 'navbar' %>
+    <%= stylesheet_link_tag "print.css", :media => 'print' %>
+  </head>
+  <body style='font: 10px verdana;'>
+    <%= render :partial => 'layouts/navbar.html' %>
+    <h1><%= @message.subject%></h1>
+    <div class="message_header">
+      <span><%= @message.type_title %> <strong><%= @message.created_at.localize(:short) %></strong></span><br />
+      <strong>De:</strong> <%=h @message.sender(:long) %><br />
+      <strong>A:</strong> <%= display_recipient_list(@message.message_recipients.kind_to, :text) %> <br />
+      <% if @message.message_recipients.cc.length > 0 %>
+      CC: <%= display_recipient_list(@message.message_recipients.cc, :text) %> <br />
+      <% end %>
+    </div>
+    <% @attachments = @message.attachments %>
+    <% if @attachments.length > 0 %>
+    <br/>
+    <div class="Attachment"> <%= @attachments.length %> Fichier(s) attaché(s):
+      <%= @attachments.collect {|attachment| attachment.filename }.join(" / ") %>
+    </div><br />
+    <% end %>
+    
+    <%= @message.text? ? simple_format(@message.text) : @message.body %>
+  <br />
+  </body>
+</html>

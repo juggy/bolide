@@ -1,0 +1,9 @@
+- @options = options rescue nil; @options ||= {}
+#task_list
+- @categorized_task_list.each do |category, items|
+  %div{:id=>category.to_s, :class=>"task_list", :style=>((items.empty?) ? "display:none" : "")}
+    %h5= task_header(category)
+    %table
+      %tbody{:id=>"#{category.to_s}_table"}
+        - items.each do |item|
+          = render :partial => '/tasks/item', :object => item

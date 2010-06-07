@@ -1,0 +1,2 @@
+module WorkSheetTemplatesHelper
+end

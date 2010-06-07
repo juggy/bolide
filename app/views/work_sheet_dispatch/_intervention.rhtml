@@ -1,0 +1,22 @@
+<div id='<%= dom_id(intervention) %>' class='intervention <%= 'draggable' unless intervention.completed? %>'>
+  <span style='float:right;'>
+  <%= display_contract_type(intervention.work_sheet.project.contract) %> 
+  
+  <% if current_user.has_permission?('update_schedule') %>
+    <%= link_to_remote edit_image_tag, 
+                    { :url => edit_dispatch_intervention_url( :id => intervention ), 
+                      :method => 'get', 
+                      :update => dom_id(intervention.foreman, "#{intervention.date.strftime("%Y%m%d")}_form"), 
+                      :before => "remove_previous_form();" },
+                    { :class => 'action' } %>
+  <% end -%>
+  
+  </span>
+  <%= image_tag( 'ok.png' ) if intervention.completed? %>
+  <strong> # <%= intervention.work_sheet.id %> - <%= intervention.work_sheet.call_number %></strong><br/>
+  <span class='hours'><%= number_with_precision (intervention.scheduled_time || 0.0), 2 %> h</span> @
+  <span <%= 'class="completed"' if intervention.work_sheet.completed? %>><%= intervention.work_sheet.display_name %></span>
+</div>
+<% if current_user.has_permission?('update_schedule') %>
+  <%= draggable_element( dom_id(intervention), :revert => "'failure'", :scroll => 'window' ) unless intervention.completed? %>
+<% end -%>

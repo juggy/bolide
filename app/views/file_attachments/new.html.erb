@@ -1,0 +1,17 @@
+<div class='innercol'>
+  <h1>Attacher un fichier</h1>
+
+  <%= error_messages_for :file_attachment %>
+
+  <% form_for(@file_attachment, :html => {:multipart => true} ) do |f| %>
+  <br />
+    <p>
+      Choisir un fichier: <br />
+      <%= f.file_field :uploaded_data %>
+    </p>
+    <%= render :partial => 'notes/form', :locals => {:f => f} %>
+    <%= form_submit %>
+
+  <% end %>
+  
+</div>

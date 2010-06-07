@@ -1,0 +1,21 @@
+.page_header.project_header
+  %h1 Équipes
+.page_menu.project_header
+  = tabnav :schedule
+  
+.innercol
+  #foremen_container
+    .foreman.section
+      .header
+        %h1 Sans équipe
+      .body
+        #no_foreman.foreman_drop_zone
+          - (@roofers[nil] || []).each do |roofer|
+            = render :partial => 'roofer', :locals => {:roofer => roofer}
+          = drop_receiving_element 'no_foreman', :url => hash_for_move_teams_path("team_leader_id" => ''), :hoverclass => 'hover'
+    
+    - @departments.each do |department|
+      = render :partial => 'department', :locals => {:title => department.name, :foremen => department.foremen}
+
+
+        

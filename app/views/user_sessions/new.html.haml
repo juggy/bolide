@@ -1,0 +1,12 @@
+- form_for @user_session, :url => user_session_path do |f|
+  .group
+    = f.label :login, "Nom d'usager"
+    = f.text_field :login, {:tabindex => 1, :size => 20}
+  .group
+    = f.label :password, "Mot de passe"
+    = f.password_field :password, {:tabindex => 2, :size => 20}
+  .group.submit
+    = f.submit "Se connecter"
+
+:javascript  
+  document.getElementById("user_session_login").focus()

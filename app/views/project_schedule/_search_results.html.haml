@@ -1,0 +1,3 @@
+%ul
+  - @work_sheets.each do |ws|
+    %li= link_to "#{ws.full_display_name} #{ "(#{ws.foreman})" if ws.foreman_id }", { :action => 'show', :grouped_by => 'foreman_id', :user_id => (ws.foreman_id || ws.department), :department => ws.department, :anchor => dom_id(ws, 'edit') } 

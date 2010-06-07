@@ -1,0 +1,38 @@
+<div class='page_header service_header'>
+  <h1>Facturer des bons de travail</h1>
+</div>
+<div class='page_menu service_header'>
+  <%= tabnav :service %>
+</div>
+
+<div class='innercol'>
+  <%= display_flash(:notice) %>
+  
+  <h1>Il y a <%= @work_sheets.size %> bons de travail à facturer</h1>
+  
+  <table class='standard'>
+    <tr>
+      <th width="60"># Appel</th>
+      <th>Description</th>    
+      <th width="160">Gestionnaire</th> 
+      <th width="160">Chargé de projet</th>
+      <th width="80">&nbsp;</th> 
+    </tr>
+    <% for work_sheet in @work_sheets %>
+      <tr class='<%= cycle 'odd','even' %>' height="55">
+        <td width="60">
+          <%= link_to work_sheet.project.call_number || 'inconnu', work_sheet.project %>
+        </td>
+        <td>
+          <%= display_contract_type(work_sheet.project.contract) %> <%=h work_sheet.display_name %>
+          <div style="padding-top: 5px;"><%= display_interventions(work_sheet) %></div>
+        </td> 
+        <td width="160"><%= work_sheet.manager %></td>
+        <td width="160"><%= work_sheet.project_manager %></td>
+        <td width="80"><%= work_sheet.has_intervention? ? link_to("facturer!", work_sheet_invoices_url(work_sheet) ) : "+ intervention"%></td>
+      </tr>
+    <% end %>
+    
+  </table>
+
+</div>

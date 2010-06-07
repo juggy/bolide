@@ -1,0 +1,162 @@
+<%= render :partial => '/projects/page_header' %>
+
+<div class='innercol'>
+  <h2><%= show_complete? ? "Résumé (Complet)" : "Résumé (Main d'oeuvre)"%> </h2>
+  Dernière mise-à-jour: <%= @contract_summary.updated_at.to_date.localize %>
+  <table class='standard report'>
+    <tr>
+      <td><%= _("Gestionnaire de compte") %>:</td>
+      <td colspan='3' class='normal'><%= @project.manager %></td>
+    </tr>
+    <tr>
+      <td><%= _("Estimateur") %>:</td>
+      <td colspan='3' class='normal'><%= @project.estimator %></td>
+    </tr>
+    <tr>
+      <td><%= _("Chargé de projet") %>:</td>
+      <td colspan='3' class='normal'><%= @project.project_manager %></td>
+    </tr>
+    <tr>
+      <td><%= _("Chef d'équipe") %>:</td>
+      <td colspan='3' class='normal'><%= @project.foreman %></td>
+    </tr>
+    <tr>
+      <td><%= _("Responsable documents") %>:</td>
+      <td colspan='3' class='normal'><%= @project.documenter %></td>
+    </tr>
+    <tr>
+      <th style="text-align: right; padding-right: 5px;">&nbsp;</th>
+      <th style="text-align: right; padding-right: 5px;"><%= _("Budget") %></th>
+      <th style="text-align: right; padding-right: 5px;"><%= _("Réel") %></th>
+      <th style="text-align: right; padding-right: 5px;"><%= _("Écart") %></th>
+    </tr>
+    <%# ContractSummary::FIELDS.each do |field| %>
+    <%# Need to order the fields %>
+    <% fields = if show_complete?
+              [
+                "income",
+                "extra_income",
+                "roofer_cost",
+                "driver_cost",
+                "workshop_tinman_cost",
+                "tinman_cost",
+                "subcontrator_cost",
+                "materials_cost",
+                "machinery_cost",
+                "general_conditions_cost",
+                "total_cost",
+                "gross_profit",
+                "net_profit"
+              ]
+            else
+              [
+                "income",
+                "extra_income",
+                "roofer_cost",
+                "driver_cost",
+                "workshop_tinman_cost",
+                "tinman_cost",
+                "total_mo_cost"
+              ]
+            end
+    %>
+    <%  fields.each do |field|
+    %>
+    <tr class='<%= field %>'>
+      <td class='tr_header'><%= ContractSummary::FIELDS_TRANSLATION[field] %>: </td>
+      <td><%= number_to_currency @contract_summary.send("budget_#{field}") %></td>
+      <td><%= number_to_currency @contract_summary.send("real_#{field}") %></td>
+      <td><%= number_to_currency @contract_summary.send("variation_#{field}") %></td>
+    </tr>
+    <% end %>
+  </table>
+  
+  <table class='standard report'>
+    <% [
+        "roofer_time",
+        "driver_time",
+        "workshop_tinman_time",
+        "tinman_time"
+      ].each do |field|
+    %>
+    <tr>
+      <td class='tr_header'><%= ContractSummary::FIELDS_TRANSLATION[field] %>: </td>
+      <td><%= number_with_precision @contract_summary.send("budget_#{field}"), :precision => 2 %></td>
+      <td><%= number_with_precision @contract_summary.send("real_#{field}"), :precision => 2 %></td>
+      <td><%= number_with_precision @contract_summary.send("variation_#{field}"), :precision => 2 %></td>
+    </tr>
+    <% end %>
+  </table>
+  
+  <% if show_complete? %>
+    <table class='standard report'>
+      <% [
+  #        "production_rate",
+          "roofer_mean_cost",
+          "machinery_mean_cost",
+          "hourly_profit"
+        ].each do |field|
+      %>
+      <tr>
+        <td class='tr_header'><%= ContractSummary::FIELDS_TRANSLATION[field] %>: </td>
+        <td><%= number_to_currency @contract_summary.send("budget_#{field}") %></td>
+        <td><%= number_to_currency @contract_summary.send("real_#{field}") %></td>
+        <td></td>
+      </tr>
+      <% end %>
+      <% field = "profit_rate" %>
+      <tr>
+        <td class='tr_header'><%= ContractSummary::FIELDS_TRANSLATION[field] %>: </td>
+        <td><%= number_to_percentage @contract_summary.send("budget_#{field}"), :precision => 2 %></td>
+        <td><%= number_to_percentage @contract_summary.send("real_#{field}"), :precision => 2 %></td>
+        <td></td>
+      </tr>
+    </table>
+  <% end -%>
+  
+  <table class='standard report'>
+    <% if show_complete? %>
+      <tr>
+        <td class='tr_header'><%= _("Superficie") %>:</td>
+        <td><%= @contract_summary.budget_area %> pi. ca.</td>
+        <td><%= @contract_summary.real_area %> pi. ca.</td>
+        <td></td>
+      </tr>
+    <% end -%>
+    <tr>
+      <td class='tr_header'><%= _("Heures au carré") %>:</td>
+      <td><%= number_with_precision @contract_summary.budget_hourly_area, :precision => 2 %></td>
+      <td><%= number_with_precision @contract_summary.real_hourly_area, :precision => 2 %></td>
+      <td></td>
+    </tr>
+    <% if show_complete? %>
+      <tr>
+        <td class='tr_header'><%= _("Revenu / pi. ca.") %>:</td>
+        <td><%= number_to_currency @contract_summary.budget_income_to_area %></td>
+        <td><%= number_to_currency @contract_summary.real_income_to_area %></td>
+        <td></td>
+      </tr>
+    <% end -%>
+  </table>
+  
+  <strong>Note:</strong>
+  <% if current_user.has_permission?('access_accounting_infos') %>
+    <div class='no-print'>
+      <% form_for @contract_summary, :url => project_contract_summaries_path(@project) do |f| %>
+        <%= f.text_area :note, :size => '60x6' %>
+        <br/>
+        <%= f.submit "Sauver" %>
+      <% end -%>
+    </div>
+    <div class='force-print' style='display:none'>
+      <%= simple_format @contract_summary.note %>
+    </div>
+  <% else %>
+    <%= simple_format @contract_summary.note %>
+  <% end -%>
+</div>
+
+
+<% content_for :sidebar do %>
+  <%= render :partial => '/projects/accounting_side_panel', :locals => {:project => @project} %>
+<% end %>

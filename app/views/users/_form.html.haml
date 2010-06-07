@@ -1,0 +1,121 @@
+.user_form
+  .body
+    .left_form_group
+      = f.label :first_name, "Prénom"
+      = f.text_field :first_name
+    .right_form_group
+      = f.label :last_name, "Nom"
+      = f.text_field :last_name
+    
+    .form_group
+      - if @user.new_record?
+        = f.check_box 'has_contact'
+        = f.label :has_contact, "Créer un employé", :style => "display:inline"
+      - else
+        Lien vers fiche employé:
+        - contact = @user.contact
+        = !contact.nil? ? link_to(contact.name, contact_path(contact)) : "pas de fiche"
+        
+    .form_section
+      .header
+        Ressource
+      .body
+        .form_group
+          = f.label :technology_id, "Spécialité technologique"
+          = f.select :technology_id, select_options_from_table(Technology)
+        .form_group
+          = f.label :department_id, "Département"
+          = f.select :department_id, Department.all.map {|d| [d.name, d.id]}
+        .form_group
+          = f.label :unavailable_from, "Non disponible à partir du:"
+          = f.calendar_date_select :unavailable_from
+        .form_group
+          = f.label :unavailable_from, "Non disponible jusqu'au:"
+          = f.calendar_date_select :unavailable_to
+          .info Il faut spécifier les 2 dates pour activer cette fonctionalité
+          
+    .form_section
+      .header
+        Role(s)
+      .body
+        - categories_desc = {"list" => "Filtre utilisé pour les listes de sélection",           "notification" => "Notification que l'utilisateur reçoit"}
+        - @roles.group_by(&:category).each do |category, role_list|
+          %h2= categories_desc[category]
+          %ul
+            - role_list.sort_by(&:name).each do |role|
+              %li
+                = check_box_tag( "roles[#{role.id}]", "1", @user.has_role?(role.name) || (params[:roles] || {}).include?(role.id.to_s) ) 
+                = role.name
+                - unless role.description.blank?
+                  == :
+                  %em= role.description
+    
+    - if current_user.has_permission?('admin')
+      .form_group
+        = f.check_box :system_user
+        = f.label :system_user, "Accès à C3?", :style => "display:inline"
+      
+      .form_section
+        .form_group
+          = f.label :login, "Identifiant"
+          = f.text_field :login
+        .form_group
+          = f.label :email, "Email"
+          = f.text_field :email
+          .info Cette addresse sera utilisée pour la messagerie
+        .left_form_group
+          = f.label :password, "Mot de passe"
+          = f.password_field :password
+        .right_form_group
+          = f.label :password_confirmation, "Confirmez le mot de passe"
+          = f.password_field :password_confirmation
+      
+        .header
+          Permissions
+        .body
+          %ul
+            - Permission::PERMISSIONS.each do |permission|
+              %li
+                = check_box_tag( "permissions[#{permission}]", "1", @user.has_this_permission?(permission) || (params[:permissions] || {}).include?(permission) )
+                = I18n.t(permission, :scope => :permission)
+                
+        .form_group
+          = f.label :access_level, "Niveau d'accès ressources humaines"
+          = f.select :access_level, User::ACCESS_LEVELS
+          .info Un utilisateur ne peut voir que les informations des ressources humaines d'un niveau inférieur
+
+    - if Account.current_account.tc?
+      .form_section
+        .header
+          Signature email
+        .body
+          .form_group
+            = f.label :suffix, "Titre professionnel, ex: CA, BSc..."
+            = f.text_field :suffix, :size => 10
+          .form_group
+            = f.label :job_title, "Titre chez Toiture Couture"
+            = f.text_field :job_title, :size => 10
+          .form_group
+            = f.label :phone, "Téléphone"
+            = f.text_field :phone, :size => 15
+          .form_group
+            = f.label :cell, "Cellulaire"
+            = f.text_field :cell, :size => 10
+        
+          #signature{:style => 'margin-top: 15px; background-color: white; border: 1px solid; padding: 5px;'}
+            = Signature.new(@user).render
+        
+    .form_section
+      .header
+        Préférences
+      .body
+        .form_group
+          = f.label :separator, "Séparateur CSV (export excel)"
+          = f.select :separator, [';', ',']
+          .info si vous avez des problèmes à ouvrir un export excel
+    
+    .form_section
+      = f.check_box :deleted
+      = f.label :deleted, "Inactif", {:style => "display:inline"}.merge(@user.id == current_user.id ? {:disabled => true} : {} )
+      
+    = form_submit

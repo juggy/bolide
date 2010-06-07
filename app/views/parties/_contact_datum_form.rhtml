@@ -1,0 +1,21 @@
+<% fields_for( "#{party_type}[contact_data_attrs][]", contact_datum, {}) do |contact_datum_form| %>
+<div class='contact_datum' <%= "id='#{dom_id(contact_datum)}'" if !contact_datum.new_record? %>>
+  <p>
+    <%= select_tag "#{party_type}[contact_data_attrs][][type]", options_for_select([["Téléphone","PhoneNumber"],["Email","Email"], ["Site web","Website"], ["Autres", "OtherContactDatum"]], (contact_datum.type.to_s unless contact_datum.new_record?)) %>
+    <%= text_field_with_inline_label contact_datum_form, _("ex: fax"), contact_datum.name, :name, :index => "", :size => 10 %>: 
+    
+    <%= contact_datum_form.text_field :value, :index => "", :size => 20 %>
+    
+    <%#= contact_datum_form.check_box personal ## STRANGE RAILS GOTHA WITH %>
+    <%= check_box_tag "#{party_type}[contact_data_attrs][][personal]", "1", contact_datum.personal %>
+    personnel?
+    
+  <% if contact_datum.new_record? %>
+    <%= link_to_function image_tag("remove.png", :border => 0), "$(this).up('.contact_datum').remove()" %>
+  <% else %>
+    <%= contact_datum_form.hidden_field( :id, :index => "", :id => "#{dom_id(contact_datum)}_id" )  %>
+    <%= link_to_remote image_tag("remove.png", :border => 0), {:url => contact_datum_url(contact_datum), :method => :delete, :confirm => _("Êtes-vous sûrs?")}, {:class => "img", :style => 'margin-left: 15px'} %>
+  <% end %>
+  </p>
+</div>
+<% end %>

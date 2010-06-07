@@ -1,0 +1,5 @@
+<ul>
+  <% for party in @parties %>
+  <li><%= link_to display_icon(party, party.quick_search_name), party %></li>
+  <% end %>
+</ul>

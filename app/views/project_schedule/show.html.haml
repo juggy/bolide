@@ -1,0 +1,48 @@
+%style
+  :sass
+    table.standard
+      :margin 0
+      table.standard tr th
+        :border none
+        :padding 2px
+      table.standard tr td
+        :border none
+        :padding 2px
+      
+.page_header.project_header
+  %h1 Planification
+.page_menu.project_header
+  = tabnav :schedule
+  
+.innercol
+  #schedule_summary
+    - if foreman_schedule?
+      = render :partial => 'summary_table', :locals => {:users => @users, :title => 'Contrat', :group => params[:department]}
+    - else
+      = render :partial => 'summary_table', :locals => {:users => @users, :title => 'Chargé de projet', :group => 'all'}
+
+  #schedule_nav.no-print{:style => 'margin-top: 20px; border-top: 1px solid #666; padding-top: 15px'}
+    %div{:style => 'float:right'}
+      %br
+      = link_to "version imprimable", print_project_schedule_url(:grouped_by => params[:grouped_by], :department => params[:department], :user_id => params[:department]), :popup => true, :class => 'action printer'
+      %br
+      - if @schedule_user
+        = link_to "version imprimable (#{@schedule_user})", print_project_schedule_url(:user_id => params[:user_id], :grouped_by => params[:grouped_by]), :popup => true, :class => 'action printer'
+        
+    %div
+      - if foreman_schedule?
+        = render :partial => 'search'
+
+    %div{:style => "clear:both"}
+  
+  #schedule_work_sheets.no-print
+    - current_month = nil
+    - for work_sheet in @work_sheets
+    
+      - if current_month != (new_month = work_sheet.scheduled_date ? work_sheet.scheduled_date.month : nil )
+        - current_month = new_month
+        .month_title{ :style => "padding-top: 20px; font-size:16px; font-weight:bold;"}
+          = current_month ? DateLocalization.date_helper_month_names[current_month] : "Non cédulé"
+        
+      = render :partial => 'work_sheet', :locals => {:work_sheet => work_sheet}
+

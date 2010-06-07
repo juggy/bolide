@@ -1,0 +1,84 @@
+%style
+  :sass
+    .on-absent.absent
+      :display block
+    .on-absent
+      :display none
+  
+    table.h-calendar
+      :border-collapse collapse
+      :width 100%
+      th
+        :background-color black
+        :color white
+        :border 1px solid #666
+      td
+        :border 1px solid #666
+        :padding 5px
+        :text-align center
+        :width 14%
+        a
+          :text-decoration underline
+          :font-weight bold
+        &.notmonth
+          :background-color #bbb
+          .day
+            :color #666
+        &.weekend
+          :background-color lightblue
+    
+    .noschedule
+      :padding 15px 5px
+    
+    table.day
+      :border-collpase true
+      :width 100%
+      td
+        :border none
+        :padding 0
+        :text-align center
+        :width 50%
+
+
+.page_header.project_header
+  %h1== #{DateLocalization.date_helper_month_names[params[:month]]} #{params[:year]}
+.page_menu.project_header
+  = tabnav :schedule
+
+.innercol
+  .month_nav
+    %div{:style => 'float:right'}
+      = link_to_next_month( @current_day )
+    %div
+      = link_to_previous_month( @current_day )
+    
+  %div{:style => 'clear:both'}
+  - calendar_for(@schedules, :year => params[:year], :month => params[:month], :html => {:class => 'h-calendar'}) do |t|
+    = t.head('dim', 'lun', 'mar', 'mer', 'jeu', 'ven', 'sam')
+    - t.day do |day, schedule|
+      - if (h = CompanyCalendar.holiday_on( day )).present?
+        .holiday_name= h.name
+      
+      - if schedule.any?
+        - sche = schedule[0]
+        %table.day
+          %tr
+            %td
+              = link_to day.day, daily_schedule_url(day), :style => 'font-size: 20px'
+            %td
+              .weather
+                = weather_icon(sche)
+          %tr
+            %td{:colspan => 2}
+              == #{sche.work_time} hres
+              %br
+              == #{sche.work_days} j
+      - elsif day >= @today
+        .noschedule
+          = day.day
+          %br
+          - if current_user.has_permission?('update_schedule')
+            = link_to "céduler", daily_schedules_url(:date => day), :method => :post
+      - else
+        .noschedule
+          = day.day

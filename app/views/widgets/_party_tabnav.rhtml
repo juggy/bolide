@@ -1,0 +1,125 @@
+<%  
+# this partial renders a tabnav, you can call it in your views with:
+#   <%= tabnav :party % > (just the tabnav) 
+# or, if you want a boxed tabnav:
+#   <% tabnav :party do % >
+#     your html here
+#   <% end % >
+# (remove the space between % and >, we don't want to mess up your brand new tabnav :-))
+#
+# you can pass render_tabnav a few options:
+#   :generate_css => true|false #=> generates a default inline css for the tabnav, defaults to false
+#   :html => aHash #=> sets html options for the tabnav's div (es :html => {:class=> 'myCssClass', :id=>'myCssId'}) 
+#     
+render_tabnav :party, :html => {:class => 'page_tabnav'} do 
+    
+  # this generates a tab for every controller in your app
+  # you'll probably want to delete this and
+  # add tabs one by one as shown below
+  # controller_names.each do |name|
+  #   add_tab do |t|
+  #     t.named name.camelize
+  #     t.titled "Go to #{name.camelize}"
+  #     t.links_to :controller => name
+  #   end
+  # end 
+
+  add_tab do |t|
+   t.named _("Vue Principale")
+   t.links_to send( "hash_for_" +@party.class.to_s.underscore+"_path", :id => @party.id)
+   #t.highlights_on lambda { true }
+  end
+           
+  add_tab do |t|
+    t.named _("Projets")
+    t.links_to send( "hash_for_projects_" +@party.class.to_s.underscore+"_path", :id => @party.id)
+  end
+  
+  if @party.is_a?(Company)
+    add_tab do |t|
+      t.named _("Ententes")
+      t.links_to hash_for_contracts_company_path(:id =>@party.id)
+    end
+    
+    if current_user.has_permission?('access_accounting_infos')
+      if @party.aged_account
+        add_tab do |t|
+          t.named _("Comptabilité")
+          t.links_to hash_for_aged_account_company_path(:id => @party.id)
+        end
+      end
+    end
+    
+  end
+  
+  if @party.is_a?(Building)
+    add_tab do |t|
+      t.named _("Entente")
+      t.links_to hash_for_contracts_building_path(:id =>@party.id)
+    end
+  end
+  
+  add_tab do |t|
+   t.named _("Relations")
+   t.links_to hash_for_party_relations_path( :party_id => @party.id)
+   # t.highlights_on  ( @controller_name == 'relations' )}
+  end
+  
+  add_tab do |t|
+    t.named _("Intervenant")
+    t.links_to send( "hash_for_involvements_" +@party.class.to_s.underscore+"_path", :id => @party.id)
+  end
+  
+  if @party.is_a?(Contact) && (@party.is_employee? || @party.employee_info) && current_user.has_hr_permission?( @party )
+    add_tab do |t|
+      t.named _("RH")
+      t.links_to hash_for_hr_contact_path( :id => @party.id)
+      t.highlights_on lambda { params[:action] == 'hr' || ['competences', 'employee_infos', 'absences'].include?(params[:controller]) }
+    end
+  end
+  
+  if @party.is_a?(Company) && !@party.courses.empty?
+    add_tab do |t|
+      t.named _("Certifications")
+      t.links_to hash_for_certifications_company_path(:id =>@party.id)
+    end
+  end
+  
+  add_tab do |t|
+    t.named _("Historique")
+    t.links_to send( "hash_for_history_" +@party.class.to_s.underscore+"_path", :id => @party.id)
+  end
+  
+  #  
+  # you can use restful routes with:
+  #
+  #add_tab do |t|
+  #  t.named 'Users'
+  #  t.links_to hash_for_users_path
+  #end
+  #
+  #add_tab do |t|
+  #  t.named 'Customers'
+  #  t.links_to :controller => 'customers'
+  #end
+  #  
+  # # A tab can be initialized with a Hash like this:
+  # 
+  # add_tab :name => 'welcome', :link => {:controller=>'welcome'}
+  #
+  # # You can have a dynamic name or link 
+  # # (this partial is evaluated in the page context, so it sees every helper or instance variable)
+  #  
+  # add_tab do |t|
+  #   t.named "#{current_user} details"
+  #   t.links_to :controller => 'users', :action => 'show', :id => current_user.id
+  # end
+  #
+  # # You can have an image inside 
+  #
+  # add_tab do |t|
+  #   t.named image_tag('test')
+  #   t.links_to :controller => 'users', :action => 'show', :id => current_user.id
+  # end
+end 
+%>

@@ -1,0 +1,14 @@
+<div id="search">
+<p style='float:right;margin-right:10px'><%= link_to _("recherche avancée..."), {:controller => 'search'}, :style => 'font-size:11px;color:#CCC;' %></p><p style="color:white"><%= _("Recherche") %></p>
+<%= text_field_tag "party_name", "", {:autocomplete => "off", :id => "global_search_party_name"} %>
+<div id="global_search_party_name_auto_complete" class="auto_complete" style="display:hidden;"></div>
+<%= auto_complete_field "global_search_party_name", 
+      { :frequency => 0.4,
+        :url => {:controller => '/parties', :action => 'search', :collection => 'ALL'},
+        :after_update_element => 
+          "function(element,value)  {
+             var nodes = $(value).getElementsByTagName('a');
+             if(nodes.length>0) window.location = $(nodes[0]).href;
+           }" 
+      } %>
+</div>

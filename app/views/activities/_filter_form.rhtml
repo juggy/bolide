@@ -1,0 +1,17 @@
+<div class='list_filter'>
+  <% form_tag do %>
+    <%= hidden_field_tag :_method, :get %>
+    <div>Filtrer par type: 
+      <%= select_tag 'activity_type', 
+                      options_for_select([['Tous', nil],['Tâche', 'Task'], ['Note', 'Note'], ['Message','LinkedMessage'], ['Statut','StateChange'], ['Fichier', 'FileAttachment'] ], params[:activity_type]),
+                      :onchange => "this.form.submit();" %>
+    </div>
+    <div><%= _("Voir les tâches de") %>: <%= select_tag "user_id", options_for_select(User.to_select_options(:all_label => _("tout le monde")), params[:user_id].to_i), 
+                                        :onchange => "this.form.submit();" %></div>
+    <div>Filtrer par catégorie: 
+      <%= select_tag 'category_id',
+                      options_for_select((select_options_from_table(ActivityCategory, :all_label => "Tous",:all => true)), params[:category_id].to_i),
+                      :onchange => "this.form.submit();" %>
+    </div>
+  <% end %>
+</div>

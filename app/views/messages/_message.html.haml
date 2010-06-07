@@ -1,0 +1,8 @@
+%tr{:class=>"message"}
+  %td
+    .subject 
+      = check_box_tag "ids[#{message.id}]"
+      = highlight_filter(f, text_around_filter(f, message.subject, 30))
+      %span.date= message.created_at.localize(:short)
+    .body
+      = highlight_filter(f, text_around_filter(f, message.text_body))

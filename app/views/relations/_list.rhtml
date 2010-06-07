@@ -1,0 +1,15 @@
+<% if relations.length > 0%>
+  <h1><%= title %></h1>
+  <table class='standard'>
+
+  <% for relation in relations %>
+    <tr class='<%= cycle("odd","even") %>'>
+
+      <td width='35%'><%= relation.description %> <%= "(#{relation.deleted_at.localize(:date)})" if relation.deleted_at %></td>
+      <td><%= link_to relation.third_party.name, relation.third_party, :class => dom_class(relation.third_party) %></td>
+      <td width="60"><%= link_to "&nbsp;", edit_party_relation_url(@party, relation), {:class=> 'edit', :title=>_("Modifier")} %> <%= link_to( "&nbsp;", restore_party_relation_url(@party, relation), {:method => 'post', :class=> 'restore', :title=>_("restaurer")} ) if !relation.active? %></td>
+      <td width="20"><%= link_to( "&nbsp;", party_relation_path(@party, relation), { :confirm => _('Êtes-vous sûr?'), :method => :delete, :class=> 'delete', :title=>_("Supprimer")} ) unless relation.deleted_at && !current_user.has_permission?("destroy_relations") %></td>
+    </tr>
+  <% end %>
+  </table>
+<% end %>

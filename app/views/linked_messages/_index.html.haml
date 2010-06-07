@@ -1,0 +1,5 @@
+- if @messages.empty?
+  .no-email
+    Pas de messages
+- @messages.each do |m|
+  = render :partial=>'messages/message', :locals=>{:f=>@f, :message=>m}

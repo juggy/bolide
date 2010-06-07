@@ -1,0 +1,9 @@
+<div id="party_categories">
+  <h1><%= image_tag("tag.png", :border => 0)%> <%= _("Catégories") %></h1>
+  <ul>
+    <li><%= link_to _("Toutes"),  url_for(:tag => '', :collection => params[:collection]) %></li>
+  <% for tag in Tag.find_by_type(party_type) do %>
+    <li><%= link_to tag.name, url_for(:tag => tag.name, :collection => params[:collection]) %></li>
+  <% end %>
+  </ul>
+</div>

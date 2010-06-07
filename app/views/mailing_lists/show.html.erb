@@ -1,0 +1,23 @@
+<p>
+  <b>Name:</b>
+  <%=h @mailing_list.name %>
+</p>
+
+<p>
+  <b>Recipients:</b>
+  <%=h @mailing_list.recipients %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%=h @mailing_list.user_id %>
+</p>
+
+<p>
+  <b>Private:</b>
+  <%=h @mailing_list.private %>
+</p>
+
+
+<%= link_to 'Edit', edit_mailing_list_path(@mailing_list) %> |
+<%= link_to 'Back', mailing_lists_path %>

@@ -1,0 +1,36 @@
+<%= render :partial => '/projects/page_header' %>
+
+<div class='innercol'>
+  <% if @accounting_items.length > 0%>
+    <h1>Travaux en cours</h1>
+    <table class='standard'>
+      <tr>
+        <th>Année Financière</td>
+        <th>Contrat après extra</td>
+        <th>Coût Total</th>
+        <th>Facturation au 31 déc.</th>
+        <th colspan="2">&nbsp;</th>
+      </tr>
+    <% for accounting_item in @accounting_items %>
+      <tr class='<%= cycle("odd","even") %>'>
+        <td><%= accounting_item.financial_year %></td>
+        <td><%= number_to_currency accounting_item.with_extra_contract_amount %></td>
+        <td><%= number_to_currency accounting_item.total_cost %></td>
+        <td><%= number_to_currency accounting_item.invoiced_amount %></td>
+        <td width="30"><%= link_to "&nbsp;", edit_project_accounting_item_url(@project, accounting_item), {:class=> 'edit', :title=>_("Modifier")} %></td>
+        <td width="20"><%= link_to( "&nbsp;", project_accounting_item_path(@project, accounting_item), { :confirm => _('Êtes-vous sûr?'), :method => :delete, :class=> 'delete', :title=>_("Supprimer")} )  %></td>
+      </tr>
+    <% end %>
+    </table>
+  
+  <% else %>
+    <div class="help">Vous n'avez pas de travaux en cours pour ce projet.</div>
+  <% end %>
+  
+</div>
+
+<% content_for :sidebar do %>
+  <div class='new'>
+    <%= link_to 'Ajouter une année', new_project_accounting_item_path(@project), :class => :new %>
+  </div>
+<% end %>

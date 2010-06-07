@@ -1,0 +1,39 @@
+<% if @current_project %>
+  <div id='current_project_wrapper'>
+    <div id='current_project'>
+      <h1>
+        <%= link_to _("terminer "), {:controller => 'projects', :action => 'deselect', :id => @current_project}, :class => "action#{@current_project.is_defined? ? ' highlight' : ''}" %>
+        <%= "Demande: " + @current_project.display_name %>
+      </h1>
+      <h3>Client</h3>
+      <p>
+        <%= @current_project.client ? link_to_party( @current_project.client ) : content_tag("span", "aucun client associé", :class => 'highlight') %><br />
+        <% if params[:controller] == 'companies' && params[:action] == 'show' %>
+          <%= link_to_remote( _("lier ce client"), 
+                    {:url => hash_for_project_url(:id => @current_project, 
+                    :project => {:client_id => params[:id]} ), 
+                    :method => :put}, :class =>"link_party" ) unless @current_project.client && @current_project.client.id.to_s == params[:id] %>
+        <% elsif !@current_project.client %>
+          <span class='info'>Allez dans la fiche d'une compagnie pour la choisir comme client de ce projet</span>
+        <% end %>
+      </p>
+      <h3>Immeuble</h3>
+      <p>
+        <%= @current_project.building ? link_to_party( @current_project.building ) : content_tag("span", "aucun immeuble associé", :class => 'highlight') %><br />
+        <% if params[:controller] == 'buildings' && params[:action] == 'show' %>
+          <%= link_to_remote( _("lier cet immeuble"), 
+                    {:url => hash_for_project_url(:id => @current_project, 
+                    :project => {:building_id => params[:id]} ), 
+                    :method => :put }, :class =>"link_party" ) unless @current_project.building && @current_project.building.id.to_s == params[:id] %>
+        <% elsif !@current_project.building %>
+          <span class='info'>Allez dans la fiche d'un immeuble pour lier à ce projet</span>
+        <% end %>
+      </p>
+      <%# TODO : maybe allow to add involvements here also %>
+      <% if @current_project.call %>
+        <h3>Demande</h3>
+        <%= render :partial => '/calls/show', :locals => {:call => @current_project.call} %>
+      <% end %>
+    </div>
+  </div>
+<% end %>

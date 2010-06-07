@@ -1,0 +1,43 @@
+.page_header
+  %h1 
+    Certification
+    - if !params["min_start_date"].blank? || !params["max_start_date"].blank?
+      = "entre le #{params["min_start_date"]} et le #{params["max_start_date"]}"
+
+.innercol
+  .report_filter
+    - form_tag do
+      = hidden_field_tag :_method, :get
+      = select_tag "id", options_for_select( Course.all.collect {|c| [c.name, c.id.to_s ]}, params[:id] )
+      %br
+      suivi entre
+      = calendar_date_select_tag "min_start_date", params["min_start_date"], :size => 10
+      et le 
+      = calendar_date_select_tag "max_start_date", params["max_start_date"], :size => 10
+      %br
+      = submit_tag 'afficher'
+  
+  -if @course
+    - form_for :group_course, :url => {:action => :plan_group_course} do |f|
+      .course{:style=>'page-break-after:always'}
+        %h1= @course.name
+        %p= @course.description
+        = link_to_function "voir tout le monde", "$$('.none').each( function(el) {el.toggle();} );"
+        |
+        = link_to_function "planifier une formation de groupe", "$$('.none').each( function(el) {el.show();} ); $$('.to_plan').each( function(el) {el.show();} ); $('group_course_form').show(); "
+        
+        #group_course_form{:style => "display:none; margin: 10px; padding: 10px; background-color: lightyellow;"}
+          = f.hidden_field :course_id, :value => @course.id 
+          Date de la formation: 
+          = f.calendar_date_select :date, :size => 10
+          
+          .info
+            Cochez les employés plus bas à envoyer à cette formation
+          %br
+          = f.submit "planifier"
+            
+        - h = @competences.group_by(&:employee_id)
+        - Team.all.each do |team|
+          = render :partial => 'team_course_table', :locals => {:title => "Équipe: #{team.leader.full_name}", :members => team.all_members.reject {|u| u.contact.nil? || !u.contact.is_employee? || !current_user.has_hr_permission?(u) }, :h => h}
+        
+        = render :partial => 'team_course_table', :locals => {:title => "Sans Équipe", :members => User.active.all(:conditions => "team_leader_id is null", :include => {:contact => :employee_info }).reject {|u| u.contact.nil? || !u.contact.is_employee? || !current_user.has_hr_permission?(u) }, :h => h }

@@ -1,0 +1,14 @@
+<h1>Garanties</h1>
+<% if @project.warranty_infos.size > 0 %>
+  <table class='standard'>
+  <% for warranty in @project.warranty_infos %>
+    <tr class='<%= cycle("odd","even") %>'>
+      <td width="150"><%= warranty.warranty_type %></td>
+      <td><%= warranty.years %> ans</td>
+      <td><%= warranty.description %></td>
+    </tr>
+  <% end -%>
+  </table>
+<% else %>
+  Aucune
+<% end -%>
